@@ -9,7 +9,7 @@ var Comunidad = function(comunidad){
     this.poblacion = comunidad.poblacion;
     this.provincia = comunidad.provincia;
 };
-Comunidad.createComunidad = function createUser(newComunidad, result) {
+Comunidad.createComunidad = function createComunidad(newComunidad, result) {
   console.log('comu model insert');
         sql.query("INSERT INTO comunidad set ?", newComunidad, function (err, res) {
 

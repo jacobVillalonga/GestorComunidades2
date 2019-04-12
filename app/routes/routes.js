@@ -1,6 +1,7 @@
 'use strict';
 module.exports = function(app) {
   var comunidadController = require('../controller/comunidadController');
+  var viviendaController = require('../controller/viviendaController');
 
   // comunidadController Routes
 
@@ -14,4 +15,10 @@ module.exports = function(app) {
     .get(comunidadController.select_comunidad)
     .put(comunidadController.update_comunidad)
     .delete(comunidadController.delete_comunidad);
+
+  // viviendaController Routes
+
+  app.route('/viviendas')
+    .get(viviendaController.list_all_viviendas)
+    ;
 };
