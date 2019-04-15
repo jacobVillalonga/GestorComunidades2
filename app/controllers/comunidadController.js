@@ -1,16 +1,16 @@
 'use strict';
 
-var Comunidad = require('../model/comunidadModel.js');
+var Comunidad = require('../models/comunidadModel.js');
 
 exports.list_all_comunidades = function(req, res) {
   Comunidad.getAllComunidades(function(err, comunidad) {
     if (err)
       res.send(err);
-      //console.log('res', comunidad);
+      // console.log('res: ', comunidad);
+      // console.log('-------res---------', res);
     res.send(comunidad);
   });
 };
-
 exports.insert_comunidad = function(req, res) {
   var comunidad = new Comunidad(req.body);
   //handles null error

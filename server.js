@@ -23,5 +23,8 @@ console.log('API server started on: ' + port);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.set('views', './app/views');
+app.set('view engine', 'ejs');
+
 var routes = require('./app/routes/routes'); //importing route
 routes(app); //register the route

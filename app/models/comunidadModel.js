@@ -10,7 +10,6 @@ var Comunidad = function(comunidad){
     this.provincia = comunidad.provincia;
 };
 Comunidad.createComunidad = function createComunidad(newComunidad, result) {
-  console.log('comu model insert');
         sql.query("INSERT INTO comunidad set ?", newComunidad, function (err, res) {
 
                 if(err) {
