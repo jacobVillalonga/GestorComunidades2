@@ -26,5 +26,6 @@ app.use(bodyParser.json());
 app.set('views', './app/views');
 app.set('view engine', 'ejs');
 
-var routes = require('./app/routes/routes'); //importing route
-routes(app); //register the route
+require('./app/routes/comunidad.routes')(app); //importing route
+require('./app/routes/vivienda.routes')(app); 
+// routes(app); //register the route
