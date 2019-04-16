@@ -1,34 +1,39 @@
 <% include partials/header.ejs %>
 <div class="container">
-    <% if (message) { %>
-        <p class="text-center text-danger"><%= message %></p>
-    <% } %>
-
-    <% if (player) { %>
+        <p class="text-center text-danger">Editing</p>
+    <% if (comunidad) { console.log(comunidad);%>
         <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
             <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="first-name">First Name</label>
-                    <input type="text" class="form-control" name="first_name" id="first-name" value="<%= player.first_name %>" required>
+                <div class="form-group col-md-2">
+                    <label for="id_comunidad">ID</label>
+                    <input type="text" class="form-control" name="id_comunidad" id="id_comunidad" value="<%= comunidad.id_comunidad %>" required disabled title="NIF cannot be edited.">
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="last-name">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" id="last-name" value="<%= player.last_name %>" required>
+                <div class="form-group col-md-5">
+                    <label for="nombre_comunidad">Nombre</label>
+                    <input type="text" class="form-control" name="nombre_comunidad" id="nombre_comunidad" value="<%= comunidad.nombre_comunidad %>" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" value="<%= player.user_name %>" required disabled title="Username cannot be edited.">
+                <div class="form-group col-md-5">
+                    <label for="nif">Dirección</label>
+                    <input type="text" class="form-control" name="direccion" id="direccion" value="<%= comunidad.direccion %>" required>
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="number">Number</label>
-                    <input type="number" class="form-control" name="number" id="number" placeholder="Number" value="<%= player.number %>" required>
+                <div class="form-group col-md-4">
+                    <label for="cp">Código postal</label>
+                    <input type="cp" class="form-control" name="cp" id="cp" value="<%= comunidad.cp %>" required>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label for="cp">Población</label>
+                    <input type="cp" class="form-control" name="poblacion" id="poblacion" value="<%= comunidad.poblacion %>" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="cp">Provincia</label>
+                    <input type="cp" class="form-control" name="provincia" id="provincia" value="<%= comunidad.provincia %>" required>
+                </div>
+                <!-- <div class="form-group col-md-6">
                     <label for="position">Position</label>
                     <select id="position" name="position" class="form-control" required>
-                        <option selected><%= player.position %></option>
+                        <option selected> player.position </option>
                         <option>Goalkeeper</option>
                         <option>Centre Back</option>
                         <option>Right Back</option>
@@ -41,13 +46,13 @@
                         <option>Striker</option>
                     </select>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-success float-right">Update Player</button>
+            </div> -->
+            <a href="/" rel="noopener" class="btn btn-sm btn-success">Guardar</a>
+            <!-- <button type="submit" class="btn btn-success float-right">Guardar</button> -->
+            <a href="/" class="btn btn-sm btn-danger">Cancelar</a>
         </form>
     <% } else { %>
-        <p class="text-center">Player Not Found. Go <a href="/add">here</a> to add players.</p>
+        <p class="text-center">Not Found. Go <a href="/add">here</a> to add players.</p>
     <% } %>
 </div>
-</div>
-</body>
-</html>
+<% include partials/footer.ejs %>

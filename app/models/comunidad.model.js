@@ -23,7 +23,7 @@ Comunidad.createComunidad = function createComunidad(newComunidad, result) {
             });
 };
 Comunidad.getComunidadById = function createUser(comunidadId, result) {
-        sql.query("Select nombre_comunidad from comunidad where id_comunidad = ? ", comunidadId, function (err, res) {
+        sql.query("Select * from comunidad where id_comunidad = ? ", comunidadId, function (err, res) {
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);

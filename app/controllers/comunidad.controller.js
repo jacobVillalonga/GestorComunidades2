@@ -3,12 +3,11 @@
 var Comunidad = require('../models/comunidad.model.js');
 
 exports.list_all_comunidades = function(req, res) {
-  Comunidad.getAllComunidades(function(err, comunidad) {
+  Comunidad.getAllComunidades(function(err, comunidades) {
     if (err)
       res.send(err);
-      // console.log('res: ', comunidad);
-      // console.log('-------res---------', res);
-    res.send(comunidad);
+    // res.send(comunidades);
+    res.render('index.ejs',{title: 'Gestor Comunidades',comunidades:comunidades})
   });
 };
 exports.insert_comunidad = function(req, res) {
@@ -29,7 +28,8 @@ exports.select_comunidad = function(req, res) {
     Comunidad.getComunidadById(req.params.idComunidad, function(err, comunidad) {
       if (err)
         res.send(err);
-      res.json(comunidad);
+      // res.json(comunidad);
+      res.render('edit-comunidad.ejs',{title: 'Edit Comunidad',comunidad:comunidad[0]})
     });
   };
 
@@ -42,9 +42,11 @@ exports.update_comunidad = function(req, res) {
 };
 
 exports.delete_comunidad = function(req, res) {
+  console.log("Eliminando comunidad ",req.params.idComunidad);
   Comunidad.remove( req.params.idComunidad, function(err, comunidad) {
     if (err)
       res.send(err);
-    res.json({ message: 'Comunidad eliminada' });
+    // res.json({ message: 'Comunidad eliminada' });
+      res.render('deleted.ejs',{message: 'Comunidad eliminada'})
   });
 };

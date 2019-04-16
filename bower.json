@@ -1,0 +1,14 @@
+{
+  "name": "gestor_comunidades",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Jacob Villalonga"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jacobVillalonga/GestorComunidades2",
+  "dependencies": {
+    "angular": "^1.7.8",
+    "bootstrap": "^4.3.1"
+  }
+}

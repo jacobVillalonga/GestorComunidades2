@@ -10,20 +10,23 @@
                         <th scope="col">CP</th>
                         <th scope="col">Población</th>
                         <th scope="col">Provincia</th>
+                        <th scope="col">
+                          <a href="/comunidades/0" class="btn btn-sm btn-primary">Añadir</a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <% Array.prototype.forEach.call(comunidades, comunidad => { %>
                         <tr>
-                            <th scope="row"><%= comunidad.id %></th>
+                            <th scope="row"><%= comunidad.id_comunidad %></th>
                             <td><%= comunidad.nombre_comunidad %></td>
                             <td><%= comunidad.direccion %></td>
                             <td><%= comunidad.cp %></td>
                             <td><%= comunidad.poblacion %></td>
-                            <td><%= comunidad.prpovincia %></td>
+                            <td><%= comunidad.provincia %></td>
                             <td>
-                                <a href="/edit/<%= comunidad.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                <a href="/delete/<%= comunidad.id %>" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="/comunidades/<%= comunidad.id_comunidad %>" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/comunidades/delete/<%= comunidad.id_comunidad %>" data-method="delete" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                     <% }) %>
@@ -33,6 +36,4 @@
             <p class="text-center">No comunidades found. Go <a href="/add" >here</a> to add comunidades.</p>
         <% } %>
     </div>
-</div>
-</body>
-</html>
+<% include partials/footer.ejs %>
