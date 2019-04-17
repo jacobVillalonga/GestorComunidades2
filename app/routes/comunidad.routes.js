@@ -29,10 +29,7 @@ module.exports = function(app) {
       comunidadController.insert_comunidad(req, res);
     });
 ;
-   app.route('/comunidades/:idComunidad')
-    .get(comunidadController.select_comunidad)
-    .put(comunidadController.update_comunidad)
-    .delete(comunidadController.delete_comunidad);
+   app.route('/comunidades/:idComunidad').get(comunidadController.select_comunidad);
 
-    app.route('/comunidades/delete/:idComunidad').get(comunidadController.delete_comunidad);
+   app.route('/comunidades/delete/:idComunidad').get(comunidadController.delete_comunidad);
 };

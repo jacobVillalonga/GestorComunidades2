@@ -22,7 +22,7 @@ Comunidad.createComunidad = function createComunidad(newComunidad, result) {
                 }
             });
 };
-Comunidad.getComunidadById = function createUser(comunidadId, result) {
+Comunidad.getComunidadById = function getComunidad(comunidadId, result) {
         sql.query("Select * from comunidad where id_comunidad = ? ", comunidadId, function (err, res) {
                 if(err) {
                     console.log("error: ", err);
@@ -31,6 +31,17 @@ Comunidad.getComunidadById = function createUser(comunidadId, result) {
                 else{
                     result(null, res);
 
+                }
+            });
+};
+Comunidad.getViviendasComunidad = function getViviendas(comunidadId, result) {
+        sql.query("Select * from vivienda where comunidad_fk = ? ", comunidadId, function (err, res) {
+                if(err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+                else{
+                    result(null, res);
                 }
             });
 };

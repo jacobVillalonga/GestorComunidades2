@@ -29,7 +29,11 @@ exports.select_comunidad = function(req, res) {
       if (err)
         res.send(err);
       // res.json(comunidad);
-      res.render('edit-comunidad.ejs',{title: 'Edit Comunidad',comunidad:comunidad[0]})
+      Comunidad.getViviendasComunidad(req.params.idComunidad, function(err, viviendas) {
+        if (err)
+          res.send(err);
+        res.render('edit-comunidad.ejs',{title: 'Edit Comunidad',comunidad:comunidad[0],viviendas:viviendas})
+      });
     });
   };
 
@@ -47,6 +51,6 @@ exports.delete_comunidad = function(req, res) {
     if (err)
       res.send(err);
     // res.json({ message: 'Comunidad eliminada' });
-      res.render('deleted.ejs',{message: 'Comunidad eliminada'})
+      res.render('deleted.ejs',{title: '', message: 'Comunidad eliminada'})
   });
 };

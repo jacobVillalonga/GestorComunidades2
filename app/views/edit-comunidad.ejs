@@ -1,6 +1,6 @@
 <% include partials/header.ejs %>
 <div class="container">
-        <p class="text-center text-danger">Editing</p>
+        <p class="text-center text-danger">Editando Comunidad</p>
     <% if (comunidad) { console.log(comunidad);%>
         <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
             <div class="form-row">
@@ -45,14 +45,18 @@
                         <option>Left Wing Forward</option>
                         <option>Striker</option>
                     </select>
-                </div>
-            </div> -->
-            <a href="/" rel="noopener" class="btn btn-sm btn-success">Guardar</a>
-            <!-- <button type="submit" class="btn btn-success float-right">Guardar</button> -->
-            <a href="/" class="btn btn-sm btn-danger">Cancelar</a>
+                </div> -->
+            </div>
+            <div align="center">
+              <a href="/" rel="noopener" class="btn btn-sm btn-success">Guardar</a>
+              <!-- <button type="submit" class="btn btn-success float-right">Guardar</button> -->
+              <a href="/comunidades" class="btn btn-sm btn-danger">Cancelar</a>
+            </div>
+            <%include tables/tablaViviendas.ejs %>
+            </div>
         </form>
     <% } else { %>
-        <p class="text-center">Not Found. Go <a href="/add">here</a> to add players.</p>
+        <p class="text-center">Not Found. Go <a href="/add">here</a> to add comunidad.</p>
     <% } %>
 </div>
 <% include partials/footer.ejs %>
