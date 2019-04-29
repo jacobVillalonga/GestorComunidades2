@@ -45,6 +45,17 @@ Comunidad.getViviendasComunidad = function getViviendas(comunidadId, result) {
                 }
             });
 };
+Comunidad.getFacturasComunidad = function getFacturas(comunidadId, result) {
+        sql.query("Select * from factura where comunidad_fk = ? ", comunidadId, function (err, res) {
+                if(err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+                else{
+                    result(null, res);
+                }
+            });
+};
 Comunidad.getAllComunidades = function getAllComunidades(result) {
         sql.query("Select * from comunidad", function (err, res) {
                 if(err) {
@@ -58,7 +69,13 @@ Comunidad.getAllComunidades = function getAllComunidades(result) {
             });
 };
 Comunidad.updateById = function(id, comunidad, result){
-  sql.query("UPDATE comunidad SET nombre_comunidad = ? WHERE id_comunidad = ?", [comunidad.nombre_comunidad, id], function (err, res) {
+  sql.query("UPDATE comunidad SET nombre_comunidad = ? ,"+
+  " direccion = ? ,"+
+  " cp = ? ,"+
+  " poblacion = ? ,"+
+  " provincia = ? WHERE id_comunidad = ?",
+  [comunidad.nombre_comunidad, comunidad.direccion, comunidad.cp, comunidad.poblacion, comunidad.provincia, id],
+   function (err, res) {
           if(err) {
               console.log("error: ", err);
                 result(null, err);

@@ -1,62 +1,56 @@
 <% include partials/header.ejs %>
 <div class="container">
-        <p class="text-center text-danger">Editando Comunidad</p>
-    <% if (comunidad) { console.log(comunidad);%>
-        <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
-            <div class="form-row">
-                <div class="form-group col-md-2">
-                    <label for="id_comunidad">ID</label>
-                    <input type="text" class="form-control" name="id_comunidad" id="id_comunidad" value="<%= comunidad.id_comunidad %>" required disabled title="NIF cannot be edited.">
-                </div>
-                <div class="form-group col-md-5">
-                    <label for="nombre_comunidad">Nombre</label>
-                    <input type="text" class="form-control" name="nombre_comunidad" id="nombre_comunidad" value="<%= comunidad.nombre_comunidad %>" required>
-                </div>
-                <div class="form-group col-md-5">
-                    <label for="nif">Dirección</label>
-                    <input type="text" class="form-control" name="direccion" id="direccion" value="<%= comunidad.direccion %>" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="cp">Código postal</label>
-                    <input type="cp" class="form-control" name="cp" id="cp" value="<%= comunidad.cp %>" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="cp">Población</label>
-                    <input type="cp" class="form-control" name="poblacion" id="poblacion" value="<%= comunidad.poblacion %>" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="cp">Provincia</label>
-                    <input type="cp" class="form-control" name="provincia" id="provincia" value="<%= comunidad.provincia %>" required>
-                </div>
-                <!-- <div class="form-group col-md-6">
+  <p class="text-center text-danger">Editando Comunidad</p>
+  <% if (comunidad) { console.log(comunidad);%>
+  <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="id_comunidad">ID</label>
+        <input type="text" class="form-control" name="id_comunidad" id="id_comunidad" value="<%= comunidad.id_comunidad %>" required disabled title="NIF cannot be edited.">
+      </div>
+      <div class="form-group col-md-5">
+        <label for="nombre_comunidad">Nombre</label>
+        <input type="text" class="form-control" name="nombre_comunidad" id="nombre_comunidad" value="<%= comunidad.nombre_comunidad %>" required>
+      </div>
+      <div class="form-group col-md-5">
+        <label for="nif">Dirección</label>
+        <input type="text" class="form-control" name="direccion" id="direccion" value="<%= comunidad.direccion %>" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="cp">Código postal</label>
+        <input type="cp" class="form-control" name="cp" id="cp" value="<%= comunidad.cp %>" required>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="cp">Población</label>
+        <input type="cp" class="form-control" name="poblacion" id="poblacion" value="<%= comunidad.poblacion %>" required>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="cp">Provincia</label>
+        <input type="cp" class="form-control" name="provincia" id="provincia" value="<%= comunidad.provincia %>" required>
+      </div>
+      <!-- <div class="form-group col-md-6">
                     <label for="position">Position</label>
                     <select id="position" name="position" class="form-control" required>
                         <option selected> player.position </option>
                         <option>Goalkeeper</option>
                         <option>Centre Back</option>
-                        <option>Right Back</option>
-                        <option>Left Back</option>
-                        <option>Defensive Midfielder</option>
-                        <option>Central Midfielder</option>
-                        <option>Attacking Midfielder</option>
-                        <option>Right Wing Forward</option>
-                        <option>Left Wing Forward</option>
-                        <option>Striker</option>
                     </select>
                 </div> -->
-            </div>
-            <div align="center">
-              <a href="/" rel="noopener" class="btn btn-sm btn-success">Guardar</a>
-              <!-- <button type="submit" class="btn btn-success float-right">Guardar</button> -->
-              <a href="/comunidades" class="btn btn-sm btn-danger">Cancelar</a>
-            </div>
-            <%include tables/tablaViviendas.ejs %>
-            </div>
-        </form>
-    <% } else { %>
-        <p class="text-center">Not Found. Go <a href="/add">here</a> to add comunidad.</p>
+    </div>
+    <div align="center">
+      <a href="/" rel="noopener" class="btn btn-sm btn-success">Ok</a>
+      <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
+      <a href="/comunidades" class="btn btn-sm btn-danger">Cancelar</a>
+    </div>
+  </form>
+    <% if (comunidad.id_comunidad != null){ %>
+      <%  include tables/tablaViviendas.ejs %>
+      <%  include tables/tablaFacturas.ejs %>
     <% } %>
+  <% } else { %>
+  <p class="text-center">Not Found. Go <a href="/add">here</a> to add comunidad.</p>
+  <% } %>
 </div>
 <% include partials/footer.ejs %>

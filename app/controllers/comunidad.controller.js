@@ -25,20 +25,38 @@ exports.insert_comunidad = function(req, res) {
 };
 
 exports.select_comunidad = function(req, res) {
-    Comunidad.getComunidadById(req.params.idComunidad, function(err, comunidad) {
-      if (err)
-        res.send(err);
-      // res.json(comunidad);
+  Comunidad.getComunidadById(req.params.idComunidad, function(err, comunidad) {
+    if (err)
+      res.send(err);
+    // res.json(comunidad);
+    if (req.params.idComunidad == 0) {
+      var comu = {'nombre_comunidad':''};
+      res.render('edit-comunidad.ejs', {
+        title: 'Eañadir Comunidad',
+        comunidad: comu
+      });
+    } else {
       Comunidad.getViviendasComunidad(req.params.idComunidad, function(err, viviendas) {
         if (err)
           res.send(err);
-        res.render('edit-comunidad.ejs',{title: 'Edit Comunidad',comunidad:comunidad[0],viviendas:viviendas})
+          Comunidad.getFacturasComunidad(req.params.idComunidad, function(err, facturas) {
+            if (err)
+              res.send(err);
+            res.render('edit-comunidad.ejs', {
+              title: 'Editar Comunidad',
+              comunidad: comunidad[0],
+              viviendas: viviendas,
+              facturas: facturas
+          })
+        })
       });
-    });
-  };
+    }
+  });
+};
 
 exports.update_comunidad = function(req, res) {
-  Comunidad.updateById(req.params.idComunidad, new Comunidad(req.body), function(err, comunidad) {
+    console.log(req.body);
+  Comunidad.updateById(req.params.idComunidad, req.body, function(err, comunidad) {
     if (err)
       res.send(err);
     res.json(comunidad);

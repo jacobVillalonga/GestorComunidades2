@@ -29,7 +29,13 @@ module.exports = function(app) {
       comunidadController.insert_comunidad(req, res);
     });
 ;
-   app.route('/comunidades/:idComunidad').get(comunidadController.select_comunidad);
+   app.route('/comunidades/:idComunidad')
+    .get(comunidadController.select_comunidad)
+    .post(function(req, res){
+        console.log(req.body);
+        // comunidadController.update_comunidad(req,res);
+    });
+   app.route('/comunidades/0').get(comunidadController.insert_comunidad);
 
    app.route('/comunidades/delete/:idComunidad').get(comunidadController.delete_comunidad);
 };
