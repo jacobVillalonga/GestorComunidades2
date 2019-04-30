@@ -1,0 +1,47 @@
+
+<div class="container">
+  <div class="table-wrapper">
+      <% if (propietarios.length > 0) {%>
+        <h4 class="bg-grey">Propietarios:</h4>
+          <table class="table table-hovered">
+              <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Apellidos</th>
+                      <th scope="col">NIF</th>
+                      <th scope="col">Fecha nacimiento</th>
+                      <th scope="col">Telefono</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Dirección</th>
+                      <th scope="col">CP</th>
+                      <th scope="col">
+                        <a href="/propietarios/0" class="btn btn-sm btn-primary">Añadir</a>
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% Array.prototype.forEach.call(propietarios, propietario => { %>
+                      <tr>
+                          <th scope="row"><%= propietario.id_propietario %></th>
+                          <td><%= propietario.nombre %></td>
+                          <td><%= propietario.apellidos %></td>
+                          <td><%= propietario.nif %></td>
+                          <td><%= propietario.fecha_nacimiento %></td>
+                          <td><%= propietario.telefono %></td>
+                          <td><%= propietario.email %></td>
+                          <td><%= propietario.direccion %></td>
+                          <td><%= propietario.cp %></td>
+                          <td>
+                              <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                              <a href="/propietarios/delete/<%= propietario.id_propietario %>" data-method="delete" class="btn btn-sm btn-danger">Delete</a>
+                          </td>
+                      </tr>
+                  <% }) %>
+              </tbody>
+          </table>
+      <% } else { %>
+          <p class="text-center">No propietarios found. Go <a href="/add" >here</a> to add propietarios.</p>
+      <% } %>
+  </div>
+</div>

@@ -33,7 +33,7 @@ exports.select_comunidad = function(req, res) {
     if (req.params.idComunidad == 0) {
       var comu = {'nombre_comunidad':''};
       res.render('edit-comunidad.ejs', {
-        title: 'Eañadir Comunidad',
+        title: 'Añadir Comunidad',
         comunidad: comu
       });
     } else {

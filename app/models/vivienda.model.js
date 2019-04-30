@@ -43,9 +43,19 @@ Vivienda.getViviendaById = function getVivienda(viviendaId, result) {
             });
 };
 Vivienda.getPropietariosVivienda = function getPropietarios(viviendaId, result) {
-      sql.query("Select p.id_propietario,p.nombre,p.apellidos,p.nif from propietario p"+
-                +"join prop_vivienda pv on pv.id_propietario = p.id_propietario"+
-                +"where pv.id_vivienda = ? ",
+      sql.query("Select * from propietario as p join prop_vivienda pv on pv.id_propietario = p.id_propietario where pv.id_vivienda = ? ",
+        viviendaId, function (err, res) {
+          if(err) {
+            console.log("error: ", err);
+            result(err, null);
+          } else {
+            result(null, res);
+          }
+      })
+};
+Vivienda.getCuotasVivienda = function getCuotas(viviendaId, result) {
+      sql.query("Select * from pago_cuota "+
+                +"where vivienda_fk = ? ",
         viviendaId, function (err, res) {
           if(err) {
             console.log("error: ", err);

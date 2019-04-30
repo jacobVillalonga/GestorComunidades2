@@ -37,10 +37,30 @@ exports.select_vivienda = function(req, res) {
     if (err)
       res.send(err);
     // res.json(vivienda);
-    res.render('edit-vivienda.ejs', {
-      title: 'Edit Vivienda',
-      vivienda: vivienda[0]
-    })
+    if (req.params.idVivienda == 0) {
+      var vivienda = {
+        'numero': ''
+      };
+      res.render('edit-vivienda.ejs', {
+        title: 'Añadir Vivienda',
+        vivienda: vivienda
+      });
+    } else {
+      Vivienda.getPropietariosVivienda(req.params.idVivienda, function(err, propietarios) {
+        if (err)
+          res.send(err);
+        Vivienda.getCuotasVivienda(req.params.idVivienda, function(err, cuotas) {
+          if (err)
+            res.send(err);
+          res.render('edit-vivienda.ejs', {
+            title: 'Edit Vivienda',
+            vivienda: vivienda[0],
+            propietarios: propietarios,
+            cuotas: cuotas
+          })
+        })
+      });
+    }
   });
 };
 
