@@ -10,6 +10,7 @@ exports.list_all_comunidades = function(req, res) {
     res.render('index.ejs',{title: 'Gestor Comunidades',comunidades:comunidades})
   });
 };
+
 exports.insert_comunidad = function(req, res) {
   var comunidad = new Comunidad(req.body);
   //handles null error
@@ -68,7 +69,6 @@ exports.delete_comunidad = function(req, res) {
   Comunidad.remove( req.params.idComunidad, function(err, comunidad) {
     if (err)
       res.send(err);
-    // res.json({ message: 'Comunidad eliminada' });
-      res.render('deleted.ejs',{title: '', message: 'Comunidad eliminada'})
+    res.render('deleted.ejs',{title: '', message: 'Comunidad eliminada'})
   });
 };
