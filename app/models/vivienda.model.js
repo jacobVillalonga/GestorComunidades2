@@ -7,7 +7,8 @@ var Vivienda = function(vivienda){
       this.comunidad_fk = vivienda.comunidad_fk;
 };
 Vivienda.getAllViviendas = function getAllViviendas(result) {
-        sql.query("Select * from vivienda", function (err, res) {
+        sql.query("SELECT c.nombre_comunidad, v.id_vivienda, v.numero, v.comunidad_fk FROM `vivienda` v JOIN comunidad c on c.id_comunidad=v.comunidad_fk ORDER by c.nombre_comunidad ",
+         function (err, res) {
                 if(err) {
                     console.log("error: ", err);
                     result(null, err);
@@ -43,7 +44,7 @@ Vivienda.getViviendaById = function getVivienda(viviendaId, result) {
             });
 };
 Vivienda.getPropietariosVivienda = function getPropietarios(viviendaId, result) {
-      sql.query("Select * from propietario as p join prop_vivienda pv on pv.id_propietario = p.id_propietario where pv.id_vivienda = ? ",
+      sql.query("Select * from propietario as p join prop_vivienda pv on pv.id_propietario = p.id_propietario where pv.id_vivienda = ? order by nombre, apellidos",
         viviendaId, function (err, res) {
           if(err) {
             console.log("error: ", err);
@@ -54,8 +55,7 @@ Vivienda.getPropietariosVivienda = function getPropietarios(viviendaId, result) 
       })
 };
 Vivienda.getCuotasVivienda = function getCuotas(viviendaId, result) {
-      sql.query("Select * from pago_cuota "+
-                +"where vivienda_fk = ? ",
+      sql.query("Select * from pago_cuota where vivienda_fk = ? order by fecha",
         viviendaId, function (err, res) {
           if(err) {
             console.log("error: ", err);
@@ -66,7 +66,7 @@ Vivienda.getCuotasVivienda = function getCuotas(viviendaId, result) {
       })
 };
 Vivienda.getViviendasComunidad = function getViviendas(comunidadId, result) {
-        sql.query("Select * from vivienda where comunidad_fk = ? ", comunidadId, function (err, res) {
+        sql.query("Select * from vivienda where comunidad_fk = ? order by numero", comunidadId, function (err, res) {
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);

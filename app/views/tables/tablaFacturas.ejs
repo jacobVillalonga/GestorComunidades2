@@ -23,8 +23,8 @@
                           <td><%= factura.importe %> €</td>
                           <td><%= factura.concepto %></td>
                           <td>
-                              <a href="/factura/<%= factura.id_factura %>" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                              <a href="/factura/delete/<%= factura.id_factura %>" data-method="delete" class="btn btn-sm btn-danger">Delete</a>
+                              <a href="/facturas/<%= factura.id_factura %>" rel="noopener" class="btn btn-sm btn-success">Editar</a>
+                              <a href="/facturas/delete/<%= factura.id_factura %>" data-method="delete" class="btn btn-sm btn-danger">Delete</a>
                           </td>
                       </tr>
                   <% }) %>

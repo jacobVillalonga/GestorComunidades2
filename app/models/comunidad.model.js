@@ -33,7 +33,7 @@ Comunidad.getComunidadById = function getComunidad(comunidadId, result) {
   });
 };
 Comunidad.getViviendasComunidad = function getViviendas(comunidadId, result) {
-  sql.query("Select * from vivienda where comunidad_fk = ? ", comunidadId, function(err, res) {
+  sql.query("Select * from vivienda where comunidad_fk = ? order by numero", comunidadId, function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -43,7 +43,7 @@ Comunidad.getViviendasComunidad = function getViviendas(comunidadId, result) {
   });
 };
 Comunidad.getFacturasComunidad = function getFacturas(comunidadId, result) {
-  sql.query("Select * from factura where comunidad_fk = ? ", comunidadId, function(err, res) {
+  sql.query("Select * from factura where comunidad_fk = ? order by fecha", comunidadId, function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -53,7 +53,7 @@ Comunidad.getFacturasComunidad = function getFacturas(comunidadId, result) {
   });
 };
 Comunidad.getAllComunidades = function getAllComunidades(result) {
-  sql.query("Select * from comunidad", function(err, res) {
+  sql.query("Select * from comunidad order by nombre_comunidad", function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(null, err);

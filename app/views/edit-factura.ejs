@@ -1,0 +1,50 @@
+<% include partials/header.ejs %>
+<div class="container">
+        <p class="text-center text-danger">Editando Factura</p>
+    <% if (factura){ %>
+      <% if (factura.id_factura == 0){ %>
+        <form class="add-player-form" action="/facturas" method="post" enctype="application/json">
+      <% } else { %>
+        <form class="add-player-form" action="/facturas/<%= factura.id_factura %>" method="post" enctype="application/json">
+      <% } %>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="id_factura">ID</label>
+                    <input type="text" class="form-control" name="id_factura" id="id_factura" value="<%= factura.id_factura %>" required readonly title="ID cannot be edited.">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="importe">Importe</label>
+                    <input type="text" class="form-control" name="importe" id="importe" value="<%= factura.importe %>" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fecha">Fecha</label>
+                    <input type="text" class="form-control" name="fecha" id="fecha" value="<%= factura.fecha %>" required>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="concepto">Concepto</label>
+                  <input type="text" class="form-control" name="concepto" id="concepto" value="<%= factura.concepto %>" required>
+              </div>
+              <!-- @TODO cambiar a combobox -->
+              <div class="form-group col-md-4">
+                  <label for="comunidad_fk">Comunidad</label>
+                  <input type="text" class="form-control" name="comunidad_fk" id="comunidad_fk" value="<%= factura.comunidad_fk %>" required>
+              </div>
+              <div class="form-group col-md-2">
+                  <label for="nombre_comunidad">ID Comunidad</label>
+                  <input type="text" class="form-control" name="nombre_comunidad" id="nombre_comunidad" value="<%= factura.comunidad_fk %>" readonly required>
+              </div>
+            </div>
+            <div align="center">
+              <!-- <a href="/" rel="noopener" class="btn btn-sm btn-success">Guardar</a> -->
+              <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
+              <a href="/viviendas" class="btn btn-sm btn-danger">Cancelar</a>
+            </div>
+        </form>
+        @ToDo: Datos vivienda
+    <% } else { %>
+        <p class="text-center">Not Found. Go <a href="/add">here</a> to add facturas.</p>
+    <% } %>
+</div>
+<% include partials/footer.ejs %>

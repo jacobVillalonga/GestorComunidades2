@@ -1,0 +1,82 @@
+<% include partials/header.ejs %>
+<div class="container">
+  <p class="text-center text-danger">Editando Propietario</p>
+  <% if (propietario) { %>
+  <% if (propietario.id_propietario == 0){ %>
+  <form class="add-player-form" action="/propietarios" method="post" enctype="application/json">
+    <% } else { %>
+    <form class="add-player-form" action="/propietarios/<%= propietario.id_propietario %>" method="post" enctype="application/json">
+      <% } %>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="id_propietario">ID</label>
+          <input type="text" class="form-control" name="id_propietario" id="id_propietario" value="<%= propietario.id_propietario %>" required readonly title="ID cannot be edited.">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" name="nombre" id="nombre" value="<%= propietario.nombre %>" required>
+        </div>
+        <div class="form-group col-md-5">
+          <label for="apellidos">Apellidos</label>
+          <input type="text" class="form-control" name="apellidos" id="apellidos" value="<%= propietario.apellidos %>" required>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="nif">NIF</label>
+          <input type="text" class="form-control" name="nif" id="nif" value="<%= propietario.nif %>" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="fecha_nacimiento">Fecha nacimiento</label>
+          <input type="text" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="<%= propietario.fecha_nacimiento %>" required>
+        </div>
+        <div class="form-group col-md-2">
+          <!-- @TODO: cambiar a combobox-->
+          <label for="sexo">Sexo</label>
+          <input type="text" class="form-control" name="sexo" id="sexo" value="<%= propietario.sexo %>" required>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="telefono">Teléfono 1</label>
+          <input type="text" class="form-control" name="telefono" id="telefono" value="<%= propietario.telefono %>" required>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="telefono2">Teléfono 2</label>
+          <input type="text" class="form-control" name="telefono2" id="telefono2" value="<%= propietario.telefono2 %>">
+        </div>
+        <div class="form-group col-md-2">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" name="email" id="email" value="<%= propietario.email %>">
+        </div>
+        <div class="form-group col-md-2">
+          <label for="pais">Pais</label>
+          <input type="text" class="form-control" name="pais" id="pais" value="<%= propietario.pais %>">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="direccion">Dirección</label>
+          <input type="text" class="form-control" name="direccion" id="direccion" value="<%= propietario.direccion %>" required>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="cp">Código postal</label>
+          <input type="cp" class="form-control" name="cp" id="cp" value="<%= propietario.cp %>" required>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="cp">Población</label>
+          <input type="cp" class="form-control" name="poblacion" id="poblacion" value="<%= propietario.poblacion %>" required>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="cp">Provincia</label>
+          <input type="cp" class="form-control" name="provincia" id="provincia" value="<%= propietario.provincia %>" required>
+        </div>
+      </div>
+      <div align="center">
+        <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
+        <a href="/propietarios" class="btn btn-sm btn-danger">Cancelar</a>
+      </div>
+    </form>
+    <% } else { %>
+    <p class="text-center">Not Found. Go <a href="/add">here</a> to add propietario.</p>
+    <% } %>
+</div>
+<% include partials/footer.ejs %>

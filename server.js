@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 
 app.set('views', './app/views');
 app.set('view engine', 'ejs');
+require('./app/routes/index.routes')(app);
 require('./app/routes/comunidad.routes')(app); //importing route
 require('./app/routes/vivienda.routes')(app);
 require('./app/routes/propietario.routes')(app);

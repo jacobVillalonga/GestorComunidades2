@@ -2,9 +2,6 @@
 module.exports = function(app) {
   var comunidadController = require('../controllers/comunidad.controller');
 
-  app.route('/')
-    .get(comunidadController.list_all_comunidades);
-
   app.route('/comunidades')
     .get(comunidadController.list_all_comunidades)
     .post(function(req, res){

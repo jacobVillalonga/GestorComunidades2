@@ -20,7 +20,7 @@ var Propietario = function(propietario){
 
   };
   Propietario.getAllPropietarios = function getAllPropietarios(result) {
-          sql.query("Select * from propietario", function (err, res) {
+          sql.query("Select * from propietario order by nombre, apellidos", function (err, res) {
                   if(err) {
                       console.log("error: ", err);
                       result(null, err);
@@ -31,5 +31,77 @@ var Propietario = function(propietario){
                   }
               });
   };
+  Propietario.getPropietarioById = function getPropietario(propietarioId, result) {
+    sql.query("Select * from propietario where id_propietario = ? ", propietarioId, function(err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
 
+      }
+    });
+  };
+  Propietario.createPropietario = function createPropietario(newPropietario, result) {
+    sql.query("INSERT INTO propietario set ?", newPropietario, function(err, res) {
+
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res.insertId);
+        result(null, res.insertId);
+      }
+    });
+  };
+  Propietario.updateById = function(id, propietario, result) {
+    // @TODO adaptar query a propietario
+    sql.query("UPDATE propietario SET nombre = ? ," +
+      " apellidos = ? ," +
+      " nif = ? ," +
+      " fecha_nacimiento = ? ," +
+      " sexo = ? ," +
+      " telefono = ? ," +
+      " telefono2 = ? ," +
+      " email = ? ," +
+      " direccion = ? ," +
+      " cp = ? ," +
+      " pais = ? ," +
+      " poblacion = ? ," +
+      " provincia = ? WHERE id_propietario = ?",
+      [propietario.nombre,
+        propietario.apellidos,
+        propietario.nif,
+        propietario.fecha_nacimiento,
+        propietario.sexo,
+        propietario.telefono,
+        propietario.telefono2,
+        propietario.email,
+        propietario.direccion,
+        propietario.cp,
+        propietario.pais,
+        propietario.poblacion,
+        propietario.provincia,
+        id],
+      function(err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+        } else {
+          result(null, res);
+        }
+      });
+  };
+  Propietario.remove = function(id, result) {
+    sql.query("DELETE FROM propietario WHERE id_propietario = ?", [id], function(err, res) {
+
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+
+        result(null, res);
+      }
+    });
+  };
   module.exports= Propietario;

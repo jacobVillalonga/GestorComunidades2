@@ -10,7 +10,7 @@ var Factura = function(factura){
         this.comunidad_fk = factura.comunidad_fk;
   };
   Factura.getAllFacturas = function getAllFacturas(result) {
-          sql.query("Select * from factura", function (err, res) {
+          sql.query("Select * from factura order by fecha", function (err, res) {
                   if(err) {
                       console.log("error: ", err);
                       result(null, err);
@@ -21,5 +21,15 @@ var Factura = function(factura){
                   }
               });
   };
+  Factura.getFacturaById = function getFactura(facturaId, result) {
+    sql.query("Select * from factura where id_factura = ? ", facturaId, function(err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
 
+      }
+    });
+  };
   module.exports= Factura;
