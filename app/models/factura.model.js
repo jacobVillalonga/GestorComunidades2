@@ -5,6 +5,7 @@ var sql = require('../config/db.config.js');
 var Factura = function(factura){
 
         this.importe = factura.importe;
+        this.emisor = factura.emisor;
         this.fecha = factura.fecha;
         this.concepto = factura.concepto;
         this.comunidad_fk = factura.comunidad_fk;

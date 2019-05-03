@@ -7,6 +7,7 @@
               <thead class="thead-dark">
                   <tr>
                       <th scope="col">ID</th>
+                      <th scope="col">Emisor</th>
                       <th scope="col">Fecha</th>
                       <th scope="col">Importe</th>
                       <th scope="col">Concepto</th>
@@ -19,6 +20,7 @@
                   <% Array.prototype.forEach.call(facturas, factura => { %>
                       <tr>
                           <th scope="row"><%= factura.id_factura %></th>
+                          <td><%= factura.emisor %></td>
                           <td><%= factura.fecha %></td>
                           <td><%= factura.importe %> €</td>
                           <td><%= factura.concepto %></td>
@@ -31,7 +33,7 @@
               </tbody>
           </table>
       <% } else { %>
-          <p class="text-center">No facturas found. Go <a href="/add" >here</a> to add facturas.</p>
+          <p class="text-center">No facturas found. Go <a href="/facturas/0" >here</a> to add facturas.</p>
       <% } %>
   </div>
 </div>
