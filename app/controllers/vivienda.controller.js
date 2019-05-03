@@ -18,10 +18,15 @@ exports.list_all_viviendas = function(req, res) {
 exports.insert_vivienda = function(req, res) {
   var vivienda = new Vivienda(req.body);
   //handles null error
-  if (!vivienda.nombre_vivienda) {
+  if (!vivienda.numero) {
     res.status(400).send({
       error: true,
       message: 'Please provide vivienda/numero'
+    });
+  } else if (!vivienda.comunidad_fk) {
+    res.status(400).send({
+      error: true,
+      message: 'Please provide vivienda/comunidad_fk'
     });
   } else {
     Vivienda.createVivienda(vivienda, function(err, vivienda) {
@@ -37,13 +42,24 @@ exports.select_vivienda = function(req, res) {
     if (err)
       res.send(err);
     // res.json(vivienda);
+    if (req.params.idComunidad) {
+      var comunidad_fk = req.params.idComunidad;
+    } else {
+      res.status(400).send({
+        error: true,
+        message: 'Please provide comunidad/comunidad_fk'
+      });
+    }
     if (req.params.idVivienda == 0) {
+      console.log("Hey!")
       var vivienda = {
+        'id_vivienda': 0,
         'numero': ''
       };
       res.render('edit-vivienda.ejs', {
         title: 'Añadir Vivienda',
-        vivienda: vivienda
+        vivienda: vivienda,
+        comunidad_fk: comunidad_fk
       });
     } else {
       Vivienda.getPropietariosVivienda(req.params.idVivienda, function(err, propietarios) {
@@ -55,6 +71,7 @@ exports.select_vivienda = function(req, res) {
           res.render('edit-vivienda.ejs', {
             title: 'Edit Vivienda',
             vivienda: vivienda[0],
+            comunidad_fk: comunidad_fk,
             propietarios: propietarios,
             cuotas: cuotas
           })

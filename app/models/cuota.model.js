@@ -20,5 +20,15 @@ Cuota.getAllCuotas = function getAllCuotas(result) {
                 }
             });
 };
+Cuota.getCuotaById = function getCuota(cuotaId, result) {
+  sql.query("SELECT * FROM pago_cuota c join vivienda v on c.vivienda_fk = v.id_vivienda where id_cuota = ? ", cuotaId, function(err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      result(null, res);
 
+    }
+  });
+};
 module.exports= Cuota;

@@ -9,7 +9,12 @@ module.exports = function(app) {
        viviendaController.insert_vivienda(req, res);
     });
 
-  app.route('/viviendas/:idVivienda')
+  app.route('/comunidades/:idComunidad/viviendas')
+    .post(function(req, res){
+      viviendaController.insert_vivienda(req, res);
+    });
+
+  app.route('/comunidades/:idComunidad/viviendas/:idVivienda')
     .get(viviendaController.select_vivienda)
     .post(function(req, res){
         viviendaController.update_vivienda(req,res);

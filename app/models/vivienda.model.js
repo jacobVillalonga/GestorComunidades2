@@ -5,9 +5,10 @@ var sql = require('../config/db.config.js');
 var Vivienda = function(vivienda){
       this.numero = vivienda.numero;
       this.comunidad_fk = vivienda.comunidad_fk;
+      this.coeficiente = vivienda.coeficiente;
 };
 Vivienda.getAllViviendas = function getAllViviendas(result) {
-        sql.query("SELECT c.nombre_comunidad, v.id_vivienda, v.numero, v.comunidad_fk FROM `vivienda` v JOIN comunidad c on c.id_comunidad=v.comunidad_fk ORDER by c.nombre_comunidad ",
+        sql.query("SELECT c.nombre_comunidad, v.id_vivienda, v.numero, v.coeficiente, v.comunidad_fk FROM `vivienda` v JOIN comunidad c on c.id_comunidad=v.comunidad_fk ORDER by c.nombre_comunidad ",
          function (err, res) {
                 if(err) {
                     console.log("error: ", err);
@@ -77,7 +78,7 @@ Vivienda.getViviendasComunidad = function getViviendas(comunidadId, result) {
             });
 };
 Vivienda.updateById = function(id, vivienda, result){
-  sql.query("UPDATE vivienda SET numero = ? WHERE id_vivienda = ?", [vivienda.numero, id], function (err, res) {
+  sql.query("UPDATE vivienda SET numero = ?, coeficiente = ? WHERE id_vivienda = ?", [vivienda.numero, vivienda.coeficiente, id], function (err, res) {
           if(err) {
               console.log("error: ", err);
                 result(null, err);

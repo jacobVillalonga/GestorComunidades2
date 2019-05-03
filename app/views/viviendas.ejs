@@ -9,7 +9,7 @@
                         <th scope="col">Comunidad</th>
                         <th scope="col">ID</th>
                         <th scope="col">Número</th>
-                        <!-- <th scope="col">Id Comunidad</th> -->
+                        <th scope="col">Coeficiente</th>
                         <th scope="col">
                           <!-- <a href="/viviendas/0" class="btn btn-sm btn-primary">Añadir</a> -->
                         </th>
@@ -27,6 +27,7 @@
                             ID: <%= vivienda.comunidad_fk %>
                           </td>
                           <td></td>
+                          <td></td>
                           <td>
                             <a href="/comunidades/<%= vivienda.comunidad_fk %>" data-method="get" class="btn btn-sm btn-primary">
                               <span class="glyphicon glyphicon-eye-open"></span>
@@ -38,9 +39,9 @@
                             <td></td>
                             <th scope="row"><%= vivienda.id_vivienda %></th>
                             <td><%= vivienda.numero %></td>
+                            <td><%= vivienda.coeficiente %>%</td>
                             <td>
-                                <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                <a href="/viviendas/delete/<%= vivienda.id_vivienda %>" data-method="delete" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="/comunidades/<%= vivienda.comunidad_fk %>/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-success">Editar</a>
                             </td>
                         </tr>
                     <% }) %>

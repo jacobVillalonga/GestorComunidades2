@@ -1,0 +1,53 @@
+<% include partials/header.ejs %>
+<div class="container">
+        <p class="text-center text-danger">Editando Factura</p>
+    <% if (cuota){ %>
+      <% if (cuota.id_cuota == 0){ %>
+        <form class="add-player-form" action="/cuotas" method="post" enctype="application/json">
+      <% } else { %>
+        <form class="add-player-form" action="/cuotas/<%= cuota.id_cuota %>" method="post" enctype="application/json">
+      <% } %>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="id_cuota">ID</label>
+                    <input type="text" class="form-control" name="id_cuota" id="id_cuota" value="<%= cuota.id_cuota %>" required readonly title="ID cannot be edited.">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="importe">Importe</label>
+                    <input type="text" class="form-control" name="importe" id="importe" value="<%= cuota.importe %>" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fecha">Fecha</label>
+                    <input type="text" class="form-control" name="fecha" id="fecha" value="<%= cuota.fecha %>" required>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                  <label for="pagado2">Pagado</label>
+                  <input type="text" class="form-control" name="pagado2" id="pagado2" value="<%= cuota.pagado %>" required>
+              </div>
+              <div class="form-group col-md-2">
+                <label for="pagado">Pagado</label>
+                <input type="checkbox" class="form-control" name="pagado" id="pagado" value="1" checked="<% cuota.pagado == 1 %>">
+              </div>
+              <!-- @TODO cambiar a combobox -->
+              <div class="form-group col-md-4">
+                  <label for="numero">Número Vivienda</label>
+                  <input type="text" class="form-control" name="numero" id="numero" value="<%= cuota.numero %>" required>
+              </div>
+              <div class="form-group col-md-2">
+                  <label for="vivienda_fk">ID Vivienda</label>
+                  <input type="text" class="form-control" name="vivienda_fk" id="vivienda_fk" value="<%= cuota.vivienda_fk %>" readonly required>
+              </div>
+            </div>
+            <div align="center">
+              <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
+              <a href="/viviendas" class="btn btn-sm btn-danger">Cancelar</a>
+            </div>
+        </form>
+        @ToDo: Datos vivienda
+    <% } else { %>
+        <p class="text-center">Not Found. Go <a href="/add">here</a> to add cuotas.</p>
+    <% } %>
+</div>
+<% include partials/footer.ejs %>
