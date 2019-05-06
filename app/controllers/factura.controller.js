@@ -10,12 +10,23 @@ exports.list_all_facturas = function(req, res) {
   });
 };
 
+exports.insert_factura = function(req, res) {
+  var factura = new Factura(req.body);
+  //handles null error
+  Factura.insertFactura(factura, function(err, factura) {
+    if (err)
+      res.send(err);
+      res.json(factura);
+  })
+};
+
 exports.select_factura = function(req, res) {
   Factura.getFacturaById(req.params.idFactura, function(err, factura) {
     if (err)
       res.send(err);
     if (req.params.idFactura == 0) {
       var factura = {
+        'comunidad_fk': req.params.idComunidad,
         'fecha': ''
       };
       res.render('edit-factura.ejs', {

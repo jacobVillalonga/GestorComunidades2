@@ -1,7 +1,6 @@
 
 <div class="container">
   <div class="table-wrapper">
-      <% if (facturas.length > 0) {%>
         <h4 class="bg-grey">Facturas:</h4>
           <table class="table table-hovered">
               <thead class="thead-dark">
@@ -12,10 +11,11 @@
                       <th scope="col">Importe</th>
                       <th scope="col">Concepto</th>
                       <th scope="col">
-                        <a href="/facturas/0" class="btn btn-sm btn-success">Añadir</a>
+                        <a href="/comunidades/<%= comunidad.id_comunidad %>/facturas/0" class="btn btn-sm btn-success">Añadir</a>
                       </th>
                   </tr>
               </thead>
+              <% if (facturas.length > 0) {%>
               <tbody>
                   <% Array.prototype.forEach.call(facturas, factura => { %>
                       <tr>
@@ -29,10 +29,17 @@
                           </td>
                       </tr>
                   <% }) %>
-              </tbody>
+              </tbody
+              <% } else { %>
+                <tr>
+                  <td colspan="10">
+                    <p class="text-center">No hay facturas asociadas a esta comunidad.</p>
+                  </td>
+                </tr>
+              <% } %>
+              <tfoot>
+
+              </tfoot>
           </table>
-      <% } else { %>
-          <p class="text-center">No facturas found. Go <a href="/facturas/0" >here</a> to add facturas.</p>
-      <% } %>
   </div>
 </div>

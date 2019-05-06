@@ -33,4 +33,15 @@ var Factura = function(factura){
       }
     });
   };
+  Factura.insertFactura = function insertFactura(factura, result) {
+      sql.query("INSERT INTO factura set ?", factura, function(err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else {
+          console.log(res.insertId);
+          result(null, res.insertId);
+        }
+      });
+  };
   module.exports= Factura;
