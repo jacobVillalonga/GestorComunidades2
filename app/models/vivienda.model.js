@@ -34,7 +34,7 @@ Vivienda.createVivienda = function createVivienda(newVivienda, result) {
             });
 };
 Vivienda.getViviendaById = function getVivienda(viviendaId, result) {
-        sql.query("Select * from vivienda where id_vivienda = ? ", viviendaId, function (err, res) {
+        sql.query("SELECT c.nombre_comunidad, v.id_vivienda, v.numero, v.coeficiente, v.comunidad_fk FROM vivienda v join comunidad c on c.id_comunidad = v.comunidad_fk WHERE id_vivienda = ? ", viviendaId, function (err, res) {
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);
@@ -46,6 +46,17 @@ Vivienda.getViviendaById = function getVivienda(viviendaId, result) {
 };
 Vivienda.getPropietariosVivienda = function getPropietarios(viviendaId, result) {
       sql.query("Select * from propietario as p join prop_vivienda pv on pv.id_propietario = p.id_propietario where pv.id_vivienda = ? order by nombre, apellidos",
+        viviendaId, function (err, res) {
+          if(err) {
+            console.log("error: ", err);
+            result(err, null);
+          } else {
+            result(null, res);
+          }
+      })
+};
+Vivienda.getNoPropietarios = function getNoPropietarios(viviendaId, result) {
+      sql.query("SELECT * FROM propietario WHERE id_propietario NOT IN (Select p.id_propietario from propietario as p join prop_vivienda pv on pv.id_propietario = p.id_propietario where pv.id_vivienda = ?)",
         viviendaId, function (err, res) {
           if(err) {
             console.log("error: ", err);

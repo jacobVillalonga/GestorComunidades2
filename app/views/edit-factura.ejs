@@ -31,22 +31,23 @@
                   <input type="text" class="form-control" name="concepto" id="concepto" value="<%= factura.concepto %>" required>
               </div>
               <!-- @TODO cambiar a combobox -->
-              <div class="form-group col-md-4">
-                  <label for="comunidad_fk">Comunidad</label>
-                  <input type="text" class="form-control" name="comunidad_fk" id="comunidad_fk" value="<%= factura.comunidad_fk %>" required>
-              </div>
               <div class="form-group col-md-2">
-                  <label for="nombre_comunidad">ID Comunidad</label>
-                  <input type="text" class="form-control" name="nombre_comunidad" id="nombre_comunidad" value="<%= factura.comunidad_fk %>" readonly required>
+                  <label for="comunidad_fk">ID Comunidad</label>
+                  <input type="text" class="form-control" name="comunidad_fk" id="comunidad_fk" value="<%= factura.comunidad_fk %>" readonly required>
+              </div>
+              <div class="form-group col-md-4">
+                  <label for="nombre_comunidad">Comunidad</label>
+                  <input type="text" class="form-control" name="nombre_comunidad" id="nombre_comunidad" value="<%= factura.nombre_comunidad %>" readonly required>
               </div>
             </div>
-            <div align="center">
-              <!-- <a href="/" rel="noopener" class="btn btn-sm btn-success">Guardar</a> -->
+            <div align="center" class="form-row">
               <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
-              <a href="/viviendas" class="btn btn-sm btn-danger">Cancelar</a>
+              <a href="/comunidades/<%= factura.comunidad_fk %>" class="btn btn-sm btn-info">Vovler</a>
+              <a href="/facturas/delete/<%= factura.id_factura %>" data-method="delete" class="btn btn-sm btn-danger">Delete</a>
             </div>
         </form>
-        @ToDo: Datos vivienda
+        @ToDo: Datos viviendas
+        @ToDo: Datos propietarios
     <% } else { %>
         <p class="text-center">Not Found. Go <a href="/add">here</a> to add facturas.</p>
     <% } %>

@@ -40,9 +40,10 @@
                   <input type="text" class="form-control" name="vivienda_fk" id="vivienda_fk" value="<%= cuota.vivienda_fk %>" readonly required>
               </div>
             </div>
-            <div align="center">
+            <div align="center" class="form-row">
               <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
-              <a href="/viviendas" class="btn btn-sm btn-danger">Cancelar</a>
+              <a href="/viviendas/<%= cuota.vivienda_fk %>" class="btn btn-sm btn-info">Volver</a>
+              <!-- eliminar -->
             </div>
         </form>
         @ToDo: Datos vivienda

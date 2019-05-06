@@ -12,7 +12,7 @@
                       <th scope="col">Importe</th>
                       <th scope="col">Concepto</th>
                       <th scope="col">
-                        <a href="/facturas/0" class="btn btn-sm btn-primary">Añadir</a>
+                        <a href="/facturas/0" class="btn btn-sm btn-success">Añadir</a>
                       </th>
                   </tr>
               </thead>
@@ -25,8 +25,7 @@
                           <td><%= factura.importe %> €</td>
                           <td><%= factura.concepto %></td>
                           <td>
-                              <a href="/facturas/<%= factura.id_factura %>" rel="noopener" class="btn btn-sm btn-success">Editar</a>
-                              <a href="/facturas/delete/<%= factura.id_factura %>" data-method="delete" class="btn btn-sm btn-danger">Delete</a>
+                              <a href="/facturas/<%= factura.id_factura %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
                           </td>
                       </tr>
                   <% }) %>

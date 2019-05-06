@@ -25,10 +25,11 @@
                     <input type="text" class="form-control" name="comunidad_fk" id="comunidad_fk" value="<%= comunidad_fk %>" required readonly title="ID cannot be edited.">
                 </div>
             </div>
-            <div align="center">
+            <div align="center" class="form-row">
               <!-- <a href="/" rel="noopener" class="btn btn-sm btn-success">Guardar</a> -->
               <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
-              <a href="/viviendas" class="btn btn-sm btn-danger">Cancelar</a>
+              <a href="/comunidades/<%= vivienda.comunidad_fk %>" class="btn btn-sm btn-info">Vovler</a>
+              <a href="/viviendas/delete/<%= vivienda.id_vivienda %>" data-method="delete" class="btn btn-sm btn-danger">Eliminar</a>
             </div>
         </form>
         @ToDo: Datos Comunidad

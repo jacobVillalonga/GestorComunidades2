@@ -12,7 +12,7 @@
                         <th scope="col">Población</th>
                         <th scope="col">Provincia</th>
                         <th scope="col">
-                          <a href="/comunidades/0" class="btn btn-sm btn-primary">Añadir</a>
+                          <a href="/comunidades/0" class="btn btn-sm btn-success">Añadir</a>
                         </th>
                     </tr>
                 </thead>
@@ -26,8 +26,7 @@
                             <td><%= comunidad.poblacion %></td>
                             <td><%= comunidad.provincia %></td>
                             <td>
-                                <a href="/comunidades/<%= comunidad.id_comunidad %>" rel="noopener" class="btn btn-sm btn-success">Editar</a>
-                                <a href="/comunidades/delete/<%= comunidad.id_comunidad %>" data-method="delete" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="/comunidades/<%= comunidad.id_comunidad %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
                             </td>
                         </tr>
                     <% }) %>

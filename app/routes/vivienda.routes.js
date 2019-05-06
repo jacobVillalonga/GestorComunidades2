@@ -20,6 +20,19 @@ module.exports = function(app) {
         viviendaController.update_vivienda(req,res);
     });
 
+  app.route('/viviendas/:idVivienda/propietarios')
+    .get(viviendaController.prop_vivienda);
+
+  app.route('/viviendas/:idVivienda/propietarios/:idPropietario/add')
+    .get(function(req, res){
+      viviendaController.add_prop_vivienda(req,res);
+    });
+
+  app.route('/viviendas/:idVivienda/propietarios/:idPropietario/remove')
+    .get(function(req, res){
+      viviendaController.remove_prop_vivienda(req,res);
+    });
+
   app.route('/viviendas/delete/:idVivienda').get(viviendaController.delete_vivienda);
 
 };

@@ -43,10 +43,11 @@
                     </select>
                 </div> -->
     </div>
-    <div align="center">
+    <div align="center" class="form-row">
       <!-- <a href="/" rel="noopener" class="btn btn-sm btn-success">Ok</a> -->
       <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
-      <a href="/comunidades" class="btn btn-sm btn-danger">Cancelar</a>
+      <a href="/comunidades" class="btn btn-sm btn-info">Vovler</a>
+      <a href="/comunidades/delete/<%= comunidad.id_comunidad %>" data-method="delete" class="btn btn-sm btn-danger">Eliminar</a>
     </div>
   </form>
     <% if (comunidad.id_comunidad != null){ %>

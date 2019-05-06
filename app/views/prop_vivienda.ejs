@@ -1,0 +1,103 @@
+<% include partials/header.ejs %>
+<div class="container">
+  <div class="table-wrapper">
+    <p class="text-center text-danger">Añadiendo propietarios</p>
+    <% if (vivienda){ %>
+    <h4 class="bg-grey">Vivienda:</h4>
+    <table class="table table-hovered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Comunidad</th>
+          <th scope="col">Número</th>
+          <th scope="col">Coeficiente</th>
+          <th scope="col">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= vivienda.id_vivienda %></td>
+          <td><%= vivienda.nombre_comunidad %></td>
+          <td><%= vivienda.numero %></td>
+          <td><%= vivienda.coeficiente %> %</td>
+          <td>
+            <a href="/comunidades/<%= vivienda.comunidad_fk %>/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info">Volver</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <% } %>
+  </div>
+  <div class="table-wrapper">
+    <% if (propietarios.length > 0) {%>
+    <h4 class="bg-grey">Propietarios actuales:</h4>
+    <table class="table table-hovered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">NIF</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Array.prototype.forEach.call(propietarios, propietario => { %>
+        <tr>
+          <th scope="row"><%= propietario.id_propietario %></th>
+          <td><%= propietario.nombre %></td>
+          <td><%= propietario.apellidos %></td>
+          <td><%= propietario.nif %></td>
+          <td><%= propietario.telefono %></td>
+          <td><%= propietario.email %></td>
+          <td>
+            <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-success">Editar</a>
+            <a href="/viviendas/<%= vivienda.id_vivienda %>/propietarios/<%= propietario.id_propietario %>/remove" data-method="delete" class="btn btn-sm btn-danger">Quitar</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <p class="text-center">No propietarios found. Go <a href="/add">here</a> to add propietarios.</p>
+    <% } %>
+  </div>
+  <div class="table-wrapper">
+    <% if (noPropietarios.length > 0) {%>
+    <h4 class="bg-grey">No propietarios:</h4>
+    <table class="table table-hovered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellidos</th>
+          <th scope="col">NIF</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Array.prototype.forEach.call(noPropietarios, propietario => { %>
+        <tr>
+          <th scope="row"><%= propietario.id_propietario %></th>
+          <td><%= propietario.nombre %></td>
+          <td><%= propietario.apellidos %></td>
+          <td><%= propietario.nif %></td>
+          <td><%= propietario.telefono %></td>
+          <td><%= propietario.email %></td>
+          <td>
+            <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-success">Editar</a>
+            <a href="/viviendas/<%= vivienda.id_vivienda %>/propietarios/<%= propietario.id_propietario %>/add" data-method="post" class="btn btn-sm btn-primary">Añadir</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <p class="text-center">No propietarios found. Go <a href="/add">here</a> to add propietarios.</p>
+    <% } %>
+  </div>
+</div>
+<% include partials/footer.ejs %>

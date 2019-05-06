@@ -7,7 +7,6 @@ exports.list_all_comunidades = function(req, res) {
     if (err)
       res.send(err);
     // res.send(comunidades);
-    if (comunidades.size > 1){console.log("OK--------------")};
     res.render('comunidades.ejs',{title: 'Comunidades',comunidades:comunidades})
   });
 };

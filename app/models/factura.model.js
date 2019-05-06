@@ -23,7 +23,7 @@ var Factura = function(factura){
               });
   };
   Factura.getFacturaById = function getFactura(facturaId, result) {
-    sql.query("Select * from factura where id_factura = ? ", facturaId, function(err, res) {
+    sql.query("Select f.*, c.nombre_comunidad from factura f join comunidad c on c.id_comunidad = f.comunidad_fk where id_factura = ? ", facturaId, function(err, res) {
       if (err) {
         console.log("error: ", err);
         result(err, null);

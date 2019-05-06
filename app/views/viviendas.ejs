@@ -30,7 +30,7 @@
                           <td></td>
                           <td>
                             <a href="/comunidades/<%= vivienda.comunidad_fk %>" data-method="get" class="btn btn-sm btn-primary">
-                              <span class="glyphicon glyphicon-eye-open"></span>
+                              Ver
                             </a>
                           </td>
                         </tr>
@@ -41,7 +41,7 @@
                             <td><%= vivienda.numero %></td>
                             <td><%= vivienda.coeficiente %>%</td>
                             <td>
-                                <a href="/comunidades/<%= vivienda.comunidad_fk %>/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-success">Editar</a>
+                                <a href="/comunidades/<%= vivienda.comunidad_fk %>/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
                             </td>
                         </tr>
                     <% }) %>
