@@ -12,33 +12,32 @@
     <title><%= title %></title>
 </head>
 <style>
+
+  .page-wrapper {
+    min-height: calc(100vh - 50px);/* 50 = footer_height + .container_margin-bottom*/
+    margin-bottom: -30px;/* 30 = footer_height */
+  }
+
+  .container {
+    margin-bottom: 20px;
+  }
+
   .table-wrapper {
     margin-top: 50px;
   }
 
-  .add-comunidad-form {
-    margin-top: 50px;
-  }
-
   .navbar {
+    height: 50px;
     margin-bottom: 0;
     border-radius: 0;
   }
-
-  .row.content {
-    height: 450px
-  }
-
-  .sidenav {
+  /* .sidenav {
     padding-top: 20px;
-    background-color: #f1f1f1;
     height: 100%;
-  }
-
-  footer {}
-
+  } */
   .footer {
-    color: white;
+    height: 30px;
+    color: #FFF;
     background-color: #333;
   }
 
@@ -46,20 +45,23 @@
     background-color: #555;
     color: #FFF;
   }
+
   h4.bg-grey {
     padding: 5px;
   }
-  /* On small screens, set height to 'auto' for sidenav and grid */
-  @media screen and (max-width: 767px) {
-    .sidenav {
-      height: auto;
-      padding: 15px;
-    }
 
-    .row.content {
-      height: auto;
-    }
+  p {
+    margin: 1px 1px 10px;
   }
+
+  input[type="checkbox"],input[type="radio"]{
+    margin: 0px 0 0;
+  }
+  /* On small screens, set height to 'auto' for sidenav and grid */
+  /* @media screen and (max-width: 767px) {
+    .sidenav {
+    }
+  } */
 </style>
 <body>
 <nav class="navbar navbar-inverse">

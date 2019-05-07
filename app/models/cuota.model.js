@@ -32,7 +32,7 @@ Cuota.getCuotaById = function getCuota(cuotaId, result) {
   });
 };
 Cuota.insertCuota = function insertCuota(cuota, result) {
-  sql.query("INSERT INTO cuota set ?", cuota, function(err, res) {
+  sql.query("INSERT INTO pago_cuota set ?", cuota, function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);

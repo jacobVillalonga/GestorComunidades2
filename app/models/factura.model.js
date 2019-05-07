@@ -29,7 +29,6 @@ Factura.getFacturaById = function getFactura(facturaId, result) {
       result(err, null);
     } else {
       result(null, res);
-
     }
   });
 };

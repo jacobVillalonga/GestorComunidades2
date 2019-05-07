@@ -9,7 +9,7 @@
           <th scope="col">Importe</th>
           <th scope="col">Pagado</th>
           <th scope="col">
-            <a href="/cuotas/0" class="btn btn-sm btn-success">Añadir</a>
+            <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/0" class="btn btn-sm btn-success">Añadir</a>
           </th>
         </tr>
       </thead>
@@ -28,7 +28,7 @@
             <% } %>
           </td>
           <td>
-            <a href="/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
+            <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
           </td>
         </tr>
         <% }) %>

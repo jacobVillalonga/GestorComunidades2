@@ -9,7 +9,7 @@ module.exports = function(app) {
         cuotaController.insert_cuota(req, res);
       });
 
-  app.route('/cuotas/:idCuota')
+  app.route('/viviendas/:idVivienda/cuotas/:idCuota')
     .get(cuotaController.select_cuota)
     .post(function(req, res) {
       cuotaController.update_cuota(req, res);

@@ -12,7 +12,6 @@ module.exports = function(app) {
     .post(function(req, res) {
       facturaController.update_factura(req, res);
     });
-  //delete
   app.route('/facturas/delete/:idFactura')
     .get(facturaController.delete_factura);
 };

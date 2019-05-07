@@ -20,7 +20,7 @@
                         <!-- <th scope="col">Provincia</th> -->
                         <!-- <th scope="col">Pais</th> -->
                         <th scope="col">
-                          <a href="/propietarios/0" class="btn btn-sm btn-primary">Añadir</a>
+                          <a href="/propietarios/0" class="btn btn-sm btn-success">Añadir</a>
                         </th>
                     </tr>
                 </thead>
@@ -42,8 +42,7 @@
                             <!-- propietario.provincia -->
                             <!-- propietario.pais -->
                             <td>
-                                <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                <a href="/propietarios/delete/<%= propietario.id_propietario %>" data-method="delete" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
                             </td>
                         </tr>
                     <% }) %>

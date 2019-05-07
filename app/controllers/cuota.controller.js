@@ -17,7 +17,7 @@ exports.select_cuota = function(req, res) {
       res.send(err);
     if (req.params.idCuota == 0) {
       var cuota = {
-        'fecha': ''
+        'vivienda_fk':req.params.idVivienda
       };
       res.render('edit-cuota.ejs', {
         title: 'Añadir Cuota',

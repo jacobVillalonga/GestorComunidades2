@@ -1,6 +1,6 @@
 <% include partials/header.ejs %>
 <div class="container">
-        <p class="text-center text-danger">Editando Factura</p>
+    <p class="text-center text-danger">Editando Cuota</p>
     <% if (cuota){ %>
       <% if (cuota.id_cuota == 0){ %>
         <form class="add-player-form" action="/cuotas" method="post" enctype="application/json">
@@ -25,8 +25,8 @@
                   <input type="checkbox" class="form-control" name="pagado" id="pagado" value="1" <% if (cuota.pagado == 1){ %>checked<% } %>">
               </div>
               <div class="form-group col-md-2">
-                  <label for="numero">Número Vivienda</label>
-                  <input type="text" class="form-control" name="numero" id="numero" value="<%= cuota.numero %>" required readonly>
+                  <label for="">Número Vivienda</label>
+                  <input type="text" class="form-control" name="" id="" value="<%= cuota.numero %>" readonly>
               </div>
               <div class="form-group col-md-2">
                   <label for="vivienda_fk">ID Vivienda</label>
@@ -34,8 +34,8 @@
               </div>
             </div>
             <div align="center" class="form-row">
-              <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
-              <a href="/viviendas/<%= cuota.vivienda_fk %>" class="btn btn-sm btn-info">Volver</a>
+              <button formmethod="post" type="submit" class="btn btn-success">Guardar</button>
+              <a href="/viviendas" class="btn btn-sm btn-info">Volver</a>
               <a href="/cuotas/delete/<%= cuota.id_cuota %>" data-method="delete" class="btn btn-sm btn-danger">Eliminar</a>
             </div>
         </form>
