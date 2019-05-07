@@ -25,7 +25,7 @@
                           <td><%= factura.importe %> €</td>
                           <td><%= factura.concepto %></td>
                           <td>
-                              <a href="/facturas/<%= factura.id_factura %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
+                              <a href="/comunidades/<%= factura.comunidad_fk %>/facturas/<%= factura.id_factura %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
                           </td>
                       </tr>
                   <% }) %>

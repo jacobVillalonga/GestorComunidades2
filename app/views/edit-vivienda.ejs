@@ -5,7 +5,7 @@
       <% if (vivienda.id_vivienda){ %>
         <form class="add-player-form" action="/comunidades/<%= vivienda.comunidad_fk %>/viviendas/<%= vivienda.id_vivienda %>" method="post" enctype="application/json">
       <% } else { %>
-        <form class="add-player-form" action="/viviendas" method="post" enctype="application/json">
+        <form class="add-player-form" action="/comunidades/<%= comunidad_fk %>/viviendas" method="post" enctype="application/json">
       <% } %>
             <div class="form-row">
                 <div class="form-group col-md-3">

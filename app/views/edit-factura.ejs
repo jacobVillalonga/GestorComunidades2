@@ -2,10 +2,10 @@
 <div class="container">
         <p class="text-center text-danger">Editando Factura</p>
     <% if (factura){ %>
-      <% if (factura.id_factura == 0){ %>
+      <% if (!factura.id_factura){ %>
         <form class="add-player-form" action="/facturas" method="post" enctype="application/json">
       <% } else { %>
-        <form class="add-player-form" action="/facturas/<%= factura.id_factura %>" method="post" enctype="application/json">
+        <form class="add-player-form" action="/comunidades/<%= factura.comunidad_fk %>/facturas/<%= factura.id_factura %>" method="post" enctype="application/json">
       <% } %>
             <div class="form-row">
                 <div class="form-group col-md-2">

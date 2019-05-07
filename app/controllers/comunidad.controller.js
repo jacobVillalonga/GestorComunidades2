@@ -57,7 +57,7 @@ exports.select_comunidad = function(req, res) {
 
 exports.update_comunidad = function(req, res) {
     console.log(req.body);
-  Comunidad.updateById(req.params.idComunidad, req.body, function(err, comunidad) {
+  Comunidad.updateById(req.body, function(err, comunidad) {
     if (err)
       res.send(err);
     res.json(comunidad);
@@ -69,6 +69,6 @@ exports.delete_comunidad = function(req, res) {
   Comunidad.remove( req.params.idComunidad, function(err, comunidad) {
     if (err)
       res.send(err);
-    res.render('deleted.ejs',{title: '', message: 'Comunidad eliminada'})
+    res.render('msg.ejs',{title: '', message: 'Comunidad eliminada'})
   });
 };

@@ -4,10 +4,7 @@ module.exports = function(app) {
   // viviendaController Routes
 
   app.route('/viviendas')
-    .get(viviendaController.list_all_viviendas)
-    .post(function(req, res){
-       viviendaController.insert_vivienda(req, res);
-    });
+    .get(viviendaController.list_all_viviendas);
 
   app.route('/comunidades/:idComunidad/viviendas')
     .post(function(req, res){
@@ -33,6 +30,7 @@ module.exports = function(app) {
       viviendaController.remove_prop_vivienda(req,res);
     });
 
-  app.route('/viviendas/delete/:idVivienda').get(viviendaController.delete_vivienda);
+  app.route('/viviendas/delete/:idVivienda')
+    .get(viviendaController.delete_vivienda);
 
 };

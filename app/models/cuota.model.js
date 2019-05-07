@@ -31,4 +31,37 @@ Cuota.getCuotaById = function getCuota(cuotaId, result) {
     }
   });
 };
+Cuota.insertCuota = function insertCuota(cuota, result) {
+  sql.query("INSERT INTO cuota set ?", cuota, function(err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      console.log(res.insertId);
+      result(null, res.insertId);
+    }
+  });
+};
+Cuota.updateCuota = function updateCuota(cuota, result) {
+  sql.query("UPDATE pago_cuota SET vivienda_fk = ?, importe = ?, fecha = ?, pagado = ? WHERE id_cuota = ?",
+    [cuota.vivienda_fk, cuota.importe, cuota.fecha, cuota.pagado, cuota.id_cuota],
+    function(err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        result(null, res);
+      }
+    });
+};
+Cuota.removeCuota = function(cuotaId, result) {
+  sql.query("DELETE FROM pago_cuota WHERE id_cuota = ?", [cuotaId], function(err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+    } else {
+      result(null, res);
+    }
+  });
+};
 module.exports= Cuota;

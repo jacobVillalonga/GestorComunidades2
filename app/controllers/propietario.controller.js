@@ -57,7 +57,7 @@ exports.insert_propietario = function(req, res) {
 
 exports.update_propietario = function(req, res) {
   console.log(req.body);
-  Propietario.updateById(req.params.idPropietario, req.body, function(err, propietario) {
+  Propietario.updateById(req.body, function(err, propietario) {
     if (err)
       res.send(err);
     res.json(propietario);

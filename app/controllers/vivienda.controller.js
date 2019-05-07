@@ -82,7 +82,7 @@ exports.select_vivienda = function(req, res) {
 };
 
 exports.update_vivienda = function(req, res) {
-  Vivienda.updateById(req.params.idVivienda, new Vivienda(req.body), function(err, vivienda) {
+  Vivienda.updateById(req.body, function(err, vivienda) {
     if (err)
       res.send(err);
     res.json(vivienda);
@@ -138,7 +138,7 @@ exports.delete_vivienda = function(req, res) {
     if (err)
       res.send(err);
     // res.json({ message: 'Vivienda eliminada' });
-    res.render('deleted.ejs', {
+    res.render('msg.ejs', {
       title: '',
       message: 'Vivienda eliminada'
     })

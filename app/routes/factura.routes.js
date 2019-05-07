@@ -13,4 +13,6 @@ module.exports = function(app) {
       facturaController.update_factura(req, res);
     });
   //delete
+  app.route('/facturas/delete/:idFactura')
+    .get(facturaController.delete_factura);
 };

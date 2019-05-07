@@ -88,8 +88,9 @@ Vivienda.getViviendasComunidad = function getViviendas(comunidadId, result) {
                 }
             });
 };
-Vivienda.updateById = function(id, vivienda, result){
-  sql.query("UPDATE vivienda SET numero = ?, coeficiente = ? WHERE id_vivienda = ?", [vivienda.numero, vivienda.coeficiente, id], function (err, res) {
+Vivienda.updateById = function(vivienda, result){
+  sql.query("UPDATE vivienda SET numero = ?, coeficiente = ? WHERE id_vivienda = ?",
+  [vivienda.numero, vivienda.coeficiente, vivienda.id_vivienda], function (err, res) {
           if(err) {
               console.log("error: ", err);
                 result(null, err);

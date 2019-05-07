@@ -63,13 +63,13 @@ Comunidad.getAllComunidades = function getAllComunidades(result) {
     }
   });
 };
-Comunidad.updateById = function(id, comunidad, result) {
+Comunidad.updateById = function(comunidad, result) {
   sql.query("UPDATE comunidad SET nombre_comunidad = ? ," +
     " direccion = ? ," +
     " cp = ? ," +
     " poblacion = ? ," +
     " provincia = ? WHERE id_comunidad = ?",
-    [comunidad.nombre_comunidad, comunidad.direccion, comunidad.cp, comunidad.poblacion, comunidad.provincia, id],
+    [comunidad.nombre_comunidad, comunidad.direccion, comunidad.cp, comunidad.poblacion, comunidad.provincia, comunidad.id_comunidad],
     function(err, res) {
       if (err) {
         console.log("error: ", err);

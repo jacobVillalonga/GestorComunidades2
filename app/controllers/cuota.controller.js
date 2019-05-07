@@ -31,3 +31,46 @@ exports.select_cuota = function(req, res) {
     }
   })
 };
+
+exports.insert_cuota = function(req, res) {
+  var cuota = req.body;
+  //handles null error
+  if (!cuota.importe || !cuota.fecha) {
+    res.status(400).send({
+      error: true,
+      message: 'Please provide importe y fecha cuota'
+    });
+  } else if (!cuota.vivienda_fk) {
+    res.status(400).send({
+      error: true,
+      message: 'Please provide vivienda_fk'
+    });
+  } else {
+    Cuota.insertCuota(cuota, function(err, cuota) {
+      if (err)
+        res.send(err);
+      res.json(cuota);
+    });
+  }
+};
+
+exports.update_cuota = function(req, res) {
+    console.log(req.body);
+  Cuota.updateCuota(req.body, function(err, cuotaId) {
+    if (err)
+      res.send(err);
+    res.json(cuotaId);
+  });
+};
+
+exports.delete_cuota = function(req, res) {
+  console.log("Eliminando cuota ", req.params.idCuota);
+  Cuota.removeCuota(req.params.idCuota, function(err, cuota) {
+    if (err)
+      res.send(err);
+    res.render('msg.ejs', {
+      title: '',
+      message: 'Cuota eliminada'
+    })
+  });
+};

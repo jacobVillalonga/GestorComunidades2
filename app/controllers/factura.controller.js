@@ -42,3 +42,24 @@ exports.select_factura = function(req, res) {
     }
   })
 };
+
+exports.update_factura = function(req, res) {
+    console.log(req.body);
+  Factura.updateFactura(req.body, function(err, factura) {
+    if (err)
+      res.send(err);
+    res.json(factura);
+  });
+};
+
+exports.delete_factura = function(req, res) {
+  console.log("Eliminando factura ", req.params.idFactura);
+  Factura.removeFactura(req.params.idFactura, function(err, factura) {
+    if (err)
+      res.send(err);
+    res.render('msg.ejs', {
+      title: '',
+      message: 'Factura eliminada'
+    })
+  });
+};

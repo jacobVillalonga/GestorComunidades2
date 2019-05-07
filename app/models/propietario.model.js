@@ -54,8 +54,7 @@ var Propietario = function(propietario){
       }
     });
   };
-  Propietario.updateById = function(id, propietario, result) {
-    // @TODO adaptar query a propietario
+  Propietario.updateById = function(propietario, result) {
     sql.query("UPDATE propietario SET nombre = ? ," +
       " apellidos = ? ," +
       " nif = ? ," +
@@ -82,7 +81,7 @@ var Propietario = function(propietario){
         propietario.pais,
         propietario.poblacion,
         propietario.provincia,
-        id],
+        propietario.id_propietario],
       function(err, res) {
         if (err) {
           console.log("error: ", err);
