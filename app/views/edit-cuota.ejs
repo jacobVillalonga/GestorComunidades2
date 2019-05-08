@@ -5,7 +5,7 @@
       <% if (cuota.id_cuota == 0){ %>
         <form class="add-player-form" action="/cuotas" method="post" enctype="application/json">
       <% } else { %>
-        <form class="add-player-form" action="/cuotas/<%= cuota.id_cuota %>" method="post" enctype="application/json">
+        <form class="add-player-form" action="/viviendas/<%= cuota.vivienda_fk %>/cuotas/<%= cuota.id_cuota %>" method="post" enctype="application/json">
       <% } %>
           <div class="form-row">
               <div class="form-group col-md-2">

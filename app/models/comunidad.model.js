@@ -9,14 +9,14 @@ var Comunidad = function(comunidad) {
   this.poblacion = comunidad.poblacion;
   this.provincia = comunidad.provincia;
 };
-Comunidad.createComunidad = function createComunidad(newComunidad, result) {
+Comunidad.insert = function (newComunidad, result) {
   sql.query("INSERT INTO comunidad set ?", newComunidad, function(err, res) {
 
     if (err) {
       console.log("error: ", err);
       result(err, null);
     } else {
-      console.log(res.insertId);
+      console.log("insert comunidad: ", res);
       result(null, res.insertId);
     }
   });
@@ -63,7 +63,7 @@ Comunidad.getAllComunidades = function getAllComunidades(result) {
     }
   });
 };
-Comunidad.updateById = function(comunidad, result) {
+Comunidad.update = function (comunidad, result) {
   sql.query("UPDATE comunidad SET nombre_comunidad = ? ," +
     " direccion = ? ," +
     " cp = ? ," +
@@ -75,18 +75,19 @@ Comunidad.updateById = function(comunidad, result) {
         console.log("error: ", err);
         result(null, err);
       } else {
+        console.log("update comunidad: ", res);
         result(null, res);
       }
     });
 };
-Comunidad.remove = function(id, result) {
+Comunidad.delete = function (id, result) {
   sql.query("DELETE FROM comunidad WHERE id_comunidad = ?", [id], function(err, res) {
 
     if (err) {
       console.log("error: ", err);
       result(null, err);
     } else {
-
+      console.log("delete comunidad: ", res);
       result(null, res);
     }
   });

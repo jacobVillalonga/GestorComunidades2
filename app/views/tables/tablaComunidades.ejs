@@ -1,21 +1,21 @@
 <div class="container">
     <div class="table-wrapper">
-        <% if (comunidades.length > 0) {%>
-          <h4 class="bg-grey">Comunidades:</h4>
-            <table class="table table-hovered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">CP</th>
-                        <th scope="col">Población</th>
-                        <th scope="col">Provincia</th>
-                        <th scope="col">
-                          <a href="/comunidades/0" class="btn btn-sm btn-success">Añadir</a>
-                        </th>
-                    </tr>
-                </thead>
+        <h4 class="bg-grey">Comunidades:</h4>
+          <table class="table table-hovered">
+              <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Dirección</th>
+                      <th scope="col">CP</th>
+                      <th scope="col">Población</th>
+                      <th scope="col">Provincia</th>
+                      <th scope="col">
+                        <a href="/comunidades/0" class="btn btn-sm btn-success">Añadir</a>
+                      </th>
+                  </tr>
+              </thead>
+              <% if (comunidades.length > 0) {%>
                 <tbody>
                     <% Array.prototype.forEach.call(comunidades, comunidad => { %>
                         <tr>
@@ -31,9 +31,13 @@
                         </tr>
                     <% }) %>
                 </tbody>
-            </table>
-        <% } else { %>
-            <p class="text-center">No comunidades found. Go <a href="/add" >here</a> to add comunidades.</p>
-        <% } %>
+              <% } else { %>
+                <tr>
+                  <td colspan="10">
+                    <p class="text-center">No hay Comunidades en a base de datos.</p>
+                  </td>
+                </tr>
+              <% } %>
+        </table>
     </div>
 </div>

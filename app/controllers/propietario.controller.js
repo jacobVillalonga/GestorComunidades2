@@ -50,7 +50,7 @@ exports.insert_propietario = function(req, res) {
     Propietario.createPropietario(propietario, function(err, propietario) {
       if (err)
         res.send(err);
-      res.json(propietario);
+      res.render('msg.ejs',{title: 'Guardar Propietario', message: 'Propietario registrado'})
     });
   }
 };
@@ -60,7 +60,7 @@ exports.update_propietario = function(req, res) {
   Propietario.updateById(req.body, function(err, propietario) {
     if (err)
       res.send(err);
-    res.json(propietario);
+    res.render('msg.ejs',{title: 'Guardar propietario', message: 'Propietario actualizado'})
   });
 };
 
@@ -69,9 +69,6 @@ exports.delete_propietario = function(req, res) {
   Propietario.remove(req.params.idPropietario, function(err, propietario) {
     if (err)
       res.send(err);
-    res.render('deleted.ejs', {
-      title: '',
-      message: 'Propietario eliminado'
-    })
+    res.render('msg.ejs',{title: 'Eliminar propietario', message: 'Propietario eliminado'})
   });
 };

@@ -17,10 +17,10 @@ exports.insert_comunidad = function(req, res) {
   if(!comunidad.nombre_comunidad){
     res.status(400).send({ error:true, message: 'Please provide comunidad/nombre_comunidad' });
   }else{
-    Comunidad.createComunidad(comunidad, function(err, comunidad) {
+    Comunidad.insert(comunidad, function(err, comunidad) {
       if (err)
         res.send(err);
-      res.json(comunidad);
+      res.render('msg.ejs',{title: 'Guardar comunidad', message: 'Comunidad registrada'})
     });
   }
 };
@@ -57,18 +57,18 @@ exports.select_comunidad = function(req, res) {
 
 exports.update_comunidad = function(req, res) {
     console.log(req.body);
-  Comunidad.updateById(req.body, function(err, comunidad) {
+  Comunidad.update(req.body, function(err, comunidad) {
     if (err)
       res.send(err);
-    res.json(comunidad);
+    res.render('msg.ejs',{title: 'Guardar comunidad', message: 'Comunidad actualizada'})
   });
 };
 
 exports.delete_comunidad = function(req, res) {
   console.log("Eliminando comunidad ",req.params.idComunidad);
-  Comunidad.remove( req.params.idComunidad, function(err, comunidad) {
+  Comunidad.delete( req.params.idComunidad, function(err, comunidad) {
     if (err)
       res.send(err);
-    res.render('msg.ejs',{title: '', message: 'Comunidad eliminada'})
+    res.render('msg.ejs',{title: 'Eliminar comunidad', message: 'Comunidad eliminada'})
   });
 };

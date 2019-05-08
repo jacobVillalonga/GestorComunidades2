@@ -7,8 +7,6 @@ exports.list_all_viviendas = function(req, res) {
   Vivienda.getAllViviendas(function(err, viviendas) {
     if (err)
       res.send(err);
-    //console.log('res', vivienda);
-    // res.send(vivienda);
     res.render('viviendas.ejs', {
       title: 'Gestor Comunidades',
       viviendas: viviendas
@@ -30,10 +28,10 @@ exports.insert_vivienda = function(req, res) {
       message: 'Please provide vivienda/comunidad_fk'
     });
   } else {
-    Vivienda.createVivienda(vivienda, function(err, vivienda) {
+    Vivienda.insert(vivienda, function(err, vivienda) {
       if (err)
         res.send(err);
-      res.json(vivienda);
+      res.render('msg.ejs',{title: 'Guardar vivienda', message: 'Vivienda registrada'})
     });
   }
 };
@@ -82,10 +80,10 @@ exports.select_vivienda = function(req, res) {
 };
 
 exports.update_vivienda = function(req, res) {
-  Vivienda.updateById(req.body, function(err, vivienda) {
+  Vivienda.update(req.body, function(err, vivienda) {
     if (err)
       res.send(err);
-    res.json(vivienda);
+    res.render('msg.ejs',{title: 'Guardar vivienda', message: 'Vivienda registrada'})
   });
 };
 
@@ -118,9 +116,10 @@ exports.add_prop_vivienda = function(req, res) {
   PropVivienda.addPropVivienda(propVivienda, function(err, propVivienda) {
     if (err)
       res.send(err);
-    res.json({message: 'propietario añadido'});
+    res.render('msg.ejs',{title: 'Asignar propietario', message: 'Propietario asignado'})
   })
 }
+
 exports.remove_prop_vivienda = function(req, res) {
   var propVivienda = {
     id_vivienda: req.params.idVivienda,
@@ -129,18 +128,15 @@ exports.remove_prop_vivienda = function(req, res) {
   PropVivienda.removePropVivienda(propVivienda, function(err, propVivienda) {
     if (err)
       res.send(err);
-    res.json({message: 'propietario removed'});
+    res.render('msg.ejs',{title: 'Quitar propietario', message: 'Propietario reasignado'})
   })
 }
+
 exports.delete_vivienda = function(req, res) {
   console.log("Eliminando vivienda ", req.params.idVivienda);
-  Vivienda.remove(req.params.idVivienda, function(err, vivienda) {
+  Vivienda.delete(req.params.idVivienda, function(err, vivienda) {
     if (err)
       res.send(err);
-    // res.json({ message: 'Vivienda eliminada' });
-    res.render('msg.ejs', {
-      title: '',
-      message: 'Vivienda eliminada'
-    })
+    res.render('msg.ejs',{title: 'Eliminar vivienda', message: 'Vivienda eliminada'})
   });
 };

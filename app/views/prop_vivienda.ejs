@@ -1,5 +1,6 @@
 <% include partials/header.ejs %>
 <div class="container">
+  <!-- info vivienda -->
   <div class="table-wrapper">
     <p class="text-center text-danger">Añadiendo propietarios</p>
     <% if (vivienda){ %>
@@ -29,8 +30,8 @@
     </table>
     <% } %>
   </div>
+  <!-- propietarios vivienda -->
   <div class="table-wrapper">
-    <% if (propietarios.length > 0) {%>
     <h4 class="bg-grey">Propietarios actuales:</h4>
     <table class="table table-hovered">
       <thead class="thead-dark">
@@ -41,8 +42,10 @@
           <th scope="col">NIF</th>
           <th scope="col">Telefono</th>
           <th scope="col">Email</th>
+          <th scope="col"></th>
         </tr>
       </thead>
+      <% if (propietarios.length > 0) {%>
       <tbody>
         <% Array.prototype.forEach.call(propietarios, propietario => { %>
         <tr>
@@ -59,13 +62,17 @@
         </tr>
         <% }) %>
       </tbody>
+      <% } else { %>
+      <tr>
+        <td colspan="7">
+          <p class="text-center">No hay propietarios asignados a esta vivienda.</p>
+        </td>
+      </tr>
+      <% } %>
     </table>
-    <% } else { %>
-    <p class="text-center">No propietarios found. Go <a href="/add">here</a> to add propietarios.</p>
-    <% } %>
   </div>
+  <!-- propietarios BDD -->
   <div class="table-wrapper">
-    <% if (noPropietarios.length > 0) {%>
     <h4 class="bg-grey">No propietarios:</h4>
     <table class="table table-hovered">
       <thead class="thead-dark">
@@ -76,8 +83,12 @@
           <th scope="col">NIF</th>
           <th scope="col">Telefono</th>
           <th scope="col">Email</th>
+          <th scope="col">
+            <a href="/propietarios/0" class="btn btn-sm btn-success">Añadir</a>
+          </th>
         </tr>
       </thead>
+      <% if (noPropietarios.length > 0) {%>
       <tbody>
         <% Array.prototype.forEach.call(noPropietarios, propietario => { %>
         <tr>
@@ -89,15 +100,19 @@
           <td><%= propietario.email %></td>
           <td>
             <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
-            <a href="/viviendas/<%= vivienda.id_vivienda %>/propietarios/<%= propietario.id_propietario %>/add" data-method="post" class="btn btn-sm btn-primary">Añadir</a>
+            <a href="/viviendas/<%= vivienda.id_vivienda %>/propietarios/<%= propietario.id_propietario %>/add" data-method="post" class="btn btn-sm btn-primary">Asignar</a>
           </td>
         </tr>
         <% }) %>
       </tbody>
+      <% } else { %>
+      <tr>
+        <td colspan="7">
+          <p class="text-center">No hay propietarios registrados en la base de datos.</p>
+        </td>
+      </tr>
+      <% } %>
     </table>
-    <% } else { %>
-    <p class="text-center">No propietarios found. Go <a href="/add">here</a> to add propietarios.</p>
-    <% } %>
   </div>
 </div>
 <% include partials/footer.ejs %>

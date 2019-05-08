@@ -20,7 +20,7 @@ Vivienda.getAllViviendas = function getAllViviendas(result) {
                 }
             });
 };
-Vivienda.createVivienda = function createVivienda(newVivienda, result) {
+Vivienda.insert = function(newVivienda, result) {
         sql.query("INSERT INTO vivienda set ?", newVivienda, function (err, res) {
 
                 if(err) {
@@ -56,7 +56,7 @@ Vivienda.getPropietariosVivienda = function getPropietarios(viviendaId, result) 
       })
 };
 Vivienda.getNoPropietarios = function getNoPropietarios(viviendaId, result) {
-      sql.query("SELECT * FROM propietario WHERE id_propietario NOT IN (Select p.id_propietario from propietario as p join prop_vivienda pv on pv.id_propietario = p.id_propietario where pv.id_vivienda = ?)",
+      sql.query("SELECT * FROM propietario WHERE id_propietario NOT IN (Select p.id_propietario from propietario as p join prop_vivienda pv on pv.id_propietario = p.id_propietario where pv.id_vivienda = ? ) order by nombre, apellidos",
         viviendaId, function (err, res) {
           if(err) {
             console.log("error: ", err);
@@ -88,7 +88,7 @@ Vivienda.getViviendasComunidad = function getViviendas(comunidadId, result) {
                 }
             });
 };
-Vivienda.updateById = function(vivienda, result){
+Vivienda.update = function(vivienda, result){
   sql.query("UPDATE vivienda SET numero = ?, coeficiente = ? WHERE id_vivienda = ?",
   [vivienda.numero, vivienda.coeficiente, vivienda.id_vivienda], function (err, res) {
           if(err) {
@@ -100,7 +100,7 @@ Vivienda.updateById = function(vivienda, result){
                 }
             });
 };
-Vivienda.remove = function(id, result){
+Vivienda.delete = function(id, result){
      sql.query("DELETE FROM vivienda WHERE id_vivienda = ?", [id], function (err, res) {
                 if(err) {
                     console.log("error: ", err);
