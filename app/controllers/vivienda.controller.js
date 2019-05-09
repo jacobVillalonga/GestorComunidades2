@@ -7,10 +7,12 @@ exports.list_all_viviendas = function(req, res) {
   Vivienda.getAllViviendas(function(err, viviendas) {
     if (err)
       res.send(err);
-    res.render('viviendas.ejs', {
-      title: 'Gestor Comunidades',
-      viviendas: viviendas
-    })
+    // res.render('viviendas.ejs', {
+    //   title: 'Gestor Comunidades',
+    //   viviendas: viviendas
+    // })
+    res.send({title: "Gestor Comunidades",
+  viviendas:viviendas});
   });
 };
 
@@ -73,6 +75,14 @@ exports.select_vivienda = function(req, res) {
             propietarios: propietarios,
             cuotas: cuotas
           })
+          // res.send({
+          //   tittle: 'Editar vivienda',
+          //   vivienda: vivienda[0],
+          //   comunidad_fk: comunidad_fk,
+          //   propietarios: propietarios,
+          //   cuotas: cuotas
+          // });
+
         })
       });
     }

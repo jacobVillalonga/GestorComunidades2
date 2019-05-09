@@ -8,7 +8,6 @@ var Propietario = function(propietario){
         this.apellidos = propietario.apellidos;
         this.nif = propietario.nif;
         this.fecha_nacimiento = propietario.fecha_nacimiento;
-        this.sexo = propietario.sexo;
         this.telefono = propietario.telefono;
         this.telefono2 = propietario.telefono2;
         this.email = propietario.email;
@@ -59,7 +58,6 @@ var Propietario = function(propietario){
       " apellidos = ? ," +
       " nif = ? ," +
       " fecha_nacimiento = ? ," +
-      " sexo = ? ," +
       " telefono = ? ," +
       " telefono2 = ? ," +
       " email = ? ," +
@@ -72,7 +70,6 @@ var Propietario = function(propietario){
         propietario.apellidos,
         propietario.nif,
         propietario.fecha_nacimiento,
-        propietario.sexo,
         propietario.telefono,
         propietario.telefono2,
         propietario.email,

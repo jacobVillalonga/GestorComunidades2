@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!-- <script type="text/javascript src="main.js"></script> -->
+<div ng-app="myApp" ng-controller="myCtrl">
+<div>
+  <p>title: {{ info }}</p>
+  {{ data }}
+  <table>
+    <tr>
+      <th>numero</th>
+      <th>id</th>
+      </tr>
+      <tr ng-repeat="x in data.viviendas">
+    <td>{{ x.numero }}</td>
+    <td>{{ x.id_vivienda }}</td>
+  </tr>
+  </table>
+  </div>
+  <!-- <div ng-include src="'./include.html'"></div> -->
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+// var Vivienda = require('../models/vivienda.model.js');
+app.controller('myCtrl', function($scope, $http) {
+  $scope.info = "data";
+  $scope.viviendas = Vivienda.getAllViviendas;
+  console.log($scope.viviendas)
+    $http.get("http://localhost:3000/viviendas")
+    .then(function (response) {$scope.data = response.data.records;});
+});
+</script>
+
+</body>
+</html>
