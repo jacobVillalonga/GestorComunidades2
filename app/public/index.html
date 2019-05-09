@@ -27,7 +27,7 @@ var app = angular.module('myApp', []);
 // var Vivienda = require('../models/vivienda.model.js');
 app.controller('myCtrl', function($scope, $http) {
   $scope.info = "data";
-  $scope.viviendas = Vivienda.getAllViviendas;
+  // $scope.viviendas = Vivienda.getAllViviendas;
   console.log($scope.viviendas)
     $http.get("http://localhost:3000/viviendas")
     .then(function (response) {$scope.data = response.data.records;});
