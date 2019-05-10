@@ -3,14 +3,11 @@ module.exports = function(app) {
   var viviendaController = require('../controllers/vivienda.controller');
   // viviendaController Routes
 
-  // app.route('/viviendas')
-  //   .get(viviendaController.list_all_viviendas);
+app.get('/viviendas', viviendaController.list_all_viviendas);
 
-// app.get('/viviendas', viviendaController.list_all_viviendas);
-
-app.get('*', function(req, res) {
-  res.sendFile(path.resolve('app/public/index.html'));
-});
+// app.get('*', function(req, res) {
+//   res.sendFile(path.resolve('app/public/index.html'));
+// });
 
   app.route('/comunidades/:idComunidad/viviendas')
     .post(function(req, res){

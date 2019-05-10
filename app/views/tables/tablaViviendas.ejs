@@ -1,14 +1,14 @@
 
 <div class="container">
   <div class="table-wrapper">
+      <h3><%= comunidad.nombre_comunidad %></h3>
         <h4 class="bg-grey">Viviendas:</h4>
           <table class="table table-hovered">
               <thead class="thead-dark">
                   <tr>
-                      <th scope="col">ID</th>
+                      <th scope="col">ID vivienda</th>
                       <th scope="col">Número</th>
                       <th scope="col">Coeficiente</th>
-                      <th scope="col">Id Comunidad</th>
                       <th scope="col">
                         <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/0" class="btn btn-sm btn-success">Añadir</a>
                       </th>
@@ -16,16 +16,38 @@
               </thead>
               <% if (viviendas.length > 0) {%>
               <tbody>
+                <% var thisViv = 0 %>
                   <% Array.prototype.forEach.call(viviendas, vivienda => { %>
-                      <tr>
+                    <% if (thisViv != vivienda.id_vivienda) { %>
+                      <tr class="success">
                           <th scope="row"><%= vivienda.id_vivienda %></th>
                           <td><%= vivienda.numero %></td>
                           <td><%= vivienda.coeficiente %> %</td>
-                          <td><%= vivienda.comunidad_fk %></td>
                           <td>
-                              <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
+                              <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-primary">Ver</a>
                           </td>
                       </tr>
+                      <tr>
+                        <th>ID propietario</th>
+                        <th>Propietario</th>
+                        <th>NIF</th>
+                        <th></th>
+                      </tr>
+                      <% thisViv = vivienda.id_vivienda } %>
+                      <% if (vivienda.id_propietario) { %>
+                      <tr>
+                        <th scope="row"><%= vivienda.id_propietario %></th>
+                        <td><%= vivienda.nombre %> <%= vivienda.apellidos %></td>
+                        <td><%= vivienda.nif %></td>
+                        <td>
+                            <a href="/propietarios/<%= vivienda.id_propietario %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
+                        </td>
+                      </tr>
+                      <% } else { %>
+                        <tr>
+                          <td colspan="4">No hay propietarios asignados a esta vivienda</td>
+                        </tr>
+                      <% } %>
                   <% }) %>
               </tbody>
               <% } else { %>

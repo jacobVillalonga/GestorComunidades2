@@ -1,0 +1,43 @@
+
+<div class="container">
+  <div class="table-wrapper">
+        <h4 class="bg-grey">Incidencias: (en proceso...)</h4>
+          <table class="table table-hovered">
+              <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Emisor</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Informacion</th>
+                      <!-- <th scope="col">
+                        <a href="/comunidades/<%= comunidad.id_comunidad %>/facturas/0" class="btn btn-sm btn-success">Añadir</a>
+                      </th> -->
+                  </tr>
+              </thead>
+              <!-- if incidencias -->
+              <% if (false) {%>
+              <!-- <tbody>
+                  <% Array.prototype.forEach.call(facturas, factura => { %>
+                      <tr>
+                          <th scope="row"><%= factura.id_factura %></th>
+                          <td><%= factura.emisor %></td>
+                          <td><%= factura.fecha %></td>
+                          <td><%= factura.importe %> €</td>
+                          <td><%= factura.concepto %></td>
+                          <td>
+                              <a href="/comunidades/<%= factura.comunidad_fk %>/facturas/<%= factura.id_factura %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
+                          </td>
+                      </tr>
+                  <% }) %>
+              </tbody> -->
+              <% } else { %>
+                <tr>
+                  <td colspan="10">
+                    <p class="text-center">No hay incidencias asignadas a esta comunidad.</p>
+                  </td>
+                </tr>
+              <% } %>
+              <tfoot></tfoot>
+          </table>
+  </div>
+</div>

@@ -33,7 +33,21 @@ Comunidad.getComunidadById = function getComunidad(comunidadId, result) {
   });
 };
 Comunidad.getViviendasComunidad = function getViviendas(comunidadId, result) {
-  sql.query("Select * from vivienda where comunidad_fk = ? order by numero", comunidadId, function(err, res) {
+  // sql.query("Select * from vivienda where comunidad_fk = ? order by numero", comunidadId, function(err, res) {
+  sql.query("SELECT c.id_comunidad, "+
+  	"v.id_vivienda, v.numero, v.coeficiente,"+
+    "pv.id_propietario,"+
+    "p.id_propietario, p.nombre, p.apellidos, p.nif "+
+  "from comunidad c " +
+  "join vivienda v "+
+  "on c.id_comunidad = v.comunidad_fk "+
+  "left join prop_vivienda pv "+
+  "on pv.id_vivienda = v.id_vivienda "+
+  "left join propietario p "+
+  "on p.id_propietario = pv.id_propietario "+
+  "where c.id_comunidad = ? "+
+  "order by v.id_vivienda, p.nombre, p.apellidos",
+    comunidadId, function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
