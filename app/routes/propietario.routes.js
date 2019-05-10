@@ -13,5 +13,6 @@ module.exports = function(app) {
     .post(function(req, res) {
       propietarioController.update_propietario(req, res);
     });
-  //delete
+  app.route('/propietarios/delete/:idPropietario')
+    .get(propietarioController.delete_propietario);
 };

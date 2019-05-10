@@ -7,13 +7,13 @@ exports.list_all_viviendas = function(req, res) {
   Vivienda.getAllViviendas(function(err, viviendas) {
     if (err)
       res.send(err);
-    // res.render('viviendas.ejs', {
-    //   title: 'Gestor Comunidades',
-    //   viviendas: viviendas
-    // })
-    res.send({title: "Gestor Comunidades",
-  viviendas:viviendas});
-  });
+    res.render('viviendas.ejs', {
+      title: 'Gestor Comunidades',
+      viviendas: viviendas
+    });
+    // res.send({title: "Gestor Comunidades",
+    // viviendas:viviendas});
+    });
 };
 
 exports.insert_vivienda = function(req, res) {

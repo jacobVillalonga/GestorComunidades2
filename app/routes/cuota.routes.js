@@ -14,11 +14,7 @@ module.exports = function(app) {
     .post(function(req, res) {
       cuotaController.update_cuota(req, res);
     });
-    // app.route('/comunidades/:idComunidad/facturas/:idFactura')
-    //   .get(facturaController.select_factura)
-    //   .post(function(req, res) {
-    //     facturaController.update_factura(req, res);
-    //   });
+
   app.route('/cuotas/delete/:idCuota')
     .get(cuotaController.delete_cuota);
 };

@@ -16,7 +16,10 @@ exports.insert_factura = function(req, res) {
   Factura.insertFactura(factura, function(err, factura) {
     if (err)
       res.send(err);
-      res.json(factura);
+    res.render('msg.ejs', {
+      title: 'Añadir factura',
+      message: 'Factura añadida'
+    })
   })
 };
 
@@ -48,7 +51,10 @@ exports.update_factura = function(req, res) {
   Factura.updateFactura(req.body, function(err, factura) {
     if (err)
       res.send(err);
-    res.json(factura);
+    res.render('msg.ejs', {
+      title: 'Actualizar factura',
+      message: 'Factura actualizada'
+    })
   });
 };
 
@@ -58,7 +64,7 @@ exports.delete_factura = function(req, res) {
     if (err)
       res.send(err);
     res.render('msg.ejs', {
-      title: '',
+      title: 'Eliminar factura',
       message: 'Factura eliminada'
     })
   });

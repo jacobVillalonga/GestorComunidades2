@@ -49,7 +49,7 @@ exports.insert_cuota = function(req, res) {
     Cuota.insertCuota(cuota, function(err, cuota) {
       if (err)
         res.send(err);
-      res.json(cuota);
+      res.render('msg.ejs',{title: 'Guardar Cuota', message: 'Cuota registrada'})
     });
   }
 };
@@ -59,7 +59,7 @@ exports.update_cuota = function(req, res) {
   Cuota.updateCuota(req.body, function(err, cuotaId) {
     if (err)
       res.send(err);
-    res.json(cuotaId);
+    res.render('msg.ejs',{title: 'Actualizar Cuota', message: 'Cuota actualizada'})
   });
 };
 
