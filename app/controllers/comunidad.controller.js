@@ -1,6 +1,7 @@
 'use strict';
 
 var Comunidad = require('../models/comunidad.model.js');
+var Incidencia = require('../models/incidencia.model.js');
 
 exports.list_all_comunidades = function(req, res) {
   Comunidad.getAllComunidades(function(err, comunidades) {
@@ -43,11 +44,16 @@ exports.select_comunidad = function(req, res) {
           Comunidad.getFacturasComunidad(req.params.idComunidad, function(err, facturas) {
             if (err)
               res.send(err);
-            res.render('edit-comunidad.ejs', {
+            Incidencia.getIncidenciasComunidad(req.params.idComunidad, function(err, incidencias) {
+              if (err)
+                res.send(err);
+              res.render('edit-comunidad.ejs', {
               title: 'Editar Comunidad',
               comunidad: comunidad[0],
               viviendas: viviendas,
-              facturas: facturas
+              facturas: facturas,
+              incidencias: incidencias
+              })
           })
         })
       });

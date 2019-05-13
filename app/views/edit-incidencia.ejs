@@ -1,0 +1,49 @@
+<% include partials/header.ejs %>
+<div class="container">
+  <p class="text-center text-danger">Editando Incidencia</p>
+  <% if (incidencia){ %>
+    <% if (!incidencia.id_incidencia){ %>
+      <form class="add-player-form" action="/incidencias" method="post" enctype="application/json">
+    <% } else { %>
+      <form class="add-player-form" action="/comunidades/<%= incidencia.comunidad_fk %>/incidencias/<%= incidencia.id_incidencia %>" method="post" enctype="application/json">
+    <% } %>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="id_incidencia">ID</label>
+          <input type="text" class="form-control" name="id_incidencia" id="id_incidencia" value="<%= incidencia.id_incidencia %>" required readonly title="ID cannot be edited.">
+        </div>
+        <div class="form-group col-md-7">
+          <label for="info">Información</label>
+          <input type="text" class="form-control" name="info" id="info" value="<%= incidencia.info %>" required>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="fecha">Fecha</label>
+          <input type="text" class="form-control" name="fecha" id="fecha" value="<%= incidencia.fecha %>" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="emisor">Emisor</label>
+          <input type="text" class="form-control" name="emisor" id="emisor" value="<%= incidencia.emisor %>" required>
+        </div>
+        <!-- @TODO cambiar a combobox -->
+        <div class="form-group col-md-2">
+          <label for="comunidad_fk">ID Comunidad</label>
+          <input type="text" class="form-control" name="comunidad_fk" id="comunidad_fk" value="<%= incidencia.comunidad_fk %>" readonly required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="nombre_comunidad">Comunidad</label>
+          <input type="text" class="form-control" name="nombre_comunidad" id="nombre_comunidad" value="<%= incidencia.nombre_comunidad %>" readonly required>
+        </div>
+      </div>
+      <div align="center" class="form-row">
+        <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
+        <a href="/comunidades/<%= incidencia.comunidad_fk %>" class="btn btn-sm btn-info">Vovler</a>
+        <a href="/incidencias/delete/<%= incidencia.id_incidencia %>" data-method="delete" class="btn btn-sm btn-danger">Eliminar</a>
+      </div>
+    </form>
+  <% } else { %>
+    <p class="text-center">Not Found. Go <a href="/add">here</a> to add incidencias.</p>
+  <% } %>
+</div>
+<% include partials/footer.ejs %>
