@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="table-wrapper">
+    <h4 class="bg-grey">Cuotas: (version en proceso)</h4>
+    <% var deuda = 0 %>
+    <table class="table table-hovered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Enero</th>
+          <th scope="col">Febrero</th>
+          <th scope="col">Marzo</th>
+          <th scope="col">Abril</th>
+          <th scope="col">Febrero</th>
+          <th scope="col">Marzo</th>
+          <th scope="col">Abril</th>
+          <th scope="col">Febrero</th>
+          <th scope="col">Marzo</th>
+          <th scope="col">Abril</th>
+          <th scope="col">Febrero</th>
+          <th scope="col">Diciembre</th>
+          <!-- <th scope="col">
+            <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/0" class="btn btn-sm btn-success">Añadir</a>
+          </th> -->
+        </tr>
+      </thead>
+      <% if (cuotas.length > 0) {%>
+      <tbody>
+      <tr>
+        <% Array.prototype.forEach.call(cuotas, cuota => { %>
+          <% if(cuota.pagado){ %>
+            <td class="success text-info"><%= cuota.importe %> €</td>
+          <% } else { %>
+            <% deuda += cuota.importe; %>
+            <td class="danger text-danger"><%= cuota.importe %> €</td>
+          <% } %>
+        <% }) %>
+        <tr>
+          <td colspan="3">Deuda pendiente:</td>
+          <td><%= deuda %> €</td>
+        </tr>
+      </tbody>
+
+      <% } else { %>
+      <tr>
+        <td colspan="10">
+          <p class="text-center">No hay cuotas asignadas a esta vivienda.</p>
+        </td>
+      </tr>
+      <% } %>
+      <tfoot>
+
+      </tfoot>
+    </table>
+  </div>
+</div>

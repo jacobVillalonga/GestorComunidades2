@@ -1,7 +1,5 @@
 module.exports = function (app) {
 
-    // log.info('Loading express routes...');
-
         /* registration */
 //     app.post('/users', require('./routes/register-users'));    // register user
 //     app.post('/agents', require('./routes/register-agents'));    // register agents
