@@ -37,6 +37,7 @@ Cuota.insertCuota = function insertCuota(cuota, result) {
       console.log("error: ", err);
       result(err, null);
     } else {
+      console.log(cuota);
       console.log(res.insertId);
       result(null, res.insertId);
     }

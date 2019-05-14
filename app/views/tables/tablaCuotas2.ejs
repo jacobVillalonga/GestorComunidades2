@@ -1,6 +1,16 @@
 <div class="container">
   <div class="table-wrapper">
     <h4 class="bg-grey">Cuotas: (version en proceso)</h4>
+
+        <label for="">Año:</label>
+        <div class="form-row">
+            <div class="form-group col-md-1">
+                <input type="text" class="form-control" name="año" id="año" maxlength="4">
+            </div>
+            <div class="form-group col-md-2">
+              <span id="filtCuota" name="filtCuota" class="glyphicon glyphicon-search btn btn-sm btn-info" onclick="test()"></span>
+            </div>
+        </div>
     <% var deuda = 0 %>
     <table class="table table-hovered">
       <thead class="thead-dark">
@@ -27,10 +37,12 @@
       <tr>
         <% Array.prototype.forEach.call(cuotas, cuota => { %>
           <% if(cuota.pagado){ %>
-            <td class="success text-info"><%= cuota.importe %> €</td>
+            <td class="success text-info"><%= cuota.importe %> € <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="glyphicon glyphicon-eye-open"></a>
+          </td>
           <% } else { %>
             <% deuda += cuota.importe; %>
-            <td class="danger text-danger"><%= cuota.importe %> €</td>
+            <td class="danger text-danger"><%= cuota.importe %> € <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="glyphicon glyphicon-eye-open"></a>
+          </td>
           <% } %>
         <% }) %>
         <tr>
@@ -51,4 +63,18 @@
       </tfoot>
     </table>
   </div>
+  <div class="">
+    <% var d = cuotas[3].fecha %>
+    <p>basic Date: <%= d %></p>
+    <% var n = new Date(d) %>
+    <p>New Date: <%= n %></p>
+    <p>month: <%= n.getMonth() %></p>
+  </div>
+  <script type="text/javascript">
+    function test() {
+      var x = document.getElementById("año");
+      x.value = "hi";
+      alert(x.value);
+    }
+  </script>
 </div>
