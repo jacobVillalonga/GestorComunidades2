@@ -1,9 +1,8 @@
 <% include partials/header.ejs %>
 <div class="container">
-        <p class="text-center text-danger">Editando vivienda</p>
-    <% if (vivienda){ %>
+      <p class="text-center text-danger">Editando vivienda</p>
       <% if (vivienda.id_vivienda){ %>
-        <form class="add-player-form" action="/comunidades/<%= vivienda.comunidad_fk %>/viviendas/<%= vivienda.id_vivienda %>" method="post" enctype="application/json">
+        <form class="add-player-form" action="/viviendas/<%= vivienda.id_vivienda %>" method="post" enctype="application/json">
       <% } else { %>
         <form class="add-player-form" action="/comunidades/<%= comunidad_fk %>/viviendas" method="post" enctype="application/json">
       <% } %>
@@ -29,7 +28,7 @@
               <!-- <a href="/" rel="noopener" class="btn btn-sm btn-success">Guardar</a> -->
               <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
               <a href="/comunidades/<%= vivienda.comunidad_fk %>" class="btn btn-sm btn-info">Vovler</a>
-              <a href="/viviendas/delete/<%= vivienda.id_vivienda %>" data-method="delete" class="btn btn-sm btn-danger">Eliminar</a>
+              <a href="/viviendaDel/delete/<%= vivienda.id_vivienda %>" data-method="delete" class="btn btn-sm btn-danger">Eliminar</a>
             </div>
         </form>
         @ToDo: Datos Comunidad
@@ -38,8 +37,5 @@
             <%  include tables/tablaCuotas.ejs %>
             <%  include tables/tablaCuotas2.ejs %>
           <% } %>
-    <% } else { %>
-        <p class="text-center">Not Found. Go <a href="/add">here</a> to add viviendas.</p>
-    <% } %>
 </div>
 <% include partials/footer.ejs %>

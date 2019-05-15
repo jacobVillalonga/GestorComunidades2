@@ -1,12 +1,13 @@
 <div class="container">
   <div class="table-wrapper">
-    <h4 class="bg-grey">Cuotas:</h4>
+    <h4 class="bg-grey">Cuotas <%= year %>:</h4>
     <% var deuda = 0 %>
     <table class="table table-hovered">
       <thead class="thead-dark">
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Fecha</th>
+          <th scope="col">Mes</th>
           <th scope="col">Importe</th>
           <th scope="col">Pagado</th>
           <th scope="col">
@@ -20,6 +21,7 @@
         <tr>
           <th scope="row"><%= cuota.id_cuota %></th>
           <td><%= cuota.fecha %></td>
+          <td><%= (new Date(cuota.fecha)).toLocaleString('en-GB', { month: 'long' }) %></td>
           <td><%= cuota.importe %> €</td>
           <td>
             <% if (cuota.pagado){ %>
@@ -35,11 +37,9 @@
         </tr>
         <% }) %>
         <tr>
-          <td colspan="2">Deuda pendiente:</td>
-          <td><%= deuda %> €</td>
+          <td colspan="2">Deuda pendiente: <%= deuda %> €</td>
         </tr>
       </tbody>
-
       <% } else { %>
       <tr>
         <td colspan="10">
@@ -47,9 +47,7 @@
         </td>
       </tr>
       <% } %>
-      <tfoot>
-
-      </tfoot>
+      <tfoot></tfoot>
     </table>
   </div>
 </div>

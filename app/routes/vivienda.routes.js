@@ -15,25 +15,33 @@ app.get('/viviendas', viviendaController.list_all_viviendas);
     });
 
   app.route('/comunidades/:idComunidad/viviendas/:idVivienda')
-    .get(viviendaController.select_vivienda)
+    // .get(viviendaController.select_vivienda)
     .post(function(req, res){
         viviendaController.update_vivienda(req,res);
     });
+    app.route('/viviendas/:idVivienda')
+      .get(viviendaController.select_vivienda)
+      .post(function(req, res){
+          viviendaController.update_vivienda(req,res);
+      });
 
-  app.route('/viviendas/:idVivienda/propietarios')
+    app.route('/viviendas/:idVivienda/:year')
+      .get(viviendaController.select_vivienda);
+
+  app.route('/vivienda/:idVivienda/propietarios')
     .get(viviendaController.prop_vivienda);
 
-  app.route('/viviendas/:idVivienda/propietarios/:idPropietario/add')
+  app.route('/vivienda/:idVivienda/propietarios/:idPropietario/add')
     .get(function(req, res){
       viviendaController.add_prop_vivienda(req,res);
     });
 
-  app.route('/viviendas/:idVivienda/propietarios/:idPropietario/remove')
+  app.route('/vivienda/:idVivienda/propietarios/:idPropietario/remove')
     .get(function(req, res){
       viviendaController.remove_prop_vivienda(req,res);
     });
 
-  app.route('/viviendas/delete/:idVivienda')
+  app.route('/viviendaDel/delete/:idVivienda')
     .get(viviendaController.delete_vivienda);
 
 };

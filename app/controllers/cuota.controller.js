@@ -47,19 +47,23 @@ exports.insert_cuota = function(req, res) {
     });
   } else {
     Cuota.insertCuota(cuota, function(err, cuota) {
+      console.log(url);
       if (err)
         res.send(err);
-      res.render('msg.ejs',{title: 'Guardar Cuota', message: 'Cuota registrada'})
+      var url = "/viviendas/"+cuota.vivienda_fk;
+      console.log(url);
+      res.render('msg.ejs',{title: 'Guardar Cuota', message: 'Cuota registrada', url: url})
     });
   }
 };
 
 exports.update_cuota = function(req, res) {
-    console.log(req.body);
+    var url = "/viviendas/"+req.body.vivienda_fk;
+    console.log(url);
   Cuota.updateCuota(req.body, function(err, cuotaId) {
     if (err)
       res.send(err);
-    res.render('msg.ejs',{title: 'Actualizar Cuota', message: 'Cuota actualizada'})
+    res.render('msg.ejs',{title: 'Actualizar Cuota', message: 'Cuota actualizada', url: url})
   });
 };
 

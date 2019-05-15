@@ -26,3 +26,14 @@ and pv.id_vivienda = v.id_vivienda
 and v.comunidad_fk = c.id_comunidad
 and c.id_comunidad = 8
 order by v.id_vivienda, p.nombre, p.apellidos
+
+
+SELECT * FROM `pago_cuota` WHERE fecha > "2018" and fecha < "2020"
+
+<div class="">
+	<% var d = cuotas[3].fecha %>
+	<p>basic Date: <%= d %></p>
+	<% var n = new Date(d) %>
+	<p>New Date: <%= n %></p>
+	<p>month: <%= n.getMonth() %></p>
+</div>

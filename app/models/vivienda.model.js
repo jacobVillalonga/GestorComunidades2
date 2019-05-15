@@ -40,7 +40,7 @@ Vivienda.getViviendaById = function getVivienda(viviendaId, result) {
                     result(err, null);
                 }
                 else{
-                    result(null, res);
+                    result(null, res[0]);
                 }
             });
 };
@@ -66,9 +66,9 @@ Vivienda.getNoPropietarios = function getNoPropietarios(viviendaId, result) {
           }
       })
 };
-Vivienda.getCuotasVivienda = function getCuotas(viviendaId, result) {
-      sql.query("Select * from pago_cuota where vivienda_fk = ? order by fecha",
-        viviendaId, function (err, res) {
+Vivienda.getCuotasVivienda = function getCuotas(viviendaId, year, result) {
+      sql.query("Select * from pago_cuota where vivienda_fk = ? and fecha > ? and fecha < ? order by fecha",
+        [viviendaId, year-1, year+1 ], function (err, res) {
           if(err) {
             console.log("error: ", err);
             result(err, null);

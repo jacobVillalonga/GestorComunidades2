@@ -23,7 +23,7 @@
           <td><%= vivienda.numero %></td>
           <td><%= vivienda.coeficiente %> %</td>
           <td>
-            <a href="/comunidades/<%= vivienda.comunidad_fk %>/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
+            <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
           </td>
         </tr>
       </tbody>
@@ -57,7 +57,7 @@
           <td><%= propietario.email %></td>
           <td>
             <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
-            <a href="/viviendas/<%= vivienda.id_vivienda %>/propietarios/<%= propietario.id_propietario %>/remove" data-method="delete" class="btn btn-sm btn-danger">Quitar</a>
+            <a href="/vivienda/<%= vivienda.id_vivienda %>/propietarios/<%= propietario.id_propietario %>/remove" data-method="delete" class="btn btn-sm btn-danger">Quitar</a>
           </td>
         </tr>
         <% }) %>
@@ -100,7 +100,7 @@
           <td><%= propietario.email %></td>
           <td>
             <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
-            <a href="/viviendas/<%= vivienda.id_vivienda %>/propietarios/<%= propietario.id_propietario %>/add" data-method="post" class="btn btn-sm btn-primary">Asignar</a>
+            <a href="/vivienda/<%= vivienda.id_vivienda %>/propietarios/<%= propietario.id_propietario %>/add" data-method="post" class="btn btn-sm btn-primary">Asignar</a>
           </td>
         </tr>
         <% }) %>

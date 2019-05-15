@@ -39,22 +39,24 @@ exports.insert_vivienda = function(req, res) {
 };
 
 exports.select_vivienda = function(req, res) {
+  if (!req.params.year){
+    // var year =
+    req.params.year = new Date().getFullYear();
+  }
   Vivienda.getViviendaById(req.params.idVivienda, function(err, vivienda) {
     if (err)
       res.send(err);
     // res.json(vivienda);
     if (req.params.idComunidad) {
       var comunidad_fk = req.params.idComunidad;
-    } else {
-      res.status(400).send({
-        error: true,
-        message: 'Please provide comunidad/comunidad_fk'
-      });
-    }
+  } else {
+      var comunidad_fk = vivienda.comunidad_fk;
+  }
     if (req.params.idVivienda == 0) {
       var vivienda = {
         'id_vivienda': 0,
-        'numero': ''
+        'numero': '',
+        'comunidad_fk': comunidad_fk
       };
       res.render('edit-vivienda.ejs', {
         title: 'Añadir Vivienda',
@@ -65,24 +67,17 @@ exports.select_vivienda = function(req, res) {
       Vivienda.getPropietariosVivienda(req.params.idVivienda, function(err, propietarios) {
         if (err)
           res.send(err);
-        Vivienda.getCuotasVivienda(req.params.idVivienda, function(err, cuotas) {
+        Vivienda.getCuotasVivienda(req.params.idVivienda, req.params.year, function(err, cuotas) {
           if (err)
             res.send(err);
           res.render('edit-vivienda.ejs', {
             title: 'Edit Vivienda',
-            vivienda: vivienda[0],
+            vivienda: vivienda,
             comunidad_fk: comunidad_fk,
             propietarios: propietarios,
-            cuotas: cuotas
+            cuotas: cuotas,
+            year: req.params.year
           })
-          // res.send({
-          //   tittle: 'Editar vivienda',
-          //   vivienda: vivienda[0],
-          //   comunidad_fk: comunidad_fk,
-          //   propietarios: propietarios,
-          //   cuotas: cuotas
-          // });
-
         })
       });
     }
@@ -109,7 +104,7 @@ exports.prop_vivienda = function(req, res) {
           res.send(err);
         res.render('prop_vivienda.ejs', {
           title: 'Añadir propietario',
-          vivienda: vivienda[0],
+          vivienda: vivienda,
           propietarios: propietarios,
           noPropietarios: noPropietarios
         })
