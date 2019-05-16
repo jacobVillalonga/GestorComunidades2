@@ -9,6 +9,9 @@
                       <th scope="col">ID vivienda</th>
                       <th scope="col">Número</th>
                       <th scope="col">Coeficiente</th>
+                      <th scope="col">Nombre propietario</th>
+                      <th scope="col">NIF</th>
+                      <th scope="col"></th>
                       <th scope="col">
                         <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/0" class="btn btn-sm btn-success">Añadir</a>
                       </th>
@@ -23,25 +26,23 @@
                           <th scope="row"><%= vivienda.id_vivienda %></th>
                           <td><%= vivienda.numero %></td>
                           <td><%= vivienda.coeficiente %> %</td>
+                          <td colspan="3"></td>
                           <td>
                               <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-primary">Ver</a>
                           </td>
                       </tr>
-                      <tr>
-                        <th>ID propietario</th>
-                        <th>Propietario</th>
-                        <th>NIF</th>
-                        <th></th>
-                      </tr>
                       <% thisViv = vivienda.id_vivienda } %>
                       <% if (vivienda.id_propietario) { %>
                       <tr>
+                        <td></td>
                         <th scope="row"><%= vivienda.id_propietario %></th>
+                        <td></td>
                         <td><%= vivienda.nombre %> <%= vivienda.apellidos %></td>
                         <td><%= vivienda.nif %></td>
                         <td>
                             <a href="/propietarios/<%= vivienda.id_propietario %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
                         </td>
+                        <td></td>
                       </tr>
                       <% } else { %>
                         <tr>

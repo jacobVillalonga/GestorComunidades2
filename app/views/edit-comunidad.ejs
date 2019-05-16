@@ -3,9 +3,9 @@
   <p class="text-center text-danger">Editando Comunidad</p>
   <% if (comunidad) { %>
     <% if (comunidad.id_comunidad == 0){ %>
-  <form class="add-player-form" action="/comunidades" method="post" enctype="application/json">
+  <form class="add-player-form hidden-print" action="/comunidades" method="post" enctype="application/json">
     <% } else { %>
-  <form class="add-player-form" action="/comunidades/<%= comunidad.id_comunidad %>" method="post" enctype="application/json">
+  <form class="add-player-form hidden-print" action="/comunidades/<%= comunidad.id_comunidad %>" method="post" enctype="application/json">
     <% } %>
     <div class="form-row">
       <div class="form-group col-md-2">

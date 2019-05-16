@@ -108,7 +108,9 @@ var Propietario = function(propietario){
       "join comunidad c "+
       "WHERE pv.id_propietario = ? "+
       "and pv.id_vivienda = v.id_vivienda "+
-      "and c.id_comunidad = v.comunidad_fk ", [id], function(err, res) {
+      "and c.id_comunidad = v.comunidad_fk "+
+      "order by c.nombre_comunidad ", 
+      [id], function(err, res) {
         if (err) {
           console.log("error: ", err);
           result(null, err);

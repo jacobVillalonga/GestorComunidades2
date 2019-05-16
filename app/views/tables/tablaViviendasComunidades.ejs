@@ -7,32 +7,32 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Comunidad</th>
-                        <!-- <th scope="col">ID</th> -->
                         <th scope="col">Número</th>
                         <th scope="col">Coeficiente</th>
                         <th scope="col" colspan="2">
-                          <!-- <a href="/viviendas/0" class="btn btn-sm btn-primary">Añadir</a> -->
+                          <!-- <a href="/comunidades/:idComunidad/viviendas/0" class="btn btn-sm btn-primary">Añadir</a> -->
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                   <% var thisCom = 0 %>
                     <% Array.prototype.forEach.call(viviendas, vivienda => { %>
-                      <% if (thisCom != vivienda.comunidad_fk){ %>
+                      <% if (thisCom != vivienda.id_comunidad){ %>
                         <tr class="success">
                           <td>
-                            <%= vivienda.comunidad_fk %>
+                            <%= vivienda.id_comunidad %>
                           </td>
                           <th colspan="4">
                             <%= vivienda.nombre_comunidad %>
                           </th>
                           <td>
-                            <a href="/comunidades/<%= vivienda.comunidad_fk %>" data-method="get" class="btn btn-sm btn-primary">
+                            <a href="/comunidades/<%= vivienda.id_comunidad %>" data-method="get" class="btn btn-sm btn-primary">
                               Ver
                             </a>
                           </td>
                         </tr>
-                        <% thisCom = vivienda.comunidad_fk } %>
+                        <% thisCom = vivienda.id_comunidad } %>
+                        <% if (vivienda.id_vivienda) { %>
                         <tr>
                           <td></td>
                             <td><%= vivienda.id_vivienda %></td>
@@ -43,6 +43,7 @@
                             </td>
                             <td></td>
                         </tr>
+                        <% } %>
                     <% }) %>
                 </tbody>
             </table>
