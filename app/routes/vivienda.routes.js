@@ -14,19 +14,14 @@ app.get('/viviendas', viviendaController.list_all_viviendas);
       viviendaController.insert_vivienda(req, res);
     });
 
-  app.route('/comunidades/:idComunidad/viviendas/:idVivienda')
-    // .get(viviendaController.select_vivienda)
+  app.route('/viviendas/:idVivienda')
+    .get(viviendaController.select_vivienda)
     .post(function(req, res){
         viviendaController.update_vivienda(req,res);
     });
-    app.route('/viviendas/:idVivienda')
-      .get(viviendaController.select_vivienda)
-      .post(function(req, res){
-          viviendaController.update_vivienda(req,res);
-      });
 
-    app.route('/viviendas/:idVivienda/:year')
-      .get(viviendaController.select_vivienda);
+  app.route('/viviendas/:idVivienda/:year')
+    .get(viviendaController.select_vivienda);
 
   app.route('/vivienda/:idVivienda/propietarios')
     .get(viviendaController.prop_vivienda);

@@ -36,7 +36,7 @@ var Propietario = function(propietario){
         console.log("error: ", err);
         result(err, null);
       } else {
-        result(null, res);
+        result(null, res[0]);
 
       }
     });
@@ -100,4 +100,21 @@ var Propietario = function(propietario){
       }
     });
   };
+  Propietario.getViviendasPropietario = function(id, result) {
+    sql.query("SELECT c.id_comunidad, c.nombre_comunidad, "+
+      "v.id_vivienda, v.numero, v.coeficiente, v.comunidad_fk "+
+      "FROM `vivienda` v "+
+      "join prop_vivienda pv "+
+      "join comunidad c "+
+      "WHERE pv.id_propietario = ? "+
+      "and pv.id_vivienda = v.id_vivienda "+
+      "and c.id_comunidad = v.comunidad_fk ", [id], function(err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+        } else {
+          result(null, res);
+        }
+      })
+    };
   module.exports= Propietario;

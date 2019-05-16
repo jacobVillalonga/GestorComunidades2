@@ -68,8 +68,11 @@
         <a href="/propietarios/delete/<%= propietario.id_propietario %>" data-method="delete" class="btn btn-sm btn-danger">Eliminar</a>
       </div>
     </form>
-    <% } else { %>
-    <p class="text-center">Not Found. Go <a href="/add">here</a> to add propietario.</p>
+    <% if (propietario.id_propietario != null){ %>
+      <% include tables/tablaViviendasComunidades.ejs %>
     <% } %>
+  <% } else { %>
+    <p class="text-center">Not Found. Go <a href="/add">here</a> to add propietario.</p>
+  <% } %>
 </div>
 <% include partials/footer.ejs %>

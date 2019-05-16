@@ -1,0 +1,113 @@
+/* rutas utilizadas en la app
+example = [{
+  "archivo.routes.js": {
+    "ruta": [
+      "metodo (funcion)"
+    ]
+  }
+}]*/
+
+routes = [{
+      "index": {
+        "/": ["get"]
+      }
+    }, {
+      "comunidad": {
+        "/comunidades": [
+          "get (select all)",
+          "post (insert)"
+        ],
+        "/comunidades/:idComunidad": [
+          "get (select id)",
+          "post (update)"
+        ],
+        "/comunidades/delete/:idComunidad": [
+          "get (delete)"
+        ]
+      }
+    }, {
+      "vivienda": {
+        "/viviendas": [
+          "get(select all)"
+        ],
+        "/comunidades/:idComunidad/viviendas": [
+          "post(insert)"
+        ],
+        "/viviendas/:idVivienda": [
+          "get(select id)"
+          "post(update)"
+        ],
+        "/viviendas/:idVivienda/:year": [
+          "get(select id + year)"
+        ],
+        "/vivienda/:idVivienda/propietarios": [
+          "get(select prop_vivienda)"
+        ],
+        "/vivienda/:idVivienda/propietarios/:idPropietario/add": [
+          "get(insert prop_vivienda)"
+        ],
+        "/vivienda/:idVivienda/propietarios/:idPropietario/remove": [
+          "get(delete prop_vivienda)"
+        ],
+        "/viviendaDel/delete/:idVivienda": [
+          "get(delete)"
+        ]
+      }
+    }, {
+      "factura": {
+        "/facturas": [
+          "get(select all)",
+          "post(insert)"
+        ],
+        "/comunidades/:idComunidad/facturas/:idFactura": [
+          "get(select id)",
+          "post(update)"
+        ],
+        "/facturas/delete/:idFactura": [
+          "get(delete)"
+        ],
+      }
+    }, {
+      "cuota": {
+        "/cuotas": [
+          "get(select all)",
+          "post(insert)"
+        ],
+        "/viviendas/:idVivienda/cuotas/:idCuota": [
+          "get(select id)",
+          "post(update)"
+        ],
+        "/cuotas/delete/:idCuota": [
+          "get(delete)"
+        ]
+      }
+    }, {
+      "propietario": {
+        "/propietarios": [
+          "get(select all)"
+          "post(insert)"
+        ],
+        "/propietarios/:idPropietario": [
+          "get(select id)",
+          "post(update)"
+        ],
+        "/propietarios/delete/:idPropietario": [
+          "get(delete)"
+        ]
+      }
+    }, {
+      "incidencia": {
+        "/incidencias": [
+          "get(select all)",
+          "post(insert)"
+        ],
+        "/comunidades/:idComunidad/incidencias/:idIncidencia": [
+          "get(select id)",
+          "post(update)"
+        ],
+        "/incidencias/delete/:idIncidencia": [
+          "get(delete)"
+        ]
+      }
+    }
+]

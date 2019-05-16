@@ -26,13 +26,14 @@ exports.select_propietario = function(req, res) {
         propietario: propietario
       });
     } else {
-      // Propietario.getViviendasPropietario(req.params.idPropietario, function(err, viviendas) {
-      // if (err)
-      // res.send(err);
-      res.render('edit-propietario.ejs', {
-        title: 'Editar Propietario',
-        propietario: propietario[0]
-        // viviendas: viviendas,
+      Propietario.getViviendasPropietario(req.params.idPropietario, function(err, viviendas) {
+        if (err)
+          res.send(err);
+        res.render('edit-propietario.ejs', {
+          title: 'Editar Propietario',
+          propietario: propietario,
+          viviendas: viviendas
+        })
       })
     }
   })

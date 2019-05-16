@@ -27,6 +27,14 @@ and v.comunidad_fk = c.id_comunidad
 and c.id_comunidad = 8
 order by v.id_vivienda, p.nombre, p.apellidos
 
+SELECT c.id_comunidad, c.nombre_comunidad, v.id_vivienda, v.numero, v.coeficiente
+FROM `vivienda` v
+join prop_vivienda pv
+join comunidad c
+WHERE pv.id_propietario = 14
+and pv.id_vivienda = v.id_vivienda
+and c.id_comunidad = v.comunidad_fk
+
 
 SELECT * FROM `pago_cuota` WHERE fecha > "2018" and fecha < "2020"
 
