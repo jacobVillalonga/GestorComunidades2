@@ -8,7 +8,10 @@ exports.list_all_comunidades = function(req, res) {
     if (err)
       res.send(err);
     // res.send(comunidades);
-    res.render('comunidades.ejs',{title: 'Comunidades',comunidades:comunidades})
+    res.render('comunidades.ejs',{
+      title: 'GestorComunidades/Comunidades',
+      comunidades:comunidades
+    })
   });
 };
 
@@ -21,7 +24,10 @@ exports.insert_comunidad = function(req, res) {
     Comunidad.insert(comunidad, function(err, comunidad) {
       if (err)
         res.send(err);
-      res.render('msg.ejs',{title: 'Guardar comunidad', message: 'Comunidad registrada'})
+      res.render('msg.ejs',{
+        title: 'GestorComunidades/Guardar comunidad',
+        message: 'Comunidad registrada'
+      })
     });
   }
 };
@@ -32,10 +38,10 @@ exports.select_comunidad = function(req, res) {
       res.send(err);
     // res.json(comunidad);
     if (req.params.idComunidad == 0) {
-      var comu = {'nombre_comunidad':''};
+      var nCom = {'nombre_comunidad':''};
       res.render('edit-comunidad.ejs', {
-        title: 'Añadir Comunidad',
-        comunidad: comu
+        title: 'GestorComunidades/Añadir Comunidad',
+        comunidad: nCom
       });
     } else {
       Comunidad.getViviendasComunidad(req.params.idComunidad, function(err, viviendas) {
@@ -48,8 +54,8 @@ exports.select_comunidad = function(req, res) {
               if (err)
                 res.send(err);
               res.render('edit-comunidad.ejs', {
-              title: 'Editar Comunidad',
-              comunidad: comunidad[0],
+              title: 'GestorComunidades/Comunidad '+comunidad.nombre_comunidad,
+              comunidad: comunidad,
               viviendas: viviendas,
               facturas: facturas,
               incidencias: incidencias
@@ -62,19 +68,23 @@ exports.select_comunidad = function(req, res) {
 };
 
 exports.update_comunidad = function(req, res) {
-    console.log(req.body);
   Comunidad.update(req.body, function(err, comunidad) {
     if (err)
       res.send(err);
-    res.render('msg.ejs',{title: 'Guardar comunidad', message: 'Comunidad actualizada'})
+    res.render('msg.ejs',{
+      title: 'GestorComunidades/Guardar comunidad',
+      message: 'Comunidad actualizada'
+    })
   });
 };
 
 exports.delete_comunidad = function(req, res) {
-  console.log("Eliminando comunidad ",req.params.idComunidad);
   Comunidad.delete( req.params.idComunidad, function(err, comunidad) {
     if (err)
       res.send(err);
-    res.render('msg.ejs',{title: 'Eliminar comunidad', message: 'Comunidad eliminada'})
+    res.render('msg.ejs',{
+      title: 'GestorComunidades/Eliminar comunidad',
+      message: 'Comunidad eliminada'
+    })
   });
 };

@@ -33,6 +33,9 @@ routes = [{
         "/comunidades/:idComunidad/viviendas": [
           "post(insert)"
         ],
+        "/comunidades/:idComunidad/viviendas/:idVivienda": [
+          "get()"
+        ],
         "/viviendas/:idVivienda": [
           "get(select id)"
           "post(update)"

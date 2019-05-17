@@ -14,6 +14,7 @@ PropVivienda.addPropVivienda = function addPropietario(propVivienda, result) {
         console.log("error: ", err);
         result(err, null);
       } else {
+        console.log("add prop_vivienda: ",propVivienda);
         result(null, res);
       }
   })
@@ -26,6 +27,7 @@ PropVivienda.removePropVivienda = function addPropietario(propVivienda, result) 
         console.log("error: ", err);
         result(err, null);
       } else {
+        console.log("delete prop_viv: ",propVivienda);
         result(null, res);
       }
   })

@@ -8,6 +8,7 @@ var Cuota = function(cuota){
       this.fecha = cuota.fecha;
       this.pagado = cuota.pagado;
 };
+//not used
 Cuota.getAllCuotas = function getAllCuotas(result) {
         sql.query("Select * from pago_cuota", function (err, res) {
                 if(err) {
@@ -15,7 +16,7 @@ Cuota.getAllCuotas = function getAllCuotas(result) {
                     result(null, err);
                 }
                 else{
-                  console.log('cuota : ', res);
+                  console.log('get all cuotas: ', res);
                  result(null, res);
                 }
             });
@@ -26,24 +27,24 @@ Cuota.getCuotaById = function getCuota(cuotaId, result) {
       console.log("error: ", err);
       result(err, null);
     } else {
-      result(null, res);
+      console.log("get cuota: ",cuotaId,res);
+      result(null, res[0]);
 
     }
   });
 };
-Cuota.insertCuota = function insertCuota(cuota, result) {
+Cuota.insert = function insertCuota(cuota, result) {
   sql.query("INSERT INTO pago_cuota set ?", cuota, function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
     } else {
-      console.log(cuota);
-      console.log(res.insertId);
+      console.log("insert cuota: ",cuota);
       result(null, res.insertId);
     }
   });
 };
-Cuota.updateCuota = function updateCuota(cuota, result) {
+Cuota.update = function updateCuota(cuota, result) {
   sql.query("UPDATE pago_cuota SET vivienda_fk = ?, importe = ?, fecha = ?, pagado = ? WHERE id_cuota = ?",
     [cuota.vivienda_fk, cuota.importe, cuota.fecha, cuota.pagado, cuota.id_cuota],
     function(err, res) {
@@ -51,16 +52,18 @@ Cuota.updateCuota = function updateCuota(cuota, result) {
         console.log("error: ", err);
         result(null, err);
       } else {
+        console.log("update cuota: ",cuota);
         result(null, res);
       }
     });
 };
-Cuota.removeCuota = function(cuotaId, result) {
+Cuota.delete = function(cuotaId, result) {
   sql.query("DELETE FROM pago_cuota WHERE id_cuota = ?", [cuotaId], function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(null, err);
     } else {
+      console.log("delete cuota: ",cuotaId);
       result(null, res);
     }
   });

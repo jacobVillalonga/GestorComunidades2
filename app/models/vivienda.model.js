@@ -20,7 +20,7 @@ Vivienda.getAllViviendas = function getAllViviendas(result) {
                     result(null, err);
                 }
                 else{
-                  console.log('vivienda : ', res);
+                  console.log('get all viviendas: ',res.length);
                  result(null, res);
                 }
             });
@@ -33,7 +33,7 @@ Vivienda.insert = function(newVivienda, result) {
                     result(err, null);
                 }
                 else{
-                    console.log(res.insertId);
+                    console.log("insert vivienda: ",newVivienda);
                     result(null, res.insertId);
                 }
             });
@@ -45,6 +45,7 @@ Vivienda.getViviendaById = function getVivienda(viviendaId, result) {
                     result(err, null);
                 }
                 else{
+                  console.log("get vivienda: ",viviendaId);
                     result(null, res[0]);
                 }
             });
@@ -56,6 +57,7 @@ Vivienda.getPropietariosVivienda = function getPropietarios(viviendaId, result) 
             console.log("error: ", err);
             result(err, null);
           } else {
+            console.log("get propietarios vivienda ",viviendaId,": ",res.length);
             result(null, res);
           }
       })
@@ -67,6 +69,7 @@ Vivienda.getNoPropietarios = function getNoPropietarios(viviendaId, result) {
             console.log("error: ", err);
             result(err, null);
           } else {
+            console.log("get no propietarios vivienda ",viviendaId,": ",res.length);
             result(null, res);
           }
       })
@@ -78,6 +81,7 @@ Vivienda.getCuotasVivienda = function getCuotas(viviendaId, year, result) {
             console.log("error: ", err);
             result(err, null);
           } else {
+            console.log("get cuotas vivienda ",viviendaId,", año ",year,": ",res.length);
             result(null, res);
           }
       })
@@ -89,6 +93,7 @@ Vivienda.getViviendasComunidad = function getViviendas(comunidadId, result) {
                     result(err, null);
                 }
                 else{
+                  console.log("get viviendas comunidad ",comunidadId,": ",res.length);
                     result(null, res);
                 }
             });
@@ -97,23 +102,23 @@ Vivienda.update = function(vivienda, result){
   sql.query("UPDATE vivienda SET numero = ?, coeficiente = ? WHERE id_vivienda = ?",
   [vivienda.numero, vivienda.coeficiente, vivienda.id_vivienda], function (err, res) {
           if(err) {
-              console.log("error: ", err);
-                result(null, err);
-             }
-           else{
-             result(null, res);
-                }
-            });
+            console.log("error: ", err);
+            result(null, err);
+          } else {
+            console.log("update vivienda: ",vivienda);
+            result(null, res);
+          }
+      });
 };
-Vivienda.delete = function(id, result){
-     sql.query("DELETE FROM vivienda WHERE id_vivienda = ?", [id], function (err, res) {
+Vivienda.delete = function(idVivienda, result){
+     sql.query("DELETE FROM vivienda WHERE id_vivienda = ?", [idVivienda], function (err, res) {
                 if(err) {
                     console.log("error: ", err);
                     result(null, err);
-                }
-                else{
+                } else {
+                  console.log("delete vivienda: ",idVivienda);
                  result(null, res);
                 }
-            });
+      });
 };
 module.exports= Vivienda;

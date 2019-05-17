@@ -8,10 +8,10 @@ exports.list_all_viviendas = function(req, res) {
     if (err)
       res.send(err);
     res.render('viviendas.ejs', {
-      title: 'Gestor Comunidades',
+      title: 'GestorComunidades',
       viviendas: viviendas
     });
-    // res.send({title: "Gestor Comunidades",
+    // res.send({title: "GestorComunidades",
     // viviendas:viviendas});
     });
 };
@@ -33,7 +33,10 @@ exports.insert_vivienda = function(req, res) {
     Vivienda.insert(vivienda, function(err, vivienda) {
       if (err)
         res.send(err);
-      res.render('msg.ejs',{title: 'Guardar vivienda', message: 'Vivienda registrada'})
+      res.render('msg.ejs',{
+        title: 'GestorComunidades/Guardar vivienda',
+        message: 'Vivienda registrada'
+      })
     });
   }
 };
@@ -59,7 +62,7 @@ exports.select_vivienda = function(req, res) {
         'comunidad_fk': comunidad_fk
       };
       res.render('edit-vivienda.ejs', {
-        title: 'Añadir Vivienda',
+        title: 'GestorComunidades/Añadir Vivienda',
         vivienda: vivienda,
         comunidad_fk: comunidad_fk
       });
@@ -71,7 +74,7 @@ exports.select_vivienda = function(req, res) {
           if (err)
             res.send(err);
           res.render('edit-vivienda.ejs', {
-            title: 'Edit Vivienda',
+            title: 'GestorComunidades/Edit Vivienda',
             vivienda: vivienda,
             comunidad_fk: comunidad_fk,
             propietarios: propietarios,
@@ -88,7 +91,10 @@ exports.update_vivienda = function(req, res) {
   Vivienda.update(req.body, function(err, vivienda) {
     if (err)
       res.send(err);
-    res.render('msg.ejs',{title: 'Guardar vivienda', message: 'Vivienda registrada'})
+    res.render('msg.ejs',{
+      title: 'GestorComunidades/Guardar vivienda',
+      message: 'Vivienda registrada'
+    })
   });
 };
 
@@ -103,7 +109,7 @@ exports.prop_vivienda = function(req, res) {
         if (err)
           res.send(err);
         res.render('prop_vivienda.ejs', {
-          title: 'Añadir propietario',
+          title: 'GestorComunidades/Añadir propietario',
           vivienda: vivienda,
           propietarios: propietarios,
           noPropietarios: noPropietarios
@@ -121,7 +127,10 @@ exports.add_prop_vivienda = function(req, res) {
   PropVivienda.addPropVivienda(propVivienda, function(err, propVivienda) {
     if (err)
       res.send(err);
-    res.render('msg.ejs',{title: 'Asignar propietario', message: 'Propietario asignado'})
+    res.render('msg.ejs',{
+      title: 'GestorComunidades/Asignar propietario',
+      message: 'Propietario asignado'
+    })
   })
 }
 
@@ -133,15 +142,20 @@ exports.remove_prop_vivienda = function(req, res) {
   PropVivienda.removePropVivienda(propVivienda, function(err, propVivienda) {
     if (err)
       res.send(err);
-    res.render('msg.ejs',{title: 'Quitar propietario', message: 'Propietario reasignado'})
+    res.render('msg.ejs',{
+      title: 'GestorComunidades/Quitar propietario',
+      message: 'Propietario reasignado'
+    })
   })
 }
 
 exports.delete_vivienda = function(req, res) {
-  console.log("Eliminando vivienda ", req.params.idVivienda);
   Vivienda.delete(req.params.idVivienda, function(err, vivienda) {
     if (err)
       res.send(err);
-    res.render('msg.ejs',{title: 'Eliminar vivienda', message: 'Vivienda eliminada'})
+    res.render('msg.ejs',{
+      title: 'GestorComunidades/Eliminar vivienda',
+      message: 'Vivienda eliminada'
+    })
   });
 };

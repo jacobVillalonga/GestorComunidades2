@@ -1,6 +1,6 @@
 <% include partials/header.ejs %>
 <div class="container">
-  <p class="text-center text-danger">Editando Comunidad</p>
+  <p class="text-center text-danger hidden-print">Editando Comunidad</p>
   <% if (comunidad) { %>
     <% if (comunidad.id_comunidad == 0){ %>
   <form class="add-player-form hidden-print" action="/comunidades" method="post" enctype="application/json">

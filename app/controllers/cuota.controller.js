@@ -6,7 +6,6 @@ exports.list_all_cuotas = function(req, res) {
   Cuota.getAllCuotas(function(err, cuota) {
     if (err)
       res.send(err);
-      //console.log('res', cuota);
     res.send(cuota);
   });
 };
@@ -20,13 +19,13 @@ exports.select_cuota = function(req, res) {
         'vivienda_fk':req.params.idVivienda
       };
       res.render('edit-cuota.ejs', {
-        title: 'Añadir Cuota',
+        title: 'GestorComunidades/Añadir Cuota',
         cuota: cuota
       });
     } else {
       res.render('edit-cuota.ejs', {
-        title: 'Editar Cuota',
-        cuota: cuota[0]
+        title: 'GestorComunidades/Editar Cuota',
+        cuota: cuota
       })
     }
   })
@@ -46,30 +45,33 @@ exports.insert_cuota = function(req, res) {
       message: 'Please provide vivienda_fk'
     });
   } else {
-    Cuota.insertCuota(cuota, function(err, cuota) {
-      console.log(url);
+    Cuota.insert(cuota, function(err, cuota) {
       if (err)
         res.send(err);
       var url = "/viviendas/"+cuota.vivienda_fk;
-      console.log(url);
-      res.render('msg.ejs',{title: 'Guardar Cuota', message: 'Cuota registrada', url: url})
+      res.render('msg.ejs',{
+        title: 'GestorComunidades/Guardar Cuota',
+        message: 'Cuota registrada',
+        url: url
+      })
     });
   }
 };
 
 exports.update_cuota = function(req, res) {
     var url = "/viviendas/"+req.body.vivienda_fk;
-    console.log(url);
-  Cuota.updateCuota(req.body, function(err, cuotaId) {
+  Cuota.update(req.body, function(err, cuotaId) {
     if (err)
       res.send(err);
-    res.render('msg.ejs',{title: 'Actualizar Cuota', message: 'Cuota actualizada', url: url})
+    res.render('msg.ejs',{
+      title: 'GestorComunidades/Actualizar Cuota',
+      message: 'Cuota actualizada',
+      url: url})
   });
 };
 
 exports.delete_cuota = function(req, res) {
-  console.log("Eliminando cuota ", req.params.idCuota);
-  Cuota.removeCuota(req.params.idCuota, function(err, cuota) {
+  Cuota.delete(req.params.idCuota, function(err, cuota) {
     if (err)
       res.send(err);
     res.render('msg.ejs', {

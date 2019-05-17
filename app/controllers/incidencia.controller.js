@@ -13,11 +13,11 @@ exports.list_all_incidencias = function(req, res) {
 exports.insert_incidencia = function(req, res) {
   var incidencia = new Incidencia(req.body);
   //handles null error
-  Incidencia.insertIncidencia(incidencia, function(err, incidencia) {
+  Incidencia.insert(incidencia, function(err, incidencia) {
     if (err)
       res.send(err);
     res.render('msg.ejs', {
-      title: 'Añadir incidencia',
+      title: 'GestorComunidades/Añadir incidencia',
       message: 'Incidencia añadida'
     })
   })
@@ -33,13 +33,13 @@ exports.select_incidencia = function(req, res) {
         'fecha': ''
       };
       res.render('edit-incidencia.ejs', {
-        title: 'Añadir Incidencia',
+        title: 'GestorComunidades/Añadir Incidencia',
         incidencia: incidencia
       });
     } else {
       res.render('edit-incidencia.ejs', {
-        title: 'Editar Incidencia',
-        incidencia: incidencia[0]
+        title: 'GestorComunidades/Editar Incidencia',
+        incidencia: incidencia
         // viviendas: viviendas,
       })
     }
@@ -47,24 +47,22 @@ exports.select_incidencia = function(req, res) {
 };
 
 exports.update_incidencia = function(req, res) {
-    console.log(req.body);
-  Incidencia.updateIncidencia(req.body, function(err, incidencia) {
+  Incidencia.update(req.body, function(err, incidencia) {
     if (err)
       res.send(err);
     res.render('msg.ejs', {
-      title: 'Actualizar incidencia',
+      title: 'GestorComunidades/Actualizar incidencia',
       message: 'Incidencia actualizada'
     })
   });
 };
 
 exports.delete_incidencia = function(req, res) {
-  console.log("Eliminando incidencia ", req.params.idIncidencia);
-  Incidencia.removeIncidencia(req.params.idIncidencia, function(err, incidencia) {
+  Incidencia.delete(req.params.idIncidencia, function(err, incidencia) {
     if (err)
       res.send(err);
     res.render('msg.ejs', {
-      title: 'Eliminar incidencia',
+      title: 'GestorComunidades/Eliminar incidencia',
       message: 'Incidencia eliminada'
     })
   });

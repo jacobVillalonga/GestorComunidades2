@@ -10,14 +10,14 @@ var Factura = function(factura) {
   this.concepto = factura.concepto;
   this.comunidad_fk = factura.comunidad_fk;
 };
-
+//not used
 Factura.getAllFacturas = function getAllFacturas(result) {
   sql.query("Select * from factura order by fecha", function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(null, err);
     } else {
-      console.log('factura : ', res);
+      console.log('get all facturas ');
       result(null, res);
     }
   });
@@ -28,22 +28,23 @@ Factura.getFacturaById = function getFactura(facturaId, result) {
       console.log("error: ", err);
       result(err, null);
     } else {
-      result(null, res);
+      console.log("get factura: ",facturaId);
+      result(null, res[0]);
     }
   });
 };
-Factura.insertFactura = function insertFactura(factura, result) {
+Factura.insert = function insertFactura(factura, result) {
   sql.query("INSERT INTO factura set ?", factura, function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
     } else {
-      console.log(res.insertId);
+      console.log("insert factura: ",factura);
       result(null, res.insertId);
     }
   });
 };
-Factura.updateFactura = function updateFactura(factura, result) {
+Factura.update = function updateFactura(factura, result) {
   sql.query("UPDATE factura SET emisor = ?, importe = ?, fecha = ?, concepto = ? WHERE id_factura = ?",
     [factura.emisor, factura.importe, factura.fecha, factura.concepto, factura.id_factura],
     function(err, res) {
@@ -51,16 +52,18 @@ Factura.updateFactura = function updateFactura(factura, result) {
         console.log("error: ", err);
         result(null, err);
       } else {
+        console.log("update factura: ", factura)
         result(null, res);
       }
     });
 };
-Factura.removeFactura = function(id, result) {
-  sql.query("DELETE FROM factura WHERE id_factura = ?", [id], function(err, res) {
+Factura.delete = function(idFactura, result) {
+  sql.query("DELETE FROM factura WHERE id_factura = ?", [idFactura], function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(null, err);
     } else {
+      console.log("delete factura ",idFactura)
       result(null, res);
     }
   });

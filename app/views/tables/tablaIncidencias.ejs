@@ -5,11 +5,11 @@
           <table class="table table-hovered">
               <thead class="thead-dark">
                   <tr>
-                      <th scope="col">ID</th>
+                      <th scope="col" class="hidden-print">ID</th>
                       <th scope="col">Emisor</th>
                       <th scope="col">Fecha</th>
                       <th scope="col">Informacion</th>
-                      <th scope="col">
+                      <th scope="col" class="hidden-print">
                         <a href="/comunidades/<%= comunidad.id_comunidad %>/incidencias/0" class="btn btn-sm btn-success">Añadir</a>
                       </th>
                   </tr>
@@ -18,11 +18,11 @@
               <tbody>
                   <% Array.prototype.forEach.call(incidencias, incidencia => { %>
                       <tr>
-                          <th scope="row"><%= incidencia.id_incidencia %></th>
+                          <th scope="row" class="hidden-print"><%= incidencia.id_incidencia %></th>
                           <td><%= incidencia.emisor %></td>
                           <td><%= incidencia.fecha %></td>
                           <td><%= incidencia.info %></td>
-                          <td>
+                          <td class="hidden-print">
                               <a href="/comunidades/<%= incidencia.comunidad_fk %>/incidencias/<%= incidencia.id_incidencia %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
                           </td>
                       </tr>

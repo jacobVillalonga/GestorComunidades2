@@ -6,13 +6,13 @@
           <table class="table table-hovered">
               <thead class="thead-dark">
                   <tr>
-                      <th scope="col">ID vivienda</th>
+                      <th scope="col" class="hidden-print">ID vivienda</th>
                       <th scope="col">Número</th>
                       <th scope="col">Coeficiente</th>
                       <th scope="col">Nombre propietario</th>
                       <th scope="col">NIF</th>
                       <th scope="col"></th>
-                      <th scope="col">
+                      <th scope="col" class="hidden-print">
                         <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/0" class="btn btn-sm btn-success">Añadir</a>
                       </th>
                   </tr>
@@ -23,11 +23,11 @@
                   <% Array.prototype.forEach.call(viviendas, vivienda => { %>
                     <% if (thisViv != vivienda.id_vivienda) { %>
                       <tr class="success">
-                          <th scope="row"><%= vivienda.id_vivienda %></th>
+                          <th scope="row" class="hidden-print"><%= vivienda.id_vivienda %></th>
                           <td><%= vivienda.numero %></td>
                           <td><%= vivienda.coeficiente %> %</td>
                           <td colspan="3"></td>
-                          <td>
+                          <td class="hidden-print">
                               <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-primary">Ver</a>
                           </td>
                       </tr>
@@ -35,11 +35,11 @@
                       <% if (vivienda.id_propietario) { %>
                       <tr>
                         <td></td>
-                        <th scope="row"><%= vivienda.id_propietario %></th>
+                        <th scope="row" class="hidden-print"><%= vivienda.id_propietario %></th>
                         <td></td>
                         <td><%= vivienda.nombre %> <%= vivienda.apellidos %></td>
                         <td><%= vivienda.nif %></td>
-                        <td>
+                        <td class="hidden-print">
                             <a href="/propietarios/<%= vivienda.id_propietario %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
                         </td>
                         <td></td>

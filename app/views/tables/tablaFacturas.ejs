@@ -5,12 +5,12 @@
           <table class="table table-hovered">
               <thead class="thead-dark">
                   <tr>
-                      <th scope="col">ID</th>
+                      <th scope="col" class="hidden-print">ID</th>
                       <th scope="col">Emisor</th>
                       <th scope="col">Fecha</th>
                       <th scope="col">Importe</th>
                       <th scope="col">Concepto</th>
-                      <th scope="col">
+                      <th scope="col" class="hidden-print">
                         <a href="/comunidades/<%= comunidad.id_comunidad %>/facturas/0" class="btn btn-sm btn-success">Añadir</a>
                       </th>
                   </tr>
@@ -19,12 +19,12 @@
               <tbody>
                   <% Array.prototype.forEach.call(facturas, factura => { %>
                       <tr>
-                          <th scope="row"><%= factura.id_factura %></th>
+                          <th scope="row" class="hidden-print"><%= factura.id_factura %></th>
                           <td><%= factura.emisor %></td>
                           <td><%= factura.fecha %></td>
                           <td><%= factura.importe %> €</td>
                           <td><%= factura.concepto %></td>
-                          <td>
+                          <td class="hidden-print">
                               <a href="/comunidades/<%= factura.comunidad_fk %>/facturas/<%= factura.id_factura %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
                           </td>
                       </tr>

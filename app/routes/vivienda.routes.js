@@ -14,6 +14,8 @@ app.get('/viviendas', viviendaController.list_all_viviendas);
       viviendaController.insert_vivienda(req, res);
     });
 
+  app.get('/comunidades/:idComunidad/viviendas/:idVivienda', viviendaController.select_vivienda);
+
   app.route('/viviendas/:idVivienda')
     .get(viviendaController.select_vivienda)
     .post(function(req, res){

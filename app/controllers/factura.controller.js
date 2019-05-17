@@ -13,11 +13,11 @@ exports.list_all_facturas = function(req, res) {
 exports.insert_factura = function(req, res) {
   var factura = new Factura(req.body);
   //handles null error
-  Factura.insertFactura(factura, function(err, factura) {
+  Factura.insert(factura, function(err, factura) {
     if (err)
       res.send(err);
     res.render('msg.ejs', {
-      title: 'Añadir factura',
+      title: 'GestorComunidades/Añadir factura',
       message: 'Factura añadida'
     })
   })
@@ -33,13 +33,13 @@ exports.select_factura = function(req, res) {
         'fecha': ''
       };
       res.render('edit-factura.ejs', {
-        title: 'Añadir Factura',
+        title: 'GestorComunidades/Añadir Factura',
         factura: factura
       });
     } else {
       res.render('edit-factura.ejs', {
-        title: 'Editar Factura',
-        factura: factura[0]
+        title: 'GestorComunidades/Editar Factura',
+        factura: factura
         // viviendas: viviendas,
       })
     }
@@ -47,24 +47,22 @@ exports.select_factura = function(req, res) {
 };
 
 exports.update_factura = function(req, res) {
-    console.log(req.body);
-  Factura.updateFactura(req.body, function(err, factura) {
+  Factura.update(req.body, function(err, factura) {
     if (err)
       res.send(err);
     res.render('msg.ejs', {
-      title: 'Actualizar factura',
+      title: 'GestorComunidades/Actualizar factura',
       message: 'Factura actualizada'
     })
   });
 };
 
 exports.delete_factura = function(req, res) {
-  console.log("Eliminando factura ", req.params.idFactura);
-  Factura.removeFactura(req.params.idFactura, function(err, factura) {
+  Factura.delete(req.params.idFactura, function(err, factura) {
     if (err)
       res.send(err);
     res.render('msg.ejs', {
-      title: 'Eliminar factura',
+      title: 'GestorComunidades/Eliminar factura',
       message: 'Factura eliminada'
     })
   });

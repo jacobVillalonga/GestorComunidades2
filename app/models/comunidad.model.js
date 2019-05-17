@@ -16,7 +16,7 @@ Comunidad.insert = function (newComunidad, result) {
       console.log("error: ", err);
       result(err, null);
     } else {
-      console.log("insert comunidad: ", res);
+      console.log("insert comunidad: ", newComunidad);
       result(null, res.insertId);
     }
   });
@@ -27,7 +27,8 @@ Comunidad.getComunidadById = function getComunidad(comunidadId, result) {
       console.log("error: ", err);
       result(err, null);
     } else {
-      result(null, res);
+      console.log("get comunidad: "+comunidadId, res)
+      result(null, res[0]);
 
     }
   });
@@ -52,6 +53,7 @@ Comunidad.getViviendasComunidad = function getViviendas(comunidadId, result) {
       console.log("error: ", err);
       result(err, null);
     } else {
+      console.log("get viviendas Comunidad "+comunidadId+": "+res.length);
       result(null, res);
     }
   });
@@ -62,6 +64,7 @@ Comunidad.getFacturasComunidad = function getFacturas(comunidadId, result) {
       console.log("error: ", err);
       result(err, null);
     } else {
+      console.log("get facturas Comunidad "+comunidadId+": "+res.length);
       result(null, res);
     }
   });
@@ -72,7 +75,7 @@ Comunidad.getAllComunidades = function getAllComunidades(result) {
       console.log("error: ", err);
       result(null, err);
     } else {
-      console.log('comunidad : ', res);
+      console.log('get all Comunidades: ',res.length);
       result(null, res);
     }
   });
@@ -89,19 +92,18 @@ Comunidad.update = function (comunidad, result) {
         console.log("error: ", err);
         result(null, err);
       } else {
-        console.log("update comunidad: ", res);
+        console.log("update comunidad: ", comunidad);
         result(null, res);
       }
     });
 };
 Comunidad.delete = function (id, result) {
   sql.query("DELETE FROM comunidad WHERE id_comunidad = ?", [id], function(err, res) {
-
     if (err) {
       console.log("error: ", err);
       result(null, err);
     } else {
-      console.log("delete comunidad: ", res);
+      console.log("delete comunidad ", id);
       result(null, res);
     }
   });
