@@ -75,8 +75,8 @@ Vivienda.getNoPropietarios = function getNoPropietarios(viviendaId, result) {
       })
 };
 Vivienda.getCuotasVivienda = function getCuotas(viviendaId, year, result) {
-      sql.query("Select * from pago_cuota where vivienda_fk = ? and fecha > ? and fecha < ? order by fecha",
-        [viviendaId, year-1, year+1 ], function (err, res) {
+      sql.query("Select * from pago_cuota where vivienda_fk = ? and year(fecha) = ? order by fecha",
+        [viviendaId, year ], function (err, res) {
           if(err) {
             console.log("error: ", err);
             result(err, null);
@@ -86,6 +86,18 @@ Vivienda.getCuotasVivienda = function getCuotas(viviendaId, year, result) {
           }
       })
 };
+Vivienda.getDeudaAnterior = function getDeuda(viviendaId, year, result) {
+  sql.query("Select coalesce(sum(importe), 0) as deuda from pago_cuota where vivienda_fk = ? and year(fecha) < ? and pagado = 0",
+    [viviendaId, year ], function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log("ger deuda vivienda ",viviendaId, " anterior ",year, ": ", res[0].deuda);
+        result(null, res[0].deuda);
+      }
+    })
+}
 Vivienda.getViviendasComunidad = function getViviendas(comunidadId, result) {
         sql.query("Select * from vivienda where comunidad_fk = ? order by numero", comunidadId, function (err, res) {
                 if(err) {

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="table-wrapper">
     <h4 class="bg-grey">Cuotas <%= year %>:</h4>
-    <% var deuda = 0 %>
+    <% var deudaAc = 0 %>
     <table class="table table-hovered">
       <thead class="thead-dark">
         <tr>
@@ -27,7 +27,7 @@
             <% if (cuota.pagado){ %>
             <span class="glyphicon glyphicon-ok text-primary"></span>
             <% } else { %>
-              <% deuda += cuota.importe %>
+              <% deudaAc += cuota.importe %>
             <span class="glyphicon glyphicon-remove text-danger"></span>
             <% } %>
           </td>
@@ -37,7 +37,9 @@
         </tr>
         <% }) %>
         <tr>
-          <td colspan="2">Deuda pendiente: <%= deuda %> €</td>
+          <td colspan="4">Deuda pendiente: <%= deudaAc %> €</td>
+          <td colspan="4">Deuda anterior: <%= deuda %> €</td>
+          <td colspan="4">Deuda total: <%= deudaAc + deuda %> €</td>
         </tr>
       </tbody>
       <% } else { %>

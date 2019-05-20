@@ -11,7 +11,7 @@
               <span id="filtCuota" name="filtCuota" class="glyphicon glyphicon-search btn btn-sm btn-info" onclick="test()"></span>
             </div>
         </div>
-    <% var deuda = 0 %>
+    <% var deudaAc = 0 %>
     <table class="table table-hovered">
       <thead class="thead-dark">
         <tr>
@@ -31,13 +31,15 @@
             <td class="success text-info"><%= cuota.importe %> € <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="glyphicon glyphicon-eye-open"></a>
           </td>
           <% } else { %>
-            <% deuda += cuota.importe; %>
+            <% deudaAc += cuota.importe; %>
             <td class="danger text-danger"><%= cuota.importe %> € <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="glyphicon glyphicon-eye-open"></a>
           </td>
           <% } %>
         <% }) %>
         <tr>
-          <td colspan="3">Deuda pendiente: <%= deuda %> €</td>
+          <td colspan="4">Deuda pendiente: <%= deudaAc %> €</td>
+          <td colspan="4">Deuda anterior: <%= deuda %> €</td>
+          <td colspan="4">Deuda total: <%= deudaAc + deuda %> €</td>
         </tr>
       </tbody>
 
