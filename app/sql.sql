@@ -48,11 +48,6 @@ or year(p.fecha) = 2019
 order by v.numero, p.fecha
 
 
-	<% var fecha = new Date(cuota.fecha) %>
-	<p>New Date: <%= fecha %></p>
-	<p>month: <%= fecha.getMonth() %></p>
-
-
 	SELECT c.id_comunidad,
   	v.id_vivienda, v.numero, v.coeficiente,
     pv.id_propietario,
@@ -79,3 +74,11 @@ order by v.numero, p.fecha
 	)
 	and year(pc.fecha) = 2019
 	order by pc.fecha
+//
+	Select coalesce(sum(importe), 0) as deuda, vivienda_fk
+	from pago_cuota
+	where vivienda_fk = 15
+	and year(fecha) < 2019
+	and pagado = 0
+
+	

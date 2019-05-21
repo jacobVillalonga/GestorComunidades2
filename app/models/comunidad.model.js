@@ -58,6 +58,17 @@ Comunidad.getViviendasComunidad = function getViviendas(comunidadId, result) {
     }
   });
 };
+Comunidad.getViviendasTest = function getVivs(comunidadId, result) {
+  sql.query("select * from vivienda where comunidad_fk = ?", comunidadId, function(err, res) {
+    if (err){
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      console.log("get viviendas Comunidad "+comunidadId+": "+res.length);
+      result(null, res);
+    }
+  });
+};
 Comunidad.getFacturasComunidad = function getFacturas(comunidadId, result) {
   sql.query("Select * from factura where comunidad_fk = ? order by fecha", comunidadId, function(err, res) {
     if (err) {

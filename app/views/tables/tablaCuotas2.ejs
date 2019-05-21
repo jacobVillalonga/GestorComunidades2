@@ -8,7 +8,7 @@
                 <input type="number" min="1900" max="2099" value="<%= year %>" step="1" class="form-control" name="año" id="año" maxlength="4">
             </div>
             <div class="form-group col-md-2">
-              <span id="filtCuota" name="filtCuota" class="glyphicon glyphicon-search btn btn-sm btn-info" onclick="test()"></span>
+              <span id="filtCuota" name="filtCuota" class="glyphicon glyphicon-search btn btn-sm btn-info hidden-print" onclick="search()"></span>
             </div>
         </div>
     <% var deudaAc = 0 %>
@@ -28,12 +28,14 @@
       <tr>
         <% Array.prototype.forEach.call(cuotas, cuota => { %>
           <% if(cuota.pagado){ %>
-            <td class="success text-info"><%= cuota.importe %> € <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="glyphicon glyphicon-eye-open"></a>
-          </td>
+            <td class="success text-info"><%= cuota.importe %> €
+              <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="glyphicon glyphicon-eye-open hidden-print"></a>
+            </td>
           <% } else { %>
             <% deudaAc += cuota.importe; %>
-            <td class="danger text-danger"><%= cuota.importe %> € <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="glyphicon glyphicon-eye-open"></a>
-          </td>
+            <td class="danger text-danger"><%= cuota.importe %> €
+              <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="glyphicon glyphicon-eye-open hidden-print"></a>
+            </td>
           <% } %>
         <% }) %>
         <tr>
@@ -55,7 +57,7 @@
   </div>
 
   <script type="text/javascript">
-    function test() {
+    function search() {
       var x = document.getElementById("año").value;
       location.href = "/viviendas/<%= vivienda.id_vivienda %>/"+x;
     }

@@ -15,4 +15,6 @@ module.exports = function(app) {
     });
 
    app.route('/comunidades/delete/:idComunidad').get(comunidadController.delete_comunidad);
+
+  app.route('/provaComu/:idComunidad').get(comunidadController.provaComu);
 };

@@ -93,7 +93,7 @@ Vivienda.getDeudaAnterior = function getDeuda(viviendaId, year, result) {
         console.log("error: ", err);
         result(err, null);
       } else {
-        console.log("ger deuda vivienda ",viviendaId, " anterior ",year, ": ", res[0].deuda);
+        console.log("get deuda vivienda ",viviendaId, " anterior ",year, ": ", res[0].deuda);
         result(null, res[0].deuda);
       }
     })

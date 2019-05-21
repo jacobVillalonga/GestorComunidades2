@@ -11,7 +11,7 @@
           <th scope="col">Importe</th>
           <th scope="col">Pagado</th>
           <th scope="col">
-            <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/0" class="btn btn-sm btn-success">Añadir</a>
+            <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/0" class="btn btn-sm btn-success hidden-print">Añadir</a>
           </th>
         </tr>
       </thead>
@@ -32,14 +32,14 @@
             <% } %>
           </td>
           <td>
-            <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
+            <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
           </td>
         </tr>
         <% }) %>
         <tr>
-          <td colspan="4">Deuda pendiente: <%= deudaAc %> €</td>
-          <td colspan="4">Deuda anterior: <%= deuda %> €</td>
-          <td colspan="4">Deuda total: <%= deudaAc + deuda %> €</td>
+          <td colspan="2">Deuda pendiente: <%= deudaAc %> €</td>
+          <td colspan="2">Deuda anterior: <%= deuda %> €</td>
+          <td colspan="2">Deuda total: <%= deudaAc + deuda %> €</td>
         </tr>
       </tbody>
       <% } else { %>

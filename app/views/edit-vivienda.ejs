@@ -26,9 +26,9 @@
             </div>
             <div align="center" class="form-row">
               <!-- <a href="/" rel="noopener" class="btn btn-sm btn-success">Guardar</a> -->
-              <button formmethod="post" type="submit" class="btn btn-success float-right">Guardar</button>
-              <a href="/comunidades/<%= vivienda.comunidad_fk %>" class="btn btn-sm btn-info">Vovler</a>
-              <a href="/viviendaDel/delete/<%= vivienda.id_vivienda %>" data-method="delete" class="btn btn-sm btn-danger">Eliminar</a>
+              <button formmethod="post" type="submit" class="btn btn-success float-right hidden-print">Guardar</button>
+              <a href="/comunidades/<%= vivienda.comunidad_fk %>" class="btn btn-sm btn-info hidden-print">Vovler</a>
+              <a href="/viviendaDel/delete/<%= vivienda.id_vivienda %>" data-method="delete" class="btn btn-sm btn-danger hidden-print">Eliminar</a>
             </div>
         </form>
         @ToDo: Datos Comunidad

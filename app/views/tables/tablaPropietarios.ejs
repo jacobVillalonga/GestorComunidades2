@@ -14,7 +14,7 @@
                       <th scope="col">Dirección</th>
                       <th scope="col">CP</th>
                       <th scope="col">
-                        <a href="/propietarios/0" class="btn btn-sm btn-success">Añadir</a>
+                        <a href="/propietarios/0" class="btn btn-sm btn-success hidden-print">Añadir</a>
                       </th>
                   </tr>
               </thead>
@@ -31,7 +31,7 @@
                           <td><%= propietario.direccion %></td>
                           <td><%= propietario.cp %></td>
                           <td>
-                              <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info">Ver</a>
+                              <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
                           </td>
                       </tr>
                   <% }) %>
@@ -46,7 +46,7 @@
               <tfoot>
                 <tr>
                   <td colspan="10">
-                    <a href="/vivienda/<%= vivienda.id_vivienda %>/propietarios" rel="noopener" class="btn btn-sm btn-primary">Asignar propietario</a>
+                    <a href="/vivienda/<%= vivienda.id_vivienda %>/propietarios" rel="noopener" class="btn btn-sm btn-primary hidden-print">Asignar propietario</a>
                   </td>
                 </tr>
               </tfoot>
