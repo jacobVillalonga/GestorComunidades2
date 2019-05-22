@@ -15,9 +15,9 @@
                       </th>
                   </tr>
               </thead>
-              <% if (facturas.length > 0) {%>
+              <% if (comunidad.facturas.length > 0) {%>
               <tbody>
-                  <% Array.prototype.forEach.call(facturas, factura => { %>
+                  <% Array.prototype.forEach.call(comunidad.facturas, factura => { %>
                       <tr>
                           <th scope="row" class="hidden-print"><%= factura.id_factura %></th>
                           <td><%= factura.emisor %></td>

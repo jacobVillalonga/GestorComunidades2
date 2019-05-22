@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="table-wrapper">
+    <h3><%= comunidad.nombre_comunidad %></h3>
+    <h4 class="bg-grey">Viviendas:</h4>
+    <table class="table table-hovered">
+      <thead class="thead-dark">
+        <tr>
+          <!-- <th scope="col" class="hidden-print">ID vivienda</th> -->
+          <th scope="col" rowspan="2">Número</th>
+          <th scope="col" colspan="6">Nombre propietario</th>
+          <th scope="col" colspan="5">NIF</th>
+          <th scope="col" class="hidden-print">
+            <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/0" class="btn btn-sm btn-success">Añadir</a>
+          </th>
+        </tr>
+        <tr>
+          <th scope="col">Enero</th>
+          <th scope="col">Febrero</th>
+          <th scope="col">Marzo</th>
+          <th scope="col">Abril</th>
+          <th scope="col">Mayo</th>
+          <th scope="col">Junio</th>
+          <th scope="col">Julio</th>
+          <th scope="col">Agosto</th>
+          <th scope="col">Septiembre</th>
+          <th scope="col">Octubre</th>
+          <th scope="col">Noviembre</th>
+          <th scope="col">Diciembre</th>
+        </tr>
+      </thead>
+      <% if (comunidad.viviendas.length > 0) {%>
+      <tbody>
+        <% Array.prototype.forEach.call(comunidad.viviendas, vivienda => { %>
+          <% var deuda_actual = 0 %>
+          <% if (vivienda.propietarios.length > 0){ %>
+            <tr>
+              <td rowspan="<%= vivienda.propietarios.length+2 %>"><%= vivienda.numero %></td>
+              <% Array.prototype.forEach.call(vivienda.propietarios, propietario => { %>
+                <td colspan="6"><%= propietario.nombre %> <%= propietario.apellidos %></td>
+                <td colspan="5"><%= propietario.nif %></td>
+                <td>
+                  <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
+                </td>
+                </tr>
+              <% }) %>
+          <% } else { %>
+            <tr>
+              <td rowspan="3"><%= vivienda.numero %></td>
+              <td colspan="10">No hay propietarios asignados a esta vivienda</td>
+              <td colspan="2">
+                <a href="/vivienda/<%= vivienda.id_vivienda %>/propietarios" rel="noopener" class="btn btn-sm btn-primary hidden-print">Asignar propietario</a>
+              </td>
+            </tr>
+          <% } %>
+          <!-- row cuotas -->
+          <tr>
+            <% if (vivienda.cuotas.length > 0 ) { %>
+              <% Array.prototype.forEach.call(vivienda.cuotas, cuota => { %>
+                <% if (cuota.pagado) { %>
+                  <td class="success text-info"><%= cuota.importe %> €</td>
+                <% } else { %>
+                  <% deuda_actual += cuota.importe %>
+                  <td class="danger text-danger"><%= cuota.importe %> €</td>
+                <% } %>
+              <% }) %>
+            <% } else { %>
+              <td colspan="12">No hay cuotas asignadas a esta vivienda</td>
+            <% } %>
+          </tr>
+          <!-- row deudas -->
+          <tr>
+            <td colspan="4">Deuda anterior: <%= vivienda.deuda_anterior %> €</td>
+            <td colspan="4">Deuda actual: <%= deuda_actual %> €</td>
+            <td colspan="4">Deuda total: <%= vivienda.deuda_anterior+deuda_actual %> €</td>
+          </tr>
+        <% }) %>
+      </tbody>
+      <% } else { %>
+      <tr>
+        <td colspan="5">
+          <p class="text-center">No hay viviendas asignadas a esta comunidad.</p>
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
+</div>

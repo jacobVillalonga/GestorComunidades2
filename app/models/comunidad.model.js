@@ -1,6 +1,6 @@
 'user strict';
 var sql = require('../config/db.config.js');
-
+var Vivienda = require('./vivienda.model.js');
 //Comunidad object constructor
 var Comunidad = function(comunidad) {
   this.nombre_comunidad = comunidad.nombre_comunidad;

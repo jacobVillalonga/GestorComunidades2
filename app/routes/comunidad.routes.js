@@ -9,7 +9,7 @@ module.exports = function(app) {
     });
 
    app.route('/comunidades/:idComunidad')
-    .get(comunidadController.select_comunidad)
+    .get(comunidadController.provaComu)
     .post(function(req, res){
         comunidadController.update_comunidad(req,res);
     });

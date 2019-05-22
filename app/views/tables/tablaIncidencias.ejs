@@ -14,9 +14,9 @@
                       </th>
                   </tr>
               </thead>
-              <% if (incidencias.length > 0) {%>
+              <% if (comunidad.incidencias.length > 0) {%>
               <tbody>
-                  <% Array.prototype.forEach.call(incidencias, incidencia => { %>
+                  <% Array.prototype.forEach.call(comunidad.incidencias, incidencia => { %>
                       <tr>
                           <th scope="row" class="hidden-print"><%= incidencia.id_incidencia %></th>
                           <td><%= incidencia.emisor %></td>
