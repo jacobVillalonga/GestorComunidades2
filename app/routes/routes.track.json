@@ -21,6 +21,9 @@ routes = [{
           "get (select id)",
           "post (update)"
         ],
+        "/comunidades/:idComunidad/year/:year": [
+          "get (select id + year)"
+        ],
         "/comunidades/delete/:idComunidad": [
           "get (delete)"
         ]

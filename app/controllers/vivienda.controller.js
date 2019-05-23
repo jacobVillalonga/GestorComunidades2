@@ -43,7 +43,6 @@ exports.insert_vivienda = function(req, res) {
 
 exports.select_vivienda = function(req, res) {
   if (!req.params.year){
-    // var year =
     req.params.year = new Date().getFullYear();
   }
   Vivienda.getViviendaById(req.params.idVivienda, function(err, vivienda) {

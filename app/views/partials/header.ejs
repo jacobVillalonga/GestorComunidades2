@@ -57,6 +57,16 @@
   input[type="checkbox"],input[type="radio"]{
     margin: 0px 0 0;
   }
+
+  @media print {
+    .container {
+      width:auto;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+    }
+  }
   /* On small screens, set height to 'auto' for sidenav and grid */
   /* @media screen and (max-width: 767px) {
     .sidenav {

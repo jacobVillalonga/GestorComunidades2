@@ -2,18 +2,27 @@
   <div class="table-wrapper">
     <h3><%= comunidad.nombre_comunidad %></h3>
     <h4 class="bg-grey">Viviendas:</h4>
+    <label for="">Año:</label>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <input type="number" min="1900" max="2099" value="<%= year %>" step="1" class="form-control" name="año" id="año" maxlength="4">
+        </div>
+        <div class="form-group col-md-2">
+          <span id="filtCuota" name="filtCuota" class="glyphicon glyphicon-search btn btn-sm btn-info hidden-print" onclick="search()"></span>
+        </div>
+    </div>
     <table class="table table-hovered">
       <thead class="thead-dark">
         <tr>
           <!-- <th scope="col" class="hidden-print">ID vivienda</th> -->
-          <th scope="col" rowspan="2">Número</th>
+          <th scope="col" rowspan="2" class="active">Vivienda</th>
           <th scope="col" colspan="6">Nombre propietario</th>
           <th scope="col" colspan="5">NIF</th>
           <th scope="col" class="hidden-print">
             <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/0" class="btn btn-sm btn-success">Añadir</a>
           </th>
         </tr>
-        <tr>
+        <tr class="active">
           <th scope="col">Enero</th>
           <th scope="col">Febrero</th>
           <th scope="col">Marzo</th>
@@ -28,24 +37,44 @@
           <th scope="col">Diciembre</th>
         </tr>
       </thead>
-      <% if (comunidad.viviendas.length > 0) {%>
       <tbody>
-        <% Array.prototype.forEach.call(comunidad.viviendas, vivienda => { %>
+      <% if (comunidad.viviendas.length > 0) { %>
+        <% (comunidad.viviendas).forEach( vivienda => { %>
           <% var deuda_actual = 0 %>
           <% if (vivienda.propietarios.length > 0){ %>
-            <tr>
-              <td rowspan="<%= vivienda.propietarios.length+2 %>"><%= vivienda.numero %></td>
-              <% Array.prototype.forEach.call(vivienda.propietarios, propietario => { %>
-                <td colspan="6"><%= propietario.nombre %> <%= propietario.apellidos %></td>
-                <td colspan="5"><%= propietario.nif %></td>
-                <td>
-                  <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
-                </td>
+            <% (vivienda.propietarios).forEach(function(propietario, index) { %>
+              <% if (index == 0) { %>
+                <tr>
+                  <th class="info" rowspan="<%= vivienda.propietarios.length+2 %>">
+                    <%= vivienda.numero %>
+                    <br>
+                    <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
+                  </th>
+                  <td></td>
+                  <td colspan="5"><%= propietario.nombre %> <%= propietario.apellidos %></td>
+                  <td colspan="5"><%= propietario.nif %></td>
+                  <td>
+                    <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
+                  </td>
                 </tr>
-              <% }) %>
+              <% } else { %>
+                <tr>
+                  <td></td>
+                  <td colspan="5"><%= propietario.nombre %> <%= propietario.apellidos %></td>
+                  <td colspan="5"><%= propietario.nif %></td>
+                  <td>
+                    <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
+                  </td>
+                </tr>
+              <% } %>
+            <% }) %>
           <% } else { %>
             <tr>
-              <td rowspan="3"><%= vivienda.numero %></td>
+              <th class="info" rowspan="3">
+                <%= vivienda.numero %>
+                <br>
+                <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
+              </th>
               <td colspan="10">No hay propietarios asignados a esta vivienda</td>
               <td colspan="2">
                 <a href="/vivienda/<%= vivienda.id_vivienda %>/propietarios" rel="noopener" class="btn btn-sm btn-primary hidden-print">Asignar propietario</a>
@@ -55,7 +84,7 @@
           <!-- row cuotas -->
           <tr>
             <% if (vivienda.cuotas.length > 0 ) { %>
-              <% Array.prototype.forEach.call(vivienda.cuotas, cuota => { %>
+              <% (vivienda.cuotas).forEach( cuota => { %>
                 <% if (cuota.pagado) { %>
                   <td class="success text-info"><%= cuota.importe %> €</td>
                 <% } else { %>
@@ -68,13 +97,12 @@
             <% } %>
           </tr>
           <!-- row deudas -->
-          <tr>
+          <tr class="info">
             <td colspan="4">Deuda anterior: <%= vivienda.deuda_anterior %> €</td>
             <td colspan="4">Deuda actual: <%= deuda_actual %> €</td>
             <td colspan="4">Deuda total: <%= vivienda.deuda_anterior+deuda_actual %> €</td>
           </tr>
         <% }) %>
-      </tbody>
       <% } else { %>
       <tr>
         <td colspan="5">
@@ -82,6 +110,13 @@
         </td>
       </tr>
       <% } %>
+      </tbody>
     </table>
   </div>
+  <script type="text/javascript">
+    function search() {
+      var año = document.getElementById("año").value;
+      location.href = "/comunidades/<%= comunidad.id_comunidad %>/year/"+año;
+    }
+  </script>
 </div>

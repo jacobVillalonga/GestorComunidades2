@@ -36,43 +36,6 @@ exports.insert_comunidad = function(req, res) {
   }
 };
 
-exports.select_comunidad = function(req, res) {
-  Comunidad.getComunidadById(req.params.idComunidad, function(err, comunidad) {
-    if (err)
-      res.send(err);
-    // res.json(comunidad);
-    if (req.params.idComunidad == 0) {
-      var nCom = {
-        'nombre_comunidad': ''
-      };
-      res.render('edit-comunidad.ejs', {
-        title: 'GestorComunidades/Añadir Comunidad',
-        comunidad: nCom
-      });
-    } else {
-      Comunidad.getViviendasComunidad(req.params.idComunidad, function(err, viviendas) {
-        if (err)
-          res.send(err);
-        Comunidad.getFacturasComunidad(req.params.idComunidad, function(err, facturas) {
-          if (err)
-            res.send(err);
-          Incidencia.getIncidenciasComunidad(req.params.idComunidad, function(err, incidencias) {
-            if (err)
-              res.send(err);
-            res.render('edit-comunidad.ejs', {
-              title: 'GestorComunidades/Comunidad ' + comunidad.nombre_comunidad,
-              comunidad: comunidad,
-              viviendas: viviendas,
-              facturas: facturas,
-              incidencias: incidencias
-            })
-          })
-        })
-      });
-    }
-  });
-};
-
 exports.update_comunidad = function(req, res) {
   Comunidad.update(req.body, function(err, comunidad) {
     if (err)
@@ -95,13 +58,25 @@ exports.delete_comunidad = function(req, res) {
   });
 };
 
-exports.provaComu = function(req, res) {
+exports.select_comunidad = function(req, res) {
   //crea una fecha para usarla como parametro por defecto para filtrar cuotas y deudas
-  var year = new Date().getFullYear();
+  if (!req.params.year){
+    req.params.year = new Date().getFullYear();
+  }
   //obtiene la info de la comunidad
   Comunidad.getComunidadById(req.params.idComunidad, function(err, comunidad) {
     if (err)
       res.send(err);
+    // res.json(comunidad);
+    if (req.params.idComunidad == 0) {
+      var nCom = {
+        'nombre_comunidad': ''
+      };
+      res.render('edit-comunidad.ejs', {
+        title: 'GestorComunidades/Añadir Comunidad',
+        comunidad: nCom
+      });
+    } else {
     //obtiene las facturas de la comunidad
     Comunidad.getFacturasComunidad(req.params.idComunidad, function(err, facturas) {
       if (err)
@@ -114,10 +89,11 @@ exports.provaComu = function(req, res) {
         Comunidad.getViviendasTest(req.params.idComunidad, function(err, viviendas) {
           if (err)
             res.send(err);
+          if (viviendas.length > 0) {
           //por cada vivienda...
           viviendas.forEach(function(vivienda, index, viviendas) {
             //obtiene la deuda anterior al año del parametro
-            Vivienda.getDeudaAnterior(vivienda.id_vivienda, req.params.year = year, function(err, deuda) {
+            Vivienda.getDeudaAnterior(vivienda.id_vivienda, req.params.year, function(err, deuda) {
               if (err)
                 res.send(err);
               vivienda.deuda_anterior = deuda;
@@ -126,7 +102,7 @@ exports.provaComu = function(req, res) {
                 if (err)
                   res.send(err);
                 vivienda.propietarios = propietarios;
-                Vivienda.getCuotasVivienda(vivienda.id_vivienda, req.params.year = year, function(err, cuotas) {
+                Vivienda.getCuotasVivienda(vivienda.id_vivienda, req.params.year, function(err, cuotas) {
                   if (err)
                     res.send("Cuotas: ",vivienda.id_vivienda," ERR: ",err);
                   vivienda.cuotas = cuotas;
@@ -137,6 +113,7 @@ exports.provaComu = function(req, res) {
                     comunidad.viviendas = viviendas;
                     res.render('edit-comunidad.ejs', {
                       title: 'GestorComunidades/Comunidad ' + comunidad.nombre_comunidad,
+                      year: req.params.year,
                       comunidad: comunidad
                     })
                   }//end send
@@ -144,9 +121,21 @@ exports.provaComu = function(req, res) {
               });//end getPropietariosVivienda
             });//end getDeudaAnterior
           });//end forEach
+        //revisar (duplicat)
+        } else {
+          comunidad.facturas = facturas;
+          comunidad.incidencias = incidencias;
+          comunidad.viviendas = viviendas;
+          res.render('edit-comunidad.ejs', {
+            title: 'GestorComunidades/Comunidad ' + comunidad.nombre_comunidad,
+            year: req.params.year,
+            comunidad: comunidad
+          })
+        }
         });//end getViviendasComunidad
       });//end getIncidenciasComunidad
     });//end getFacturasComunidad
+    };
   });//end getComunidadById
 };
 var message = "";
