@@ -29,14 +29,10 @@ app.get('/viviendas', viviendaController.list_all_viviendas);
     .get(viviendaController.prop_vivienda);
 
   app.route('/vivienda/:idVivienda/propietarios/:idPropietario/add')
-    .get(function(req, res){
-      viviendaController.add_prop_vivienda(req,res);
-    });
+    .get(viviendaController.add_prop_vivienda);
 
   app.route('/vivienda/:idVivienda/propietarios/:idPropietario/remove')
-    .get(function(req, res){
-      viviendaController.remove_prop_vivienda(req,res);
-    });
+    .get(viviendaController.remove_prop_vivienda);
 
   app.route('/viviendaDel/delete/:idVivienda')
     .get(viviendaController.delete_vivienda);

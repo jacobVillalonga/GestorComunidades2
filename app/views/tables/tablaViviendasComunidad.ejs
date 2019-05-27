@@ -48,15 +48,15 @@
             <% (vivienda.propietarios).forEach(function(propietario, index) { %>
               <% if (index == 0) { %>
                 <tr>
-                  <th class="info" rowspan="<%= vivienda.propietarios.length+2 %>">
+                  <th class="info border-top" rowspan="<%= vivienda.propietarios.length+2 %>">
                     <%= vivienda.numero %>
                     <br>
                     <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
                   </th>
-                  <td></td>
-                  <td colspan="5"><%= propietario.nombre %> <%= propietario.apellidos %></td>
-                  <td colspan="5"><%= propietario.nif %></td>
-                  <td>
+                  <td class="border-top"></td>
+                  <td colspan="5" class="border-top"><%= propietario.nombre %> <%= propietario.apellidos %></td>
+                  <td colspan="5" class="border-top"><%= propietario.nif %></td>
+                  <td class="border-top">
                     <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
                   </td>
                 </tr>
@@ -73,13 +73,13 @@
             <% }) %>
           <% } else { %>
             <tr>
-              <th class="info" rowspan="3">
+              <th class="info border-top" rowspan="3">
                 <%= vivienda.numero %>
                 <br>
                 <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
               </th>
-              <td colspan="10">No hay propietarios asignados a esta vivienda</td>
-              <td colspan="2">
+              <td colspan="10" class="border-top">No hay propietarios asignados a esta vivienda</td>
+              <td colspan="2" class="border-top">
                 <a href="/vivienda/<%= vivienda.id_vivienda %>/propietarios" rel="noopener" class="btn btn-sm btn-primary hidden-print">Asignar propietario</a>
               </td>
             </tr>
@@ -101,9 +101,9 @@
           </tr>
           <!-- row deudas -->
           <tr class="info">
-            <td colspan="4">Deuda anterior: <%= vivienda.deuda_anterior %> €</td>
-            <td colspan="4">Deuda actual: <%= deuda_actual %> €</td>
-            <td colspan="4">Deuda total: <%= vivienda.deuda_anterior+deuda_actual %> €</td>
+            <th colspan="4">Deuda anterior: <%= vivienda.deuda_anterior %> €</th>
+            <th colspan="4">Deuda actual: <%= deuda_actual %> €</th>
+            <th colspan="4">Deuda total: <%= vivienda.deuda_anterior+deuda_actual %> €</th>
           </tr>
         <% }) %>
       <% } else { %>

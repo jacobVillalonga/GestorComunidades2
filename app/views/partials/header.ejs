@@ -58,14 +58,20 @@
     margin: 0px 0 0;
   }
 
+  .table > tbody > tr >.border-top {
+    border-top: 1px solid #777;
+  }
+
   @media print {
     .container {
       width:auto;
     }
-
-    th, td {
-      border: 1px solid #ddd;
+    tr {
+      border-top: 1px solid #777;
     }
+    /* th, td {
+      border: 1px solid #ddd;
+    } */
   }
   /* On small screens, set height to 'auto' for sidenav and grid */
   /* @media screen and (max-width: 767px) {
