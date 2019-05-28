@@ -40,7 +40,6 @@ exports.select_incidencia = function(req, res) {
       res.render('edit-incidencia.ejs', {
         title: 'GestorComunidades/Editar Incidencia',
         incidencia: incidencia
-        // viviendas: viviendas,
       })
     }
   })
@@ -65,5 +64,13 @@ exports.delete_incidencia = function(req, res) {
       title: 'GestorComunidades/Eliminar incidencia',
       message: 'Incidencia eliminada'
     })
+  });
+};
+//funcion test
+exports.test_incidencia = function(req, res) {
+  Incidencia.getIncidenciaById(req.params.idIncidencia, function(err, incidencia) {
+    if (err)
+      res.send(err);
+    res.json(incidencia);
   });
 };

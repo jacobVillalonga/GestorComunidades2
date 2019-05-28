@@ -1,8 +1,9 @@
 const express = require('express'),
   app = express(),
   bodyParser = require('body-parser'),
-  port = process.env.PORT || 3000,
-  path = require("path");
+  port = process.env.PORT || 3000;
+
+var path = require("path");
 
 app.listen(port);
 

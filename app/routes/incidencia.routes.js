@@ -14,4 +14,7 @@ module.exports = function(app) {
     });
   app.route('/incidencias/delete/:idIncidencia')
     .get(incidenciaController.delete_incidencia);
+    //test
+    app.route('/incidencias/:idIncidencia')
+      .get(incidenciaController.test_incidencia);
 };
