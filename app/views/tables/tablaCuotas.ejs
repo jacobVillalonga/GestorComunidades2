@@ -2,9 +2,15 @@
   <div class="table-wrapper">
     <h4 class="bg-grey">Cuotas <%= year %>:</h4>
     <% var deudaAc = 0 %>
-    <table class="table table-hovered">
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="search">Filtrar:</label>
+        <input type="text" class="form-control" onkeyup="filtra('tablaCuotas','search')" name="search" id="search" value="">
+      </div>
+    </div>
+    <table class="table table-hovered" id="tablaCuotas">
       <thead class="thead-dark">
-        <tr>
+        <tr class="header">
           <th scope="col">ID</th>
           <th scope="col">Fecha</th>
           <th scope="col">Mes</th>
@@ -36,20 +42,47 @@
           </td>
         </tr>
         <% }) %>
-        <tr>
-          <td colspan="2">Deuda pendiente: <%= deudaAc %> €</td>
-          <td colspan="2">Deuda anterior: <%= deuda %> €</td>
-          <td colspan="2">Deuda total: <%= deudaAc + deuda %> €</td>
-        </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="2">Deuda pendiente: <%= deudaAc %> €</th>
+          <th colspan="2">Deuda anterior: <%= deuda %> €</th>
+          <th colspan="2">Deuda total: <%= deudaAc + deuda %> €</th>
+        </tr>
+      </tfoot>
       <% } else { %>
       <tr>
         <td colspan="10">
           <p class="text-center">No hay cuotas asignadas a esta vivienda.</p>
         </td>
       </tr>
-      <% } %>
       <tfoot></tfoot>
+      <% } %>
     </table>
   </div>
+  <script type="text/javascript">
+    function filtra() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("search");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("tablaCuotas");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        td1 = tr[i].getElementsByTagName("td")[1];
+        if (td || td1) {
+          txtValue = td.textContent || td.innerText;
+          txtValue2 = td1.textContent || td1.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
 </div>

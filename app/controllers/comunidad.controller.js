@@ -78,11 +78,11 @@ exports.select_comunidad = function(req, res) {
       });
     } else {
     //obtiene las facturas de la comunidad
-    Comunidad.getFacturasComunidad(req.params.idComunidad, function(err, facturas) {
+    Comunidad.getFacturasComunidad(req.params.idComunidad, req.params.year, function(err, facturas) {
       if (err)
         res.send(err);
       //obtiene las incidencias de la comunidad
-      Incidencia.getIncidenciasComunidad(req.params.idComunidad, function(err, incidencias) {
+      Incidencia.getIncidenciasComunidad(req.params.idComunidad, req.params.year, function(err, incidencias) {
         if (err)
           res.send(err);
         //obtiene todas las viviendas de la comunidad

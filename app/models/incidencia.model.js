@@ -66,7 +66,8 @@ Incidencia.delete = function(idIncidencia, result) {
     }
   });
 };
-Incidencia.getIncidenciasComunidad = function getIncidencias(comunidadId, result) {
+Incidencia.getIncidenciasComunidad = function getIncidencias(comunidadId, fecha, result) {
+//todo filtrar fecha
   sql.query("Select * from incidencia where comunidad_fk = ? order by fecha", comunidadId, function(err, res) {
     if (err) {
       console.log("error: ", err);

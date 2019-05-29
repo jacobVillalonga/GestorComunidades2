@@ -1,6 +1,6 @@
 <div class="container">
   <div class="table-wrapper">
-    <h4 class="bg-grey">Cuotas: (version en proceso)</h4>
+    <h4 class="bg-grey">Cuotas  <%= year %>:</h4>
 
         <label for="">Año:</label>
         <div class="form-row">
@@ -18,9 +18,6 @@
           <% Array.prototype.forEach.call(cuotas, cuota => { %>
             <th> <%= (new Date(cuota.fecha)).toLocaleString('en-GB', { month: 'long' }) %> </th>
           <% }) %>
-          <!-- <th scope="col">
-            <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/0" class="btn btn-sm btn-success">Añadir</a>
-          </th> -->
         </tr>
       </thead>
       <% if (cuotas.length > 0) {%>
@@ -39,9 +36,9 @@
           <% } %>
         <% }) %>
         <tr>
-          <td colspan="4">Deuda pendiente: <%= deudaAc %> €</td>
-          <td colspan="4">Deuda anterior: <%= deuda %> €</td>
-          <td colspan="4">Deuda total: <%= deudaAc + deuda %> €</td>
+          <th colspan="4">Deuda pendiente: <%= deudaAc %> €</th>
+          <th colspan="4">Deuda anterior: <%= deuda %> €</th>
+          <th colspan="4">Deuda total: <%= deudaAc + deuda %> €</th>
         </tr>
       </tbody>
 

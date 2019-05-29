@@ -33,7 +33,11 @@
   <!-- propietarios vivienda -->
   <div class="table-wrapper">
     <h4 class="bg-grey">Propietarios actuales:</h4>
-    <table class="table table-hovered">
+    <div class="form-group col-md-2">
+      <label for="search1">Filtrar:</label>
+      <input type="text" class="form-control" onkeyup="filtra('tProps','search1')" id="search1">
+    </div>
+    <table class="table table-hovered" id="tProps">
       <thead class="thead-dark">
         <tr>
           <th scope="col">ID</th>
@@ -71,10 +75,14 @@
       <% } %>
     </table>
   </div>
-  <!-- propietarios BDD -->
+  <!-- no propietarios -->
   <div class="table-wrapper">
     <h4 class="bg-grey">No propietarios:</h4>
-    <table class="table table-hovered">
+    <div class="form-group col-md-2">
+      <label for="search2">Filtrar:</label>
+      <input type="text" class="form-control" onkeyup="filtra('tNoProp','search2')" id="search2">
+    </div>
+    <table class="table table-hovered" id="tNoProp">
       <thead class="thead-dark">
         <tr>
           <th scope="col">ID</th>

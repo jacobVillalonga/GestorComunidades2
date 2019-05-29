@@ -1,7 +1,11 @@
 <div class="container">
     <div class="table-wrapper">
         <h4 class="bg-grey">Comunidades:</h4>
-          <table class="table table-hovered">
+          <div class="form-group col-md-2">
+            <label for="search">Filtrar:</label>
+            <input type="text" class="form-control" onkeyup="filtra('tComs','search')" id="search">
+          </div>
+          <table class="table table-hovered" id="tComs">
               <thead class="thead-dark">
                   <tr>
                       <th scope="col">ID</th>

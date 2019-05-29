@@ -38,6 +38,7 @@ and c.id_comunidad = v.comunidad_fk
 
 SELECT * FROM `pago_cuota` WHERE fecha > "2018" and fecha < "2020"
 SELECT * FROM `pago_cuota` WHERE year(fecha) = 2019 (*elimina index de fecha*)
+<!-- propietario.fecha_nacimiento.toLocaleDateString('en-GB') -->
 
 SELECT * FROM `vivienda` v
 left join pago_cuota p
@@ -80,5 +81,3 @@ order by v.numero, p.fecha
 	where vivienda_fk = 15
 	and year(fecha) < 2019
 	and pagado = 0
-
-	
