@@ -69,9 +69,9 @@ Comunidad.getViviendasTest = function getVivs(comunidadId, result) {
     }
   });
 };
-Comunidad.getFacturasComunidad = function getFacturas(comunidadId, fecha, result) {
-  //todo filtrar fecha
-  sql.query("Select * from factura where comunidad_fk = ? order by fecha", comunidadId, function(err, res) {
+Comunidad.getFacturasComunidad = function getFacturas(comunidadId, year, result) {
+  sql.query("Select * from factura where comunidad_fk = ? and year(fecha) = ? order by fecha",
+   [comunidadId, year], function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
