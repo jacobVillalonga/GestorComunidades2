@@ -1,0 +1,67 @@
+.page-wrapper {
+  min-height: calc(100vh - 50px);
+  /* 50 = footer_height + .container_margin-bottom*/
+  margin-bottom: -30px;
+  /* 30 = footer_height */
+}
+
+.container {
+  margin-bottom: 20px;
+}
+
+.table-wrapper {
+  margin-top: 50px;
+}
+
+.navbar {
+  height: 50px;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* .sidenav {
+    padding-top: 20px;
+    height: 100%;
+  } */
+.footer {
+  height: 30px;
+  color: #FFF;
+  background-color: #333;
+}
+
+.bg-grey {
+  background-color: #555;
+  color: #FFF;
+}
+
+h4.bg-grey {
+  padding: 5px;
+}
+
+p {
+  margin: 1px 1px 10px;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  margin: 0px 0 0;
+}
+
+.table>tbody>tr>.border-top {
+  border-top: 1px solid #777;
+}
+
+@media print {
+  .container {
+    width: auto;
+  }
+
+  tr {
+    border-top: 1px solid #777;
+  }
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+/* @media screen and (max-width: 767px) {
+    .sidenav {
+    }
+} */

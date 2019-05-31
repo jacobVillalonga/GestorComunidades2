@@ -3,11 +3,7 @@ module.exports = function(app) {
   var viviendaController = require('../controllers/vivienda.controller');
   // viviendaController Routes
 
-app.get('/viviendas', viviendaController.list_all_viviendas);
-
-// app.get('*', function(req, res) {
-//   res.sendFile(path.resolve('app/public/index.html'));
-// });
+  app.get('/viviendas', viviendaController.list_all_viviendas);
 
   app.route('/comunidades/:idComunidad/viviendas')
     .post(function(req, res){
