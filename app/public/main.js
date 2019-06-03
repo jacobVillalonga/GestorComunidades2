@@ -1,13 +1,8 @@
 var app = angular.module("myApp", []);
-app.controller("myCtrl", function($scope) {
-
+app.controller("myCtrl", function($scope, $http) {
   $http.get('/incidencias/1')
-		.success(function(data) {
-			$scope.incidencia = data;
-			console.log(data)
-		})
-		.error(function(data) {
-			console.log('Error: ' + data);
-		});
-    
+    .then(function(data) {
+      $scope.incidencia = data.data;
+      console.log(data);
+    });
 });

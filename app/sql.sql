@@ -81,3 +81,9 @@ order by v.numero, p.fecha
 	where vivienda_fk = 15
 	and year(fecha) < 2019
 	and pagado = 0
+
+-- You just create a batch file with the following content:
+-- node C:\myapp.js
+-- and save it with .bat extention.
+-- Now you can just throw the batch file in C:\Users\%username%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+-- Just open it using %appdata% in run dailog box and locate to >Roaming>Microsoft>Windows>Start Menu>Programs>Startup

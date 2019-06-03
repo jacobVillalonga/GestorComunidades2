@@ -121,17 +121,17 @@ exports.select_comunidad = function(req, res) {
               });//end getPropietariosVivienda
             });//end getDeudaAnterior
           });//end forEach
-        //revisar (duplicat)
-        } else {
-          comunidad.facturas = facturas;
-          comunidad.incidencias = incidencias;
-          comunidad.viviendas = viviendas;
-          res.render('edit-comunidad.ejs', {
-            title: 'GestorComunidades/Comunidad ' + comunidad.nombre_comunidad,
-            year: req.params.year,
-            comunidad: comunidad
-          })
-        }
+        //si no hay viviendas "if (viviendas.length > 0) {" devuelve las listas vacias:
+          } else {
+            comunidad.facturas = facturas;
+            comunidad.incidencias = incidencias;
+            comunidad.viviendas = viviendas;
+            res.render('edit-comunidad.ejs', {
+              title: 'GestorComunidades/Comunidad ' + comunidad.nombre_comunidad,
+              year: req.params.year,
+              comunidad: comunidad
+            })
+          }
         });//end getViviendasComunidad
       });//end getIncidenciasComunidad
     });//end getFacturasComunidad
