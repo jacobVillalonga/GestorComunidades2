@@ -17,13 +17,16 @@
       <thead class="thead-dark">
         <tr>
           <!-- <th scope="col" class="hidden-print">ID vivienda</th> -->
-          <th scope="col" rowspan="2" class="active">Vivienda</th>
+          <th scope="col" rowspan="2" class="active">
+          <!-- <th scope="col" class="active"> -->
+            Vivienda
+            <br>
+            <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/0" class="btn btn-sm btn-success hidden-print">Añadir</a>
+          </th>
           <th scope="col"></th>
           <th scope="col" colspan="5">Nombre propietario</th>
           <th scope="col" colspan="5">NIF</th>
-          <th scope="col" class="hidden-print">
-            <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/0" class="btn btn-sm btn-success">Añadir</a>
-          </th>
+          <th scope="col"></th>
         </tr>
         <tr class="active">
           <th scope="col">Enero</th>
@@ -42,12 +45,15 @@
       </thead>
       <tbody>
       <% if (comunidad.viviendas.length > 0) { %>
+        <% var deuda_comu = 0 %>
+        <% var deuda_ant_comu = 0 %>
         <% (comunidad.viviendas).forEach( vivienda => { %>
           <% var deuda_actual = 0 %>
           <% if (vivienda.propietarios.length > 0){ %>
             <% (vivienda.propietarios).forEach(function(propietario, index) { %>
               <% if (index == 0) { %>
                 <tr>
+                  <!-- <th class="info border-top" rowspan="<%= vivienda.propietarios.length+4 %>"> -->
                   <th class="info border-top" rowspan="<%= vivienda.propietarios.length+2 %>">
                     <%= vivienda.numero %>
                     <br>
@@ -87,6 +93,20 @@
           <!-- row cuotas -->
           <tr>
             <% if (vivienda.cuotas.length > 0 ) { %>
+              <!-- <tr class="active">
+                <th scope="col">Enero</th>
+                <th scope="col">Febrero</th>
+                <th scope="col">Marzo</th>
+                <th scope="col">Abril</th>
+                <th scope="col">Mayo</th>
+                <th scope="col">Junio</th>
+                <th scope="col">Julio</th>
+                <th scope="col">Agosto</th>
+                <th scope="col">Septiembre</th>
+                <th scope="col">Octubre</th>
+                <th scope="col">Noviembre</th>
+                <th scope="col">Diciembre</th>
+              </tr> -->
               <% (vivienda.cuotas).forEach( cuota => { %>
                 <% if (cuota.pagado) { %>
                   <td class="success text-info"><%= cuota.importe %> €</td>
@@ -102,7 +122,9 @@
           <!-- row deudas -->
           <tr class="info">
             <th colspan="4">Deuda anterior: <%= vivienda.deuda_anterior %> €</th>
+            <% deuda_ant_comu += vivienda.deuda_anterior %>
             <th colspan="4">Deuda actual: <%= deuda_actual %> €</th>
+            <% deuda_comu += deuda_actual %>
             <th colspan="4">Deuda total: <%= vivienda.deuda_anterior+deuda_actual %> €</th>
           </tr>
         <% }) %>
@@ -114,6 +136,14 @@
       </tr>
       <% } %>
       </tbody>
+      <tfoot>
+        <tr class="active">
+          <!-- <th class="border-top"></th> -->
+          <th class="border-top" colspan="5">Deuda anterior comunidad: <%= deuda_ant_comu %> €</th>
+          <th class="border-top" colspan="5">Deuda actual comunidad: <%= deuda_comu %> €</th>
+          <th class="border-top" colspan="3">Deuda total comunidad: <%= deuda_comu+deuda_ant_comu %> €</th>
+        </tr>
+      </tfoot>
     </table>
   </div>
   <script type="text/javascript">

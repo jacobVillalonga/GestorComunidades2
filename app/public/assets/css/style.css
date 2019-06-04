@@ -46,18 +46,21 @@ input[type="checkbox"], input[type="radio"] {
   margin: 0px 0 0;
 }
 
-.table>tbody>tr>.border-top {
+.table>tbody>tr>.border-top, .table>tfoot>tr>.border-top {
   border-top: 1px solid #777;
 }
 
 @media print {
-  .container {
-    width: auto;
+  .container { width: auto; }
+  @page {
+    margin-top: 0;
+    margin-bottom: 0;
   }
-
-  tr {
-    border-top: 1px solid #777;
+  body  {
+    margin-top: 1.6cm;
+    margin-bottom: 1.6cm;
   }
+  tr { border-top: 1px solid #777; }
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
