@@ -15,20 +15,13 @@
     </div>
     <table class="table table-hovered">
       <thead class="thead-dark">
-        <tr>
+        <tr class="border-bot info">
           <!-- <th scope="col" class="hidden-print">ID vivienda</th> -->
-          <th scope="col" rowspan="2" class="active">
-          <!-- <th scope="col" class="active"> -->
+          <th scope="col">
             Vivienda
             <br>
             <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/0" class="btn btn-sm btn-success hidden-print">Añadir</a>
           </th>
-          <th scope="col"></th>
-          <th scope="col" colspan="5">Nombre propietario</th>
-          <th scope="col" colspan="5">NIF</th>
-          <th scope="col"></th>
-        </tr>
-        <tr class="active">
           <th scope="col">Enero</th>
           <th scope="col">Febrero</th>
           <th scope="col">Marzo</th>
@@ -41,6 +34,7 @@
           <th scope="col">Octubre</th>
           <th scope="col">Noviembre</th>
           <th scope="col">Diciembre</th>
+          <th scope="col">Propietario</th>
         </tr>
       </thead>
       <tbody>
@@ -50,82 +44,53 @@
         <% (comunidad.viviendas).forEach( vivienda => { %>
           <% var deuda_actual = 0 %>
           <% if (vivienda.propietarios.length > 0){ %>
-            <% (vivienda.propietarios).forEach(function(propietario, index) { %>
-              <% if (index == 0) { %>
-                <tr>
-                  <!-- <th class="info border-top" rowspan="<%= vivienda.propietarios.length+4 %>"> -->
-                  <th class="info border-top" rowspan="<%= vivienda.propietarios.length+2 %>">
-                    <%= vivienda.numero %>
-                    <br>
-                    <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
-                  </th>
-                  <td class="border-top"></td>
-                  <td colspan="5" class="border-top"><%= propietario.nombre %> <%= propietario.apellidos %></td>
-                  <td colspan="5" class="border-top"><%= propietario.nif %></td>
-                  <td class="border-top">
-                    <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
-                  </td>
-                </tr>
-              <% } else { %>
-                <tr>
-                  <td></td>
-                  <td colspan="5"><%= propietario.nombre %> <%= propietario.apellidos %></td>
-                  <td colspan="5"><%= propietario.nif %></td>
-                  <td>
-                    <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
-                  </td>
-                </tr>
-              <% } %>
-            <% }) %>
+            <% var row = vivienda.propietarios.length+1 %>
           <% } else { %>
-            <tr>
-              <th class="info border-top" rowspan="3">
-                <%= vivienda.numero %>
-                <br>
-                <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
-              </th>
-              <td colspan="10" class="border-top">No hay propietarios asignados a esta vivienda</td>
-              <td colspan="2" class="border-top">
-                <a href="/vivienda/<%= vivienda.id_vivienda %>/propietarios" rel="noopener" class="btn btn-sm btn-primary hidden-print">Asignar propietario</a>
-              </td>
-            </tr>
+            <% var row = 2 %>
           <% } %>
-          <!-- row cuotas -->
           <tr>
-            <% if (vivienda.cuotas.length > 0 ) { %>
-              <!-- <tr class="active">
-                <th scope="col">Enero</th>
-                <th scope="col">Febrero</th>
-                <th scope="col">Marzo</th>
-                <th scope="col">Abril</th>
-                <th scope="col">Mayo</th>
-                <th scope="col">Junio</th>
-                <th scope="col">Julio</th>
-                <th scope="col">Agosto</th>
-                <th scope="col">Septiembre</th>
-                <th scope="col">Octubre</th>
-                <th scope="col">Noviembre</th>
-                <th scope="col">Diciembre</th>
-              </tr> -->
+            <th class="border-bot active" rowspan="<%= row %>">
+              <%= vivienda.numero %>
+              <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
+            </th>
+            <% if (vivienda.cuotas.length > 0) { %>
               <% (vivienda.cuotas).forEach( cuota => { %>
                 <% if (cuota.pagado) { %>
-                  <td class="success text-info"><%= cuota.importe %> €</td>
+                  <td class="success text-info" rowspan="<%= row-1 %>"><%= cuota.importe %> €</td>
                 <% } else { %>
                   <% deuda_actual += cuota.importe %>
-                  <td class="danger text-danger"><%= cuota.importe %> €</td>
+                  <td class="danger text-danger" rowspan="<%= row-1 %>"><%= cuota.importe %> €</td>
                 <% } %>
               <% }) %>
+              <% if (vivienda.cuotas.length < 12) { %>
+                <td rowspan="<%= row-1 %>" colspan="<%= 12-vivienda.cuotas.length %>"></td>
+              <% } %>
             <% } else { %>
-              <td colspan="12">No hay cuotas asignadas a esta vivienda</td>
+              <td colspan="12" rowspan="<%= row-1 %>">No hay cuotas asignadas a esta vivienda</td>
             <% } %>
-          </tr>
+            <% if (vivienda.propietarios.length > 0) { %>
+              <% (vivienda.propietarios).forEach( propietario => { %>
+                <td class="active">
+                  <%= propietario.nombre +" "+ propietario.apellidos %>
+                  <a href="/propietarios/<%= propietario.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
+                </td>
+              </tr>
+              <tr>
+              <% }) %>
+            <% } else { %>
+              <td>Sin propietarios</td>
+            </tr>
+            <tr>
+            <% } %>
           <!-- row deudas -->
-          <tr class="info">
-            <th colspan="4">Deuda anterior: <%= vivienda.deuda_anterior %> €</th>
+            <th colspan="4" class="border-bot">Deuda anterior: <%= vivienda.deuda_anterior %> €</th>
             <% deuda_ant_comu += vivienda.deuda_anterior %>
-            <th colspan="4">Deuda actual: <%= deuda_actual %> €</th>
+            <th colspan="4" class="border-bot">Deuda actual: <%= deuda_actual %> €</th>
             <% deuda_comu += deuda_actual %>
-            <th colspan="4">Deuda total: <%= vivienda.deuda_anterior+deuda_actual %> €</th>
+            <th colspan="4" class="border-bot">Deuda total: <%= vivienda.deuda_anterior+deuda_actual %> €</th>
+            <th class="border-bot">
+              <a href="/vivienda/<%= vivienda.id_vivienda %>/propietarios" rel="noopener" class="btn btn-sm btn-primary hidden-print">Asignar propietario</a>
+            </th>
           </tr>
         <% }) %>
       <% } else { %>
@@ -137,11 +102,10 @@
       <% } %>
       </tbody>
       <tfoot>
-        <tr class="active">
-          <!-- <th class="border-top"></th> -->
-          <th class="border-top" colspan="5">Deuda anterior comunidad: <%= deuda_ant_comu %> €</th>
-          <th class="border-top" colspan="5">Deuda actual comunidad: <%= deuda_comu %> €</th>
-          <th class="border-top" colspan="3">Deuda total comunidad: <%= deuda_comu+deuda_ant_comu %> €</th>
+        <tr class="info">
+          <th colspan="5">Deuda anterior comunidad: <%= deuda_ant_comu %> €</th>
+          <th colspan="5">Deuda actual comunidad: <%= deuda_comu %> €</th>
+          <th colspan="4 ">Deuda total comunidad: <%= deuda_comu+deuda_ant_comu %> €</th>
         </tr>
       </tfoot>
     </table>

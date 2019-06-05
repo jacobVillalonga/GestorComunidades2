@@ -31,11 +31,9 @@
               <a href="/viviendaDel/delete/<%= vivienda.id_vivienda %>" data-method="delete" class="btn btn-sm btn-danger hidden-print">Eliminar</a>
             </div>
         </form>
-        @ToDo: Datos Comunidad
           <% if (vivienda.id_vivienda){ %>
             <%  include tables/tablaPropietarios.ejs %>
             <%  include tables/tablaCuotas.ejs %>
-            <%  include tables/tablaCuotas2.ejs %>
           <% } %>
 </div>
 <% include partials/footer.ejs %>

@@ -46,8 +46,11 @@ input[type="checkbox"], input[type="radio"] {
   margin: 0px 0 0;
 }
 
-.table>tbody>tr>.border-top, .table>tfoot>tr>.border-top {
-  border-top: 1px solid #777;
+.table>tbody>tr>.border-bot, .table>tfoot>tr>.border-bot {
+  border-bottom: 1px solid #777;
+}
+.table > tbody > tr > td, .table > tbody > tr > th {
+     vertical-align: middle;
 }
 
 @media print {
@@ -60,7 +63,9 @@ input[type="checkbox"], input[type="radio"] {
     margin-top: 1.6cm;
     margin-bottom: 1.6cm;
   }
-  tr { border-top: 1px solid #777; }
+  .table>tbody>tr>.border-bot, .table>tfoot>tr>.border-bot {
+    border-bottom: 1px solid #777;
+  }
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
