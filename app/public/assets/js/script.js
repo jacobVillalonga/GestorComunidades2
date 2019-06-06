@@ -22,3 +22,12 @@ function filtra(tableId, inputId) {
     }
   }
 }
+//select por año de las tablas tablaViviendasComunidad, tablaCuotas
+function search(input, ref, id) {
+  var year = document.getElementById(input).value;
+  if (ref == "comunidad") {
+    location.href = "/comunidades/"+id+"/year/"+year;
+  } else if (ref == "cuotas"){
+    location.href = "/viviendas/"+id+"/year/"+year;
+  }
+}

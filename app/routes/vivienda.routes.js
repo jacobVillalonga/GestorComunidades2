@@ -18,7 +18,7 @@ module.exports = function(app) {
         viviendaController.update_vivienda(req,res);
     });
 
-  app.route('/viviendas/:idVivienda/:year')
+  app.route('/viviendas/:idVivienda/year/:year')
     .get(viviendaController.select_vivienda);
 
   app.route('/vivienda/:idVivienda/propietarios')
