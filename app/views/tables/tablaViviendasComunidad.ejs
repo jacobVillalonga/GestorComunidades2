@@ -42,9 +42,9 @@
         </tr>
       </thead>
       <tbody>
+      <% var deuda_comu = 0 %>
+      <% var deuda_ant_comu = 0 %>
       <% if (comunidad.viviendas.length > 0) { %>
-        <% var deuda_comu = 0 %>
-        <% var deuda_ant_comu = 0 %>
         <% (comunidad.viviendas).forEach( vivienda => { %>
           <% var deuda_actual = 0 %>
           <% if (vivienda.propietarios.length > 0){ %>
@@ -60,17 +60,30 @@
             <% if (vivienda.cuotas.length > 0) { %>
               <% (vivienda.cuotas).forEach( cuota => { %>
                 <% if (cuota.pagado) { %>
-                  <td class="success text-info" rowspan="<%= row-1 %>"><%= cuota.importe %> €</td>
+                  <td class="success text-info" rowspan="<%= row-1 %>">
+                    <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" class="success text-info" rel="noopener">
+                      <%= cuota.importe %> €
+                    </a>
+                  </td>
                 <% } else { %>
                   <% deuda_actual += cuota.importe %>
-                  <td class="danger text-danger" rowspan="<%= row-1 %>"><%= cuota.importe %> €</td>
+                  <td class="danger text-danger" rowspan="<%= row-1 %>">
+                    <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" class="danger text-danger" rel="noopener">
+                      <%= cuota.importe %> €
+                    </a>
+                  </td>
                 <% } %>
               <% }) %>
               <% if (vivienda.cuotas.length < 12) { %>
-                <td rowspan="<%= row-1 %>" colspan="<%= 12-vivienda.cuotas.length %>"></td>
+                <td rowspan="<%= row-1 %>" colspan="<%= 12-vivienda.cuotas.length %>">
+                  <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/0" class="btn btn-sm btn-success hidden-print">Añadir</a>
+                </td>
               <% } %>
             <% } else { %>
-              <td colspan="12" rowspan="<%= row-1 %>">No hay cuotas asignadas a esta vivienda</td>
+              <td colspan="12" rowspan="<%= row-1 %>">
+                No hay cuotas asignadas a esta vivienda
+                <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/0" class="btn btn-sm btn-success hidden-print">Añadir</a>
+              </td>
             <% } %>
             <% if (vivienda.propietarios.length > 0) { %>
               <% (vivienda.propietarios).forEach( propietario => { %>
@@ -109,7 +122,7 @@
         <tr class="info">
           <th colspan="5">Deuda anterior comunidad: <%= deuda_ant_comu %> €</th>
           <th colspan="5">Deuda actual comunidad: <%= deuda_comu %> €</th>
-          <th colspan="4 ">Deuda total comunidad: <%= deuda_comu+deuda_ant_comu %> €</th>
+          <th colspan="4">Deuda total comunidad: <%= deuda_comu + deuda_ant_comu %> €</th>
         </tr>
       </tfoot>
     </table>
