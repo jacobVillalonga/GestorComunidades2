@@ -138,4 +138,33 @@ exports.select_comunidad = function(req, res) {
     };
   });//end getComunidadById
 };
+
+exports.test = function(req, res) {
+  if (!req.params.year){
+    req.params.year = 2018;
+    // req.params.year = new Date().getFullYear();
+  }
+  Comunidad.getComunidadById(req.params.idComunidad, function(err, comunidad){
+    if (err)
+      res.send(err);
+    Comunidad.getViviendasTest(req.params.idComunidad, function(err, viviendas) {
+      if (err)
+        res.send(err);
+      if (viviendas.length > 0) {
+      //por cada vivienda...
+        viviendas.forEach(function(vivienda, index, viviendas) {
+          Comunidad.getRelations(vivienda.id_vivienda, req.params.year, function(err, rels) {
+            if (err)
+              res.send(err);
+            vivienda.relations = rels;
+            if (index + 1 == viviendas.length) {
+              comunidad.viviendas = viviendas;
+              res.json(comunidad);
+            }
+          })
+        })//foreach
+      }
+    })
+  })
+}
 var message = "";

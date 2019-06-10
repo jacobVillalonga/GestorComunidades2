@@ -6,7 +6,7 @@ const express = require('express'),
 var serveStatic = require('serve-static');
 app.listen(port);
 
-console.log('API server started on: ' + port);
+console.log('Gestor Comunidades iniciado, puerto: ' + port);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

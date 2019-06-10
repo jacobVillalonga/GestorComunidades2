@@ -19,4 +19,6 @@ module.exports = function(app) {
   app.route('/comunidades/delete/:idComunidad')
     .get(comunidadController.delete_comunidad);
 
+  app.route('/test/:idComunidad').get(comunidadController.test);
+
 };

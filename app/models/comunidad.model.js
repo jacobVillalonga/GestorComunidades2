@@ -29,7 +29,6 @@ Comunidad.getComunidadById = function getComunidad(comunidadId, result) {
     } else {
       console.log("get comunidad: "+comunidadId, res)
       result(null, res[0]);
-
     }
   });
 };
@@ -120,5 +119,22 @@ Comunidad.delete = function (id, result) {
     }
   });
 };
-
+Comunidad.getRelations = function test(viviendaId, year, result) {
+  sql.query("SELECT pv.id_prop_viv, pv.id_propietario, pv.fecha_ini, pv.fecha_fin, "+
+  "p.nombre, p.apellidos, p.nif "+
+  "FROM prop_vivienda pv "+
+  "join propietario p on p.id_propietario = pv.id_propietario "+
+  "WHERE id_vivienda = ? "+
+  "and year(fecha_ini) <= ? "+
+  "and (year(fecha_fin) >= ? or fecha_fin = '')",
+   [viviendaId, year, year], function(err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      console.log("get propietarios vivienda",viviendaId,year+":", res.length)
+      result(null, res);
+    }
+  });
+};
 module.exports = Comunidad;
