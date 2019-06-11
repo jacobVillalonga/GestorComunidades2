@@ -119,22 +119,46 @@ Comunidad.delete = function (id, result) {
     }
   });
 };
-Comunidad.getRelations = function test(viviendaId, year, result) {
+Comunidad.getRelations = function (viviendaId, year, result) {
   sql.query("SELECT pv.id_prop_viv, pv.id_propietario, pv.fecha_ini, pv.fecha_fin, "+
   "p.nombre, p.apellidos, p.nif "+
   "FROM prop_vivienda pv "+
   "join propietario p on p.id_propietario = pv.id_propietario "+
   "WHERE id_vivienda = ? "+
-  "and year(fecha_ini) <= ? "+
-  "and (year(fecha_fin) >= ? or fecha_fin = '')",
+  "and (year(fecha_ini) <= ? or fecha_ini is null)"+
+  "and (year(fecha_fin) >= ? or fecha_fin is null)",
    [viviendaId, year, year], function(err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
     } else {
-      console.log("get propietarios vivienda",viviendaId,year+":", res.length)
+      console.log("get propietarios vivienda",viviendaId,year+":", res.length);
       result(null, res);
     }
   });
+};
+Comunidad.getDeudaAnterior = function  (idRel, year, result) {
+  sql.query("Select coalesce(sum(importe), 0) as deuda from pago_cuota where prop_viv_fk = ? and year(fecha) < ? and pagado = 0",
+  [idRel, year], function(err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      console.log("get deuda anterior Relation",idRel,year+":",res[0].deuda);
+      result(null, res[0].deuda);
+    }
+  });
+};
+Comunidad.getCuotasVivienda = function (id_prop_viv, year, result) {
+  sql.query("Select * from pago_cuota where prop_viv_fk = ? and year(fecha) = ? order by fecha",
+  [id_prop_viv, year ], function (err, res) {
+    if(err) {
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      console.log("get cuotas Relation ",id_prop_viv,", año ",year,": ",res.length);
+      result(null, res);
+    }
+  })
 };
 module.exports = Comunidad;

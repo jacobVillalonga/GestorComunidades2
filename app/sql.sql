@@ -27,15 +27,6 @@ and v.comunidad_fk = c.id_comunidad
 and c.id_comunidad = 8
 order by v.id_vivienda, p.nombre, p.apellidos
 
-SELECT c.id_comunidad, c.nombre_comunidad, v.id_vivienda, v.numero, v.coeficiente
-FROM `vivienda` v
-join prop_vivienda pv
-join comunidad c
-WHERE pv.id_propietario = 14
-and pv.id_vivienda = v.id_vivienda
-and c.id_comunidad = v.comunidad_fk
-
-
 SELECT * FROM `pago_cuota` WHERE fecha > "2018" and fecha < "2020"
 SELECT * FROM `pago_cuota` WHERE year(fecha) = 2019 (*elimina index de fecha*)
 <!-- propietario.fecha_nacimiento.toLocaleDateString('en-GB') -->
@@ -81,9 +72,3 @@ order by v.numero, p.fecha
 	where vivienda_fk = 15
 	and year(fecha) < 2019
 	and pagado = 0
-
--- You just create a batch file with the following content:
--- node C:\myapp.js
--- and save it with .bat extention.
--- Now you can just throw the batch file in C:\Users\%username%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
--- Just open it using %appdata% in run dailog box and locate to >Roaming>Microsoft>Windows>Start Menu>Programs>Startup

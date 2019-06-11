@@ -141,30 +141,77 @@ exports.select_comunidad = function(req, res) {
 
 exports.test = function(req, res) {
   if (!req.params.year){
-    req.params.year = 2018;
-    // req.params.year = new Date().getFullYear();
+    req.params.year = new Date().getFullYear();
   }
   Comunidad.getComunidadById(req.params.idComunidad, function(err, comunidad){
     if (err)
       res.send(err);
-    Comunidad.getViviendasTest(req.params.idComunidad, function(err, viviendas) {
+    //obtiene las facturas de la comunidad
+    Comunidad.getFacturasComunidad(req.params.idComunidad, req.params.year, function(err, facturas) {
       if (err)
         res.send(err);
-      if (viviendas.length > 0) {
-      //por cada vivienda...
-        viviendas.forEach(function(vivienda, index, viviendas) {
-          Comunidad.getRelations(vivienda.id_vivienda, req.params.year, function(err, rels) {
-            if (err)
-              res.send(err);
-            vivienda.relations = rels;
-            if (index + 1 == viviendas.length) {
-              comunidad.viviendas = viviendas;
-              res.json(comunidad);
-            }
-          })
-        })//foreach
-      }
-    })
-  })
+        console.log(facturas);
+      //obtiene las incidencias de la comunidad
+      Incidencia.getIncidenciasComunidad(req.params.idComunidad, req.params.year, function(err, incidencias) {
+        if (err)
+          res.send(err);
+        Comunidad.getViviendasTest(req.params.idComunidad, function(err, viviendas) {
+          if (err)
+            res.send(err);
+          if (viviendas.length > 0) {
+            //por cada vivienda...
+            viviendas.forEach(function(vivienda, indexV, viviendas) {
+              //obtener las relaciones de propiedad de ese año
+              Comunidad.getRelations(vivienda.id_vivienda, req.params.year, function(err, rels) {
+                if (err)
+                  res.send(err);
+                vivienda.relations = rels;
+                //de cada relation
+                if (vivienda.relations.length > 0) {
+                  vivienda.relations.forEach(function(relation, indexR, relations) {
+                    //obtener deuda anterior
+                    Comunidad.getDeudaAnterior(relation.id_prop_viv, req.params.year, function(err, deuda) {
+                      if (err)
+                        res.send(err);
+                      relation.deuda = deuda;
+                      Comunidad.getCuotasVivienda(relation.id_prop_viv, req.params.year, function(err, cuotas){
+                        if (err)
+                          res.send (err);
+                        relation.cuotas = cuotas;
+                        if (indexV + 1 == viviendas.length && indexR +1 == vivienda.relations.length) {
+                          comunidad.year = req.params.year;
+                          comunidad.viviendas = viviendas;
+                          comunidad.facturas = facturas;
+                          comunidad.incidencias = incidencias;
+                          // res.json(comunidad);
+                          res.render('edit-comunidad.ejs', {
+                            title: 'GestorComunidades/Comunidad ' + comunidad.nombre_comunidad,
+                            year: req.params.year,
+                            comunidad: comunidad
+                          })
+                        }
+                      })
+                    });
+                    //obtener cuotas
+                  })
+                }
+              })
+            })//foreach
+          } else {
+            comunidad.year = req.params.year;
+            comunidad.facturas = facturas;
+            comunidad.incidencias = incidencias;
+            comunidad.viviendas = viviendas;
+            // res.json(comunidad);
+            res.render('edit-comunidad.ejs', {
+              title: 'GestorComunidades/Comunidad ' + comunidad.nombre_comunidad,
+              year: req.params.year,
+              comunidad: comunidad
+            })
+          }
+        })//end getViviendas
+      })//end gatIncidencias
+    })//end getFacturas
+  })//end getComunidadById
 }
 var message = "";

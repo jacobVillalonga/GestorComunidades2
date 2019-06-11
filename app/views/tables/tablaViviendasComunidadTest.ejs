@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="table-wrapper">
+    <h3><%= comunidad.nombre_comunidad %></h3>
+    <h4 class="bg-grey">Viviendas:</h4>
+    <div class="form-row">
+      <div class="form-group col-md-1">
+        <label for="">Año:</label>
+      </div>
+      <div class="form-group col-md-2">
+        <input type="number" min="1900" max="2099" value="<%= year %>" step="1" class="form-control" name="año" id="año" maxlength="4">
+      </div>
+      <div class="form-group col-md-2">
+        <span id="filtCuota" name="filtCuota" class="glyphicon glyphicon-search btn btn-sm btn-info hidden-print" onclick="search('año', 'comunidad', <%= comunidad.id_comunidad %>)"></span>
+      </div>
+    </div>
+    <table class="table table-hovered">
+      <thead class="thead-dark">
+        <tr class="border-bot info">
+          <!-- <th scope="col" class="hidden-print">ID vivienda</th> -->
+          <th scope="col">
+            Vivienda
+            <br>
+            <a href="/comunidades/<%= comunidad.id_comunidad %>/viviendas/0" class="btn btn-sm btn-success hidden-print">Añadir</a>
+          </th>
+          <th scope="col">Enero</th>
+          <th scope="col">Febrero</th>
+          <th scope="col">Marzo</th>
+          <th scope="col">Abril</th>
+          <th scope="col">Mayo</th>
+          <th scope="col">Junio</th>
+          <th scope="col">Julio</th>
+          <th scope="col">Agosto</th>
+          <th scope="col">Septiembre</th>
+          <th scope="col">Octubre</th>
+          <th scope="col">Noviembre</th>
+          <th scope="col">Diciembre</th>
+          <th scope="col">
+            Propietarios
+            <br>
+            <a href="/propietarios/0" class="btn btn-sm btn-success hidden-print">Añadir</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      <% var deuda_comu = 0 %>
+      <% var deuda_ant_comu = 0 %>
+      <% if (comunidad.viviendas.length > 0) { %>
+        <% (comunidad.viviendas).forEach( vivienda => { %>
+          <% var deuda_actual = 0 %>
+          <tr>
+            <% var rows = vivienda.relations.length*2 %>
+            <th rowspan="<%= rows %>"><%= vivienda.numero %></th>
+          <% for(let i = 0; i < vivienda.relations.length; i++) { %>
+            <% let relation = vivienda.relations[i]; %>
+            <!-- crear td por cada mes -->
+            <% for(let j = 0; j < 12; j++) { %>
+              <% var q = false; %>
+              <!-- recorrer cuotas por mes y buscar cuota.month = j -->
+              <% for(let k = 0; k < relation.cuotas.length; k++){ %>
+                <% let cuota = relation.cuotas[k] %>
+                <% if (j == (new Date(cuota.fecha).getMonth())) { %>
+                  <% q = k %>
+                  <% console.log("viv:",vivienda.numero,"rel:",i,"j:",j,"k:",k) %>
+                <% } %>
+              <% } %>
+              <td><%= j %></td>
+              <!-- si mes = j td importe -->
+            <% } %>
+            <!-- end cuotas -->
+            <td rowspan="2">Propietarios</td>
+            </tr>
+            <!-- if this.fecha_fin == ant.fecha_fin then sameRow-->
+            <tr>
+              <td colspan="4">Deuda anterior: <%= relation.deuda %></td>
+              <td colspan="4">Deuda actual: <%= deuda_actual %></td>
+              <td colspan="4">Deuda total: <%= relation.deuda + deuda_actual %></td>
+            </tr>
+            <% if (i != vivienda.relations.length+1) { %>
+              <tr>
+            <% } %>
+          <% } %>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="14">
+            <p class="text-center">No hay viviendas asignadas a esta comunidad.</p>
+          </td>
+        </tr>
+      <% } %>
+      </tbody>
+      <tfoot>
+        <tr class="info">
+          <th colspan="5">Deuda anterior comunidad: <%= deuda_ant_comu %> €</th>
+          <th colspan="5">Deuda actual comunidad: <%= deuda_comu %> €</th>
+          <th colspan="4">Deuda total comunidad: <%= deuda_comu + deuda_ant_comu %> €</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
