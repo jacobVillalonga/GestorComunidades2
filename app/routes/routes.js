@@ -9,5 +9,6 @@ require('./vivienda.routes')(app);
 require('./propietario.routes')(app);
 require('./factura.routes')(app);
 require('./cuota.routes')(app);
+require('./derrama.routes')(app);
 require('./incidencia.routes')(app);
 };

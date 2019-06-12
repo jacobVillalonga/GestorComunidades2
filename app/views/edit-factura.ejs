@@ -32,6 +32,10 @@
                   <label for="concepto">Concepto</label>
                   <input type="text" class="form-control" name="concepto" id="concepto" value="<%= factura.concepto %>" required>
               </div>
+              <div class="form-group col-md-6">
+                  <label for="archivo">Archivo adjunto</label>
+                  <input type="file" class="form-control" name="archivo" id="archivo" value="<%= factura.archivo %>">
+              </div>
               <!-- @TODO cambiar a combobox -->
               <div class="form-group col-md-2">
                   <label for="comunidad_fk">ID Comunidad</label>
@@ -40,6 +44,11 @@
               <div class="form-group col-md-4">
                   <label for="nombre_comunidad">Comunidad</label>
                   <input type="text" class="form-control" name="nombre_comunidad" id="nombre_comunidad" value="<%= factura.nombre_comunidad %>" readonly required>
+              </div>
+
+              <div class="form-group col-md-6">
+                  <label for="file">File</label>
+                  <input type="text" class="form-control" name="file" id="file" value="<%= factura.archivo %>">
               </div>
             </div>
             <div align="center" class="form-row">

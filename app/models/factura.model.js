@@ -8,6 +8,7 @@ var Factura = function(factura) {
   this.emisor = factura.emisor;
   this.fecha = factura.fecha;
   this.concepto = factura.concepto;
+  this.archivo = factura.archivo;
   this.comunidad_fk = factura.comunidad_fk;
 };
 //not used
@@ -45,8 +46,8 @@ Factura.insert = function insertFactura(factura, result) {
   });
 };
 Factura.update = function updateFactura(factura, result) {
-  sql.query("UPDATE factura SET emisor = ?, importe = ?, fecha = ?, concepto = ? WHERE id_factura = ?",
-    [factura.emisor, factura.importe, factura.fecha, factura.concepto, factura.id_factura],
+  sql.query("UPDATE factura SET emisor = ?, importe = ?, fecha = ?, concepto = ?, archivo = ? WHERE id_factura = ?",
+    [factura.emisor, factura.importe, factura.fecha, factura.concepto, factura.archivo, factura.id_factura],
     function(err, res) {
       if (err) {
         console.log("error: ", err);

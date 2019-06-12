@@ -106,17 +106,26 @@ exports.select_comunidad = function(req, res) {
                   if (err)
                     res.send("Cuotas: ",vivienda.id_vivienda," ERR: ",err);
                   vivienda.cuotas = cuotas;
+                  Vivienda.getDerramasVivienda(vivienda.id_vivienda, req.params.year, function(err, derramas) {
+                    if (err)
+                      res.send("Derramas: ",vivienda.id_vivienda," ERR: ",err);
+                    vivienda.derramas = derramas;
+
                   //si es la ultima vivienda, envia los datos
                   if (index + 1 == viviendas.length) {
                     comunidad.facturas = facturas;
                     comunidad.incidencias = incidencias;
                     comunidad.viviendas = viviendas;
+                    console.log("-----------TT----------");
+                    console.log(comunidad);
+                    // res.json(comunidad);
                     res.render('edit-comunidad.ejs', {
                       title: 'GestorComunidades/Comunidad ' + comunidad.nombre_comunidad,
                       year: req.params.year,
                       comunidad: comunidad
                     })
                   }//end send
+                });//end getDerramasVivienda
                 });//end getCuotasVivienda
               });//end getPropietariosVivienda
             });//end getDeudaAnterior
@@ -177,7 +186,13 @@ exports.test = function(req, res) {
                       Comunidad.getCuotasVivienda(relation.id_prop_viv, req.params.year, function(err, cuotas){
                         if (err)
                           res.send (err);
-                        relation.cuotas = cuotas;
+                          var arr = [];
+                          for (let i = 0; i<cuotas.length; i++) {
+                            let cuota = cuotas[i];
+                            arr[(new Date(cuota.fecha)).getMonth()] = cuota;
+                          }
+                          console.log("arr",arr);
+                        relation.cuotas = arr;
                         if (indexV + 1 == viviendas.length && indexR +1 == vivienda.relations.length) {
                           comunidad.year = req.params.year;
                           comunidad.viviendas = viviendas;

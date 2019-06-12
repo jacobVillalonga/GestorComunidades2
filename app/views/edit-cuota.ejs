@@ -22,9 +22,17 @@
                   <label for="fecha">Fecha</label>
                   <input type="date" class="form-control" name="fecha" id="fecha" value="<%= date %>" required>
               </div>
-              <div class="form-group col-md-1">
+              <div class="form-group col-md-2">
                   <label for="pagado">Pagado</label>
                   <input type="checkbox" class="form-control" name="pagado" id="pagado" value="1" <% if (cuota.pagado == 1){ %>checked<% } %> >
+              </div>
+              <div class="form-group col-md-3">
+                  <label for="fecha_pago">Fecha pago</label>
+                  <input type="date" class="form-control" name="fecha_pago" id="fecha_pago" value="<%= cuota.fecha_pago %>">
+              </div>
+              <div class="form-group col-md-8">
+                  <label for="comentario">Comentario</label>
+                  <input type="text" class="form-control" name="comentario" id="comentario" value="<%= cuota.comentario %>">
               </div>
               <div class="form-group col-md-2">
                   <label for="">Número Vivienda</label>

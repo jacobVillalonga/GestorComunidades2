@@ -72,6 +72,9 @@ exports.select_vivienda = function(req, res) {
         Vivienda.getCuotasVivienda(req.params.idVivienda, req.params.year, function(err, cuotas) {
           if (err)
             res.send(err);
+            Vivienda.getDerramasVivienda(req.params.idVivienda, req.params.year, function(err, derramas) {
+              if (err)
+                res.send(err);
             Vivienda.getDeudaAnterior(req.params.idVivienda, req.params.year, function(err, deuda) {
               if (err)
                 res.send(err);
@@ -81,10 +84,12 @@ exports.select_vivienda = function(req, res) {
             comunidad_fk: comunidad_fk,
             propietarios: propietarios,
             cuotas: cuotas,
+            derramas: derramas,
             deuda: deuda,
             year: req.params.year
             })
           })
+        })
         })
       });
     }

@@ -7,6 +7,8 @@ var Cuota = function(cuota){
       this.vivienda_fk = cuota.vivienda_fk;
       this.fecha = cuota.fecha;
       this.pagado = cuota.pagado;
+      this.fecha_pago = cuota.fecha_pago;
+      this.comentario = cuota.comentario;
 };
 //not used
 Cuota.getAllCuotas = function getAllCuotas(result) {
@@ -45,8 +47,8 @@ Cuota.insert = function insertCuota(cuota, result) {
   });
 };
 Cuota.update = function updateCuota(cuota, result) {
-  sql.query("UPDATE pago_cuota SET vivienda_fk = ?, importe = ?, fecha = ?, pagado = ? WHERE id_cuota = ?",
-    [cuota.vivienda_fk, cuota.importe, cuota.fecha, cuota.pagado, cuota.id_cuota],
+  sql.query("UPDATE pago_cuota SET vivienda_fk = ?, importe = ?, fecha = ?, pagado = ?, fecha_pago = ?, comentario = ? WHERE id_cuota = ?",
+    [cuota.vivienda_fk, cuota.importe, cuota.fecha, cuota.pagado, cuota.fecha_pago, cuota.comentario, cuota.id_cuota],
     function(err, res) {
       if (err) {
         console.log("error: ", err);

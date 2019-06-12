@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="coeficiente">Coeficiente</label>
-                    <input type="text" class="form-control" name="coeficiente" id="coeficiente" value="<%= vivienda.coeficiente %>" required>
+                    <input type="text" class="form-control" name="coeficiente" id="coeficiente" value="<%= vivienda.coeficiente %>">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="comunidad_fk">Comunidad</label>
@@ -36,6 +36,7 @@
           <% if (vivienda.id_vivienda){ %>
             <%  include tables/tablaPropietarios.ejs %>
             <%  include tables/tablaCuotas.ejs %>
+            <%  include tables/tablaDerramas.ejs %>
           <% } %>
 </div>
 <% include partials/footer.ejs %>

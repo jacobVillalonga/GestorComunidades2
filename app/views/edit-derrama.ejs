@@ -1,0 +1,56 @@
+<% include partials/header.ejs %>
+<div class="container">
+    <p class="text-center text-danger">Editando Derrama</p>
+    <% if (derrama){ %>
+      <% if (!derrama.id_derrama){ %>
+        <% var date = (new Date()).toISOString().slice(0,10) %>
+        <form class="add-player-form" action="/derramas" method="post" enctype="application/json">
+      <% } else { %>
+        <% var date = derrama.fecha %>
+        <form class="add-player-form" action="/viviendas/<%= derrama.vivienda_fk %>/derramas/<%= derrama.id_derrama %>" method="post" enctype="application/json">
+      <% } %>
+          <div class="form-row">
+              <div class="form-group col-md-2">
+                  <label for="id_derrama">ID</label>
+                  <input type="text" class="form-control" name="id_derrama" id="id_derrama" value="<%= derrama.id_derrama %>" required readonly title="ID cannot be edited.">
+              </div>
+              <div class="form-group col-md-2">
+                  <label for="importe">Importe</label>
+                  <input type="text" class="form-control" name="importe" id="importe" value="<%= derrama.importe %>" required>
+              </div>
+              <div class="form-group col-md-3">
+                  <label for="fecha">Fecha</label>
+                  <input type="date" class="form-control" name="fecha" id="fecha" value="<%= date %>" required>
+              </div>
+              <div class="form-group col-md-2">
+                  <label for="pagado">Pagado</label>
+                  <input type="checkbox" class="form-control" name="pagado" id="pagado" value="1" <% if (derrama.pagado == 1){ %>checked<% } %> >
+              </div>
+              <div class="form-group col-md-3">
+                  <label for="fecha_pago">Fecha pago</label>
+                  <input type="date" class="form-control" name="fecha_pago" id="fecha_pago" value="<%= derrama.fecha_pago %>">
+              </div>
+              <div class="form-group col-md-8">
+                  <label for="comentario">Comentario</label>
+                  <input type="text" class="form-control" name="comentario" id="comentario" value="<%= derrama.comentario %>">
+              </div>
+              <div class="form-group col-md-2">
+                  <label for="">Número Vivienda</label>
+                  <input type="text" class="form-control" name="" id="" value="<%= derrama.numero %>" readonly>
+              </div>
+              <div class="form-group col-md-2">
+                  <label for="vivienda_fk">ID Vivienda</label>
+                  <input type="text" class="form-control" name="vivienda_fk" id="vivienda_fk" value="<%= derrama.vivienda_fk %>" readonly required>
+              </div>
+            </div>
+            <div align="center" class="form-row">
+              <button formmethod="post" type="submit" class="btn btn-success">Guardar</button>
+              <a href="/viviendas" class="btn btn-sm btn-info">Volver</a>
+              <% if (derrama.id_derrama > 0) { %>
+                <a href="/derramas/delete/<%= derrama.id_derrama %>" data-method="delete" class="btn btn-sm btn-danger">Eliminar</a>
+              <% } %>
+            </div>
+        </form>
+    <% } %>
+</div>
+<% include partials/footer.ejs %>

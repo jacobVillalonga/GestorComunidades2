@@ -86,6 +86,18 @@ Vivienda.getCuotasVivienda = function getCuotas(viviendaId, year, result) {
           }
       })
 };
+Vivienda.getDerramasVivienda = function getDerramas(viviendaId, year, result) {
+      sql.query("Select * from derrama where vivienda_fk = ? and year(fecha) = ? order by fecha",
+        [viviendaId, year ], function (err, res) {
+          if(err) {
+            console.log("error: ", err);
+            result(err, null);
+          } else {
+            console.log("get derramas vivienda ",viviendaId,", año ",year,": ",res.length);
+            result(null, res);
+          }
+      })
+};
 Vivienda.getDeudaAnterior = function getDeuda(viviendaId, year, result) {
   sql.query("Select coalesce(sum(importe), 0) as deuda from pago_cuota where vivienda_fk = ? and year(fecha) < ? and pagado = 0",
     [viviendaId, year ], function (err, res) {

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="table-wrapper">
+    <h4 class="bg-grey">Derramas  <%= year %>:</h4>
+
+        <label for="">Año:</label>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <input type="number" min="1900" max="2099" value="<%= year %>" step="1" class="form-control" name="año" id="año" maxlength="4">
+            </div>
+            <div class="form-group col-md-1">
+              <span id="filtDerrama" name="filtDerrama" class="glyphicon glyphicon-search btn btn-sm btn-info hidden-print" onclick="search('año','derramas',<%= vivienda.id_vivienda %>)"></span>
+            </div>
+        </div>
+        <div class="form-group col-md-8"></div>
+        <div class="class="form-group col-md-1">
+          <a href="/viviendas/<%= vivienda.id_vivienda %>/derramas/0" class="btn btn-sm btn-success hidden-print">Añadir</a>
+        </div>
+    <% var deudaAc = 0 %>
+    <table class="table table-hovered">
+      <thead class="thead-dark">
+        <tr>
+          <% Array.prototype.forEach.call(derramas, derrama => { %>
+            <th> <%= (new Date(derrama.fecha)).toLocaleString('en-GB', { month: 'long' }) %> </th>
+          <% }) %>
+        </tr>
+      </thead>
+      <% if (derramas.length > 0) {%>
+      <tbody>
+      <tr>
+        <% Array.prototype.forEach.call(derramas, derrama => { %>
+          <% if(derrama.pagado){ %>
+            <td class="success text-info"><%= derrama.importe %> €
+              <a href="/viviendas/<%= vivienda.id_vivienda %>/derramas/<%= derrama.id_derrama %>" rel="noopener" class="glyphicon glyphicon-eye-open hidden-print"></a>
+            </td>
+          <% } else { %>
+            <% deudaAc += derrama.importe; %>
+            <td class="danger text-danger"><%= derrama.importe %> €
+              <a href="/viviendas/<%= vivienda.id_vivienda %>/derramas/<%= derrama.id_derrama %>" rel="noopener" class="glyphicon glyphicon-eye-open hidden-print"></a>
+            </td>
+          <% } %>
+        <% }) %>
+        <tr>
+          <th colspan="4">Deuda pendiente: <%= deudaAc %> €</th>
+          <th colspan="4">Deuda anterior: <%= deuda %> €</th>
+          <th colspan="4">Deuda total: <%= deudaAc + deuda %> €</th>
+        </tr>
+      </tbody>
+
+      <% } else { %>
+      <tr>
+        <td colspan="10">
+          <p class="text-center">No hay derramas asignadas a esta vivienda.</p>
+        </td>
+      </tr>
+      <% } %>
+      <tfoot></tfoot>
+    </table>
+  </div>
+</div>

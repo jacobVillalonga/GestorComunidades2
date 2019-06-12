@@ -46,28 +46,50 @@
       <% var deuda_ant_comu = 0 %>
       <% if (comunidad.viviendas.length > 0) { %>
         <% (comunidad.viviendas).forEach( vivienda => { %>
-          <% var deuda_actual = 0 %>
           <tr>
             <% var rows = vivienda.relations.length*2 %>
-            <th rowspan="<%= rows %>"><%= vivienda.numero %></th>
+            <th class="border-bot active" rowspan="<%= rows %>">
+              <%= vivienda.numero %>
+              <a href="/viviendas/<%= vivienda.id_vivienda %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
+            </th>
           <% for(let i = 0; i < vivienda.relations.length; i++) { %>
+            <% var deuda_actual = 0 %>
             <% let relation = vivienda.relations[i]; %>
-            <!-- crear td por cada mes -->
+            <!-- crear un td por cada mes -->
             <% for(let j = 0; j < 12; j++) { %>
-              <% var q = false; %>
-              <!-- recorrer cuotas por mes y buscar cuota.month = j -->
-              <% for(let k = 0; k < relation.cuotas.length; k++){ %>
-                <% let cuota = relation.cuotas[k] %>
-                <% if (j == (new Date(cuota.fecha).getMonth())) { %>
-                  <% q = k %>
-                  <% console.log("viv:",vivienda.numero,"rel:",i,"j:",j,"k:",k) %>
+              <% let cuotas = relation.cuotas %>
+              <% if (!cuotas[j]) { %>
+                <td>-</td>
+              <% } else { %>
+                <% let cuota = cuotas[j] %>
+                <% if (cuota.pagado) { %>
+                  <td class="success text-info">
+                    <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" class="success text-info" rel="noopener">
+                      <%= cuota.importe %> €
+                    </a>
+                  </td>
+                <% } else { %>
+                  <% deuda_actual += cuota.importe %>
+                  <td class="danger text-danger">
+                    <a href="/viviendas/<%= vivienda.id_vivienda %>/cuotas/<%= cuota.id_cuota %>" class="danger text-danger" rel="noopener">
+                      <%= cuota.importe %> €
+                    </a>
+                  </td>
                 <% } %>
               <% } %>
-              <td><%= j %></td>
-              <!-- si mes = j td importe -->
             <% } %>
             <!-- end cuotas -->
-            <td rowspan="2">Propietarios</td>
+              <td rowspan="2">
+                <%= relation.nombre +" "+ relation.apellidos %>
+                <a href="/propietarios/<%= relation.id_propietario %>" rel="noopener" class="btn btn-sm btn-info hidden-print">Ver</a>
+                <br>
+                <% if (relation.fecha_ini) { %>
+                  del <%= relation.fecha_ini %>
+                <% } %>
+                <% if (relation.fecha_fin) { %>
+                  a <%= relation.fecha_fin %>
+                <% } %>
+              </td>
             </tr>
             <!-- if this.fecha_fin == ant.fecha_fin then sameRow-->
             <tr>
